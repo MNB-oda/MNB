@@ -29,10 +29,54 @@ public class CalendarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		res.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = res.getWriter();
+		//今月のカレンダーの情報を取得
+		Calendar calendar = Calendar.getInstance();
+		int year;
+		int month;
+
+
+		//翌月か先月のリンクを踏んでいたら、年と月を貰った値に更新
+		String param = request.getParameter("YEAR");
+		if(param == null || param.length() == 0){
+			year = calendar.get(Calendar.YEAR);
+		}else{
+			try{
+				year = Integer.parseInt(param);
+			}catch(NumberFormatException e){
+				year = calendar.get(Calendar.YEAR);
+			}
+		}
+		param = request.getParameter("MONTH");
+		if(param == null || param.length() == 0){
+			month = calendar.get(Calendar.MONTH);
+		}else{
+			try{
+				month = Integer.parseInt(param);
+			}catch(NumberFormatException e){
+				month = calendar.get(Calendar.MONTH);
+			}
+		}
+
+
+		//カレンダー情報を更新
+		calendar.set(year, month, 1);
+
+		//先月の最終日が何曜日だったか
+		int startWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+		//カレンダー表示処理内で、今追加しようと見ている日付
+		//2から引いているのは、DAY_OF_WEEKの値との帳尻合わせ
+		int lookingDay = 2 - startWeek;
+
+		//今月の最終日の日付
+		calendar.set(year, month + 1, 0);
+		int thisMonthlastDay = calendar.get(Calendar.DATE);
+
+
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
 
 		out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0.1//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
 
@@ -101,29 +145,12 @@ public class CalendarServlet extends HttpServlet {
 
 		out.println("<p>ソフトウェア研究部</p>");
 
+		//翌月、先月のリンクの描画
+		out.println(monthLink(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)));
+
+		//カレンダーの描画
 		out.println("<table>");
-
-
-		Calendar calendar = Calendar.getInstance();
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH);
-		int day = calendar.get(Calendar.DATE);
-
-		//先月の最終日が何曜日だったか
-		calendar.set(year, month, 1);
-		int startWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-		//今追加しようと見ている日付
-		//2から引いているのは、曜日の値との帳尻合わせ
-		int lookingDay = 2 - startWeek;
-
-		//今月の最終日の日付
-		calendar.set(year, month + 1, 0);
-		int thisMonthlastDay = calendar.get(Calendar.DATE);
-
-
-		out.println(getNowCalendar(lookingDay, thisMonthlastDay));
-
+		out.println(makeNowCalendar(lookingDay, thisMonthlastDay));
 		out.println("</table>");
 
 		out.println("</body>");
@@ -131,7 +158,7 @@ public class CalendarServlet extends HttpServlet {
 	}
 
 	//カレンダーの作成
-	protected String getNowCalendar(int lookingDay, int thisMonthlastDay){
+	protected String makeNowCalendar(int lookingDay, int thisMonthlastDay){
 		StringBuffer sb = new StringBuffer();
 
 		//曜日の出力
@@ -147,11 +174,12 @@ public class CalendarServlet extends HttpServlet {
 				+ "</tr>"
 				);
 
-		//日付の出力
+		//日付とスケジュール欄の描画
 		while(lookingDay < thisMonthlastDay){
 			StringBuffer storage = new StringBuffer();		//for文で追加したものを一度に出力するために一旦保存
 			storage.append("<tr>");
 
+			//日付の描画
 			//先月の日付(lookingの値が0未満) と来月の日付(lookingの値が最終日より大きい) の場合には日付を表示せず、
 			//今月の分には日付を表示する
 			for(int i=0; i<7; i++){
@@ -163,14 +191,22 @@ public class CalendarServlet extends HttpServlet {
 					lookingDay++;
 				}
 			}
-
 			storage.append("</tr>");
 			sb.append(storage);
-			sb.append(makeScheduleContents());
+
+			//スケジュール内容欄の描画
+			sb.append("<tr>");
+			for (int i = 0; i < 7; i++) {
+				sb.append("<td class=\"sche\"></td>");
+			}
+			sb.append("</tr>");	
 		}
+
 		return new String(sb);
 	}
 
+
+	/*
 	//スケジュールの内容欄の出力
 	protected String makeScheduleContents() {
 		StringBuffer sb = new StringBuffer();
@@ -182,12 +218,32 @@ public class CalendarServlet extends HttpServlet {
 		sb.append("</tr>");
 		return new String(sb);
 	}
+	*/
 
-	protected void monthLink(int year, int month){
+
+	//翌月、先月へのリンクの作成
+	protected String monthLink(int year, int month){
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<p>");
 
-		sb.append("<a href = \"/MNB/CalendarServlet");
+		sb.append("<a href = \"/MNB/CalendarServlet?YEAR=");
+		sb.append(year);
+		sb.append("&MONTH=");
+		sb.append(month - 1);
+		sb.append("\"><span class=\"small\">前月</span></a>&nbsp;&nbsp;");
+
+        sb.append(month + 1);
+		sb.append("月&nbsp;&nbsp;");
+
+        sb.append("<a href = \"/MNB/CalendarServlet?YEAR=");
+        sb.append(year);
+        sb.append("&MONTH=");
+        sb.append(month + 1);
+        sb.append("\"><span class=\"small\">翌月</span></a>");
+
+        sb.append("</p>");
+
+        return new String(sb);
 	}
 }
