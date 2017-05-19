@@ -17,11 +17,11 @@ table {
 }
 
 td {
-	border: 1px solid #000000;
+	border: 1px solid #ffffff;
 }
 
 th {
-	border: 1px solid #000000;
+	border: 1px solid #ffffff;
 }
 
 .button {
@@ -106,6 +106,11 @@ th {
 			<tr>
 				<th>講習タイトル</th>
 				<td>Unityの基本操作①</td>
+			</tr>
+
+			<tr>
+				<th>日時</th>
+				<td>5月18日(木)</td>
 			</tr>
 
 			<tr>
