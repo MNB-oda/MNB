@@ -11,30 +11,54 @@
 
 <style>
 body {
-	background-color: #dbf1ff;
+	background-color: #ceecff;
 	text-align: center;
 }
 
 table {
-	border: 1px solid #000000;
-	border-collapse: collapse;
+	border: 1px solid #ffffff;
 	margin-left:auto;margin-right:auto;
 	width: 80%;
 }
 
 td {
-	border: 1px solid #000000;
+	border: 1px solid #ffffff;
 	text-align: left;
 }
-
+th {
+	border: 1px solid #ffffff;
+}
 
 div {
 	text-align: right;
 }
 
+.contents td {
+	text-align: left;
+	padding-right: 20px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.contents th {
+	text-align: left;
+	padding-right: 20px;
+}
+
+.contents tr:nth-child(even) td ,th{
+	background-color: #eaeff7;
+}
+
+.contents tr:nth-child(odd) td ,th{
+	background-color: #d7e2f4;
+}
+
 .widthMax {
 	width: 100%;
 }
+
+
 
 </style>
 
@@ -42,7 +66,7 @@ div {
 <body>
 
 	<form method="post" action="">
-		<table>
+		<table class= "contents">
 		<caption><div><input type="button" name="CLOSE" value="閉じる"></div>追加</caption>
 
 			<tr>
@@ -65,8 +89,7 @@ div {
 			</tr>
 			<tr>
 				<td>講習回</td>
-				<td>第<input type="text" name="NUMBER" value="" size="2" maxlength="3"> 回
-				</td>
+				<td>第<input type="text" name="NUMBER" value="" size="2" maxlength="3">回</td>
 			</tr>
 
 			<tr>

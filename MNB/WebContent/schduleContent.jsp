@@ -11,9 +11,9 @@ body {
 }
 
 table {
-	font-size: 20px;
 	border: 2px solid #ffffff;
-	width: 100%;
+	width: 80%;
+	margin-left:auto;margin-right:auto;
 }
 
 td {
@@ -28,6 +28,11 @@ th {
 	text-align: center;
 }
 
+.button tr:first-child td {
+	background-color: #0099f2;
+	color: #ffffff;
+}
+
 .button tr:nth-child(even) td {
 	background-color: #d7e2f4;
 }
@@ -35,6 +40,7 @@ th {
 .contents td {
 	text-align: left;
 	padding-right: 20px;
+	padding-left: 10px;
 }
 
 .contents th {
@@ -42,25 +48,17 @@ th {
 	padding-right: 20px;
 }
 
-.contents tr:nth-child(even) td {
+.contents tr:nth-child(even) td ,th{
 	background-color: #d7e2f4;
 }
 
-.contents tr:nth-child(odd) td {
+.contents tr:nth-child(odd) td ,th{
 	background-color: #eaeff7;
 }
 
 .contents tr:first-child td {
 	background-color: #0099f2;
 	color: #ffffff;
-}
-
-.contents th:nth-child(even) td {
-	background-color: #d7e2f4;
-}
-
-.contents th:nth-child(odd) td {
-	background-color: #eaeff7;
 }
 
 
@@ -94,49 +92,49 @@ th {
 			</tr>
 
 			<tr>
-				<th>講習班</th>
+				<td>講習班</td>
 				<td>プログラム班</td>
 			</tr>
 
 			<tr>
-				<th>講習回</th>
+				<td>講習回</td>
 				<td>第2回</td>
 			</tr>
 
 			<tr>
-				<th>講習タイトル</th>
+				<td>講習タイトル</td>
 				<td>Unityの基本操作①</td>
 			</tr>
 
 			<tr>
-				<th>日時</th>
+				<td>日時</td>
 				<td>5月18日(木)</td>
 			</tr>
 
 			<tr>
-				<th>場所</th>
+				<td>場所</td>
 				<td>21003教室</td>
 			</tr>
 
 			<tr>
-				<th>持ち物</th>
+				<td>持ち物</td>
 				<td>PC、ACアダプター、Unity操作は3Dなのでマウスがあると良い</td>
 			</tr>
 
 			<tr>
-				<th>対象者</th>
+				<td>対象者</td>
 				<td>3Dゲームを作りたい方</td>
 			</tr>
 
 			<tr>
-				<th>関係者連絡先</th>
+				<td>関係者連絡先</td>
 				<td>東京電機大学 未来科学部 情報メディア学科 <br>ソフトウェア研究部 プログラム班班長 <br>JK
 					太郎 <br>15FI999@ms.dendai.ac.jp
 				</td>
 			</tr>
 
 			<tr>
-				<th>講習概要</th>
+				<td>講習概要</td>
 				<td>今回の講習は新入生向けです。 <br>・Unityソフトのインストールからユーザ登録 <br>・Unityの基本操作
 					<br>不明な点などございましたら、記載されている連絡先にてお願いします。
 				</td>
