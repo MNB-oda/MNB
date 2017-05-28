@@ -57,6 +57,12 @@ td.sche {
 	text-align: left;
 	height: 80px;
 }
+
+td.sche a{
+	display: block;
+	width: 100%;
+	height: 100%
+}
 </style>
 
 </head>
@@ -64,9 +70,9 @@ td.sche {
 	<p>ソフトウェア研究部</p>
 
 	<p>
-		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month - 1%>"><span>前月</span></a>&nbsp;&nbsp;
-		<%=month + 1%>月&nbsp;&nbsp; <a
-			href="/MNB/MakeCalendar?YEAR=<%=year%>&MONTH=<%=month + 1%>"><span>翌月</span></a>
+		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month-1%>"><span>前月</span></a>
+		<%=month%>月
+		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month+1%>"><span>翌月</span></a>
 	</p>
 
 	<table>
@@ -81,9 +87,10 @@ td.sche {
 		</tr>
 
 		<%
-			while (pointedDay < thisMonthLastDay) {
-				StringBuffer storage = new StringBuffer();
+			while (pointedDay <= thisMonthLastDay) {
 				out.println("<tr>");
+
+				int aaa = pointedDay;
 
 				for (int i = 0; i < 7; i++) {
 					if (pointedDay < 1 || pointedDay > thisMonthLastDay) {
@@ -98,7 +105,8 @@ td.sche {
 
 				out.println("<tr>");
 				for (int i = 0; i < 7; i++) {
-					out.println("<td class=\"sche\"></td>");
+					out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + aaa + "&DAYOFTHEWEEK=" + i + "\">OK</a></td>");
+					aaa++;
 				}
 				out.println("</tr>");
 			}

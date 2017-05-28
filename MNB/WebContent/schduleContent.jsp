@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ScheduleBean"%>
+<%
+	int month = (Integer) request.getAttribute("month");
+	int day = (Integer) request.getAttribute("day");
+	String dayOfTheWeek = (String) request.getAttribute("dayOfTheWeek");
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang=>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>講習情報</title>
@@ -13,7 +20,8 @@ body {
 table {
 	border: 2px solid #ffffff;
 	width: 80%;
-	margin-left:auto;margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 td {
@@ -48,11 +56,11 @@ th {
 	padding-right: 20px;
 }
 
-.contents tr:nth-child(even) td ,th{
+.contents tr:nth-child(even) td, th {
 	background-color: #d7e2f4;
 }
 
-.contents tr:nth-child(odd) td ,th{
+.contents tr:nth-child(odd) td, th {
 	background-color: #eaeff7;
 }
 
@@ -60,8 +68,6 @@ th {
 	background-color: #0099f2;
 	color: #ffffff;
 }
-
-
 </style>
 
 </head>
@@ -72,7 +78,7 @@ th {
 		<table class="button">
 			<p>
 			<tr>
-				<td colspan="3">5月18日（木）</td>
+				<td colspan="3"><%=month %>月<%=day %>日（<%=dayOfTheWeek %>）</td>
 			</tr>
 
 			<tr>
@@ -85,7 +91,7 @@ th {
 		</table>
 
 		<p>
-		<table class = "contents">
+		<table class="contents">
 			<tr>
 				<td>講習ID</td>
 				<td>2017521-1-01</td>

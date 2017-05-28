@@ -52,17 +52,18 @@ public class MakeCalender extends HttpServlet {
 			// 何もしない
 		} else {
 			try {
-				System.out.println(request.getParameter("MONTH"));
-				calendar.set(Calendar.MONTH, Integer.valueOf(request.getParameter("MONTH")));
+				calendar.set(Calendar.MONTH, Integer.valueOf(request.getParameter("MONTH"))-1);
 			} catch (NumberFormatException e) {
 				// 何もしない
 			}
 		}
 
+		calendar.set(Calendar.DATE, 1);
+
 		calendarBean.setCalendar(calendar);
 
 		request.setAttribute("year", calendarBean.getCalendarYear());
-		request.setAttribute("month", calendarBean.getCalendarMonth());
+		request.setAttribute("month", calendarBean.getCalendarMonth() + 1);
 		request.setAttribute("pointedDay", calendarBean.getPointedDay());
 		request.setAttribute("thisMonthLastDay", calendarBean.getThisMonthLastDay());
 

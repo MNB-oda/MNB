@@ -38,7 +38,6 @@ public class CalendarBean implements Serializable{
 
 	// 今月の最終日の日付
 	public int getThisMonthLastDay(){
-		calendar.set(getCalendarYear(), getCalendarMonth() + 1, 0);
-		return calendar.get(Calendar.DATE);
+		return calendar.getActualMaximum(Calendar.DATE);
 	}
 }
