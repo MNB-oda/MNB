@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang = "ja">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ソフ研スケジュール</title>
+<title>Insert title here</title>
+<style>
+.button {
+	text-align: right;
+}
+</style>
 </head>
 <body>
+<input type="button" name="CLOSE" value="閉じる">
+<p>・完了しました
 
-<h1>ソフ研スケジュール</h1>
-<p><a href = "C:/pleiades/workspace/MNB/src/calendar/CalendarServlet.java"></a>
-</form>
+
 </body>
 </html>

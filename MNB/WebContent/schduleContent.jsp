@@ -33,7 +33,7 @@ th {
 }
 
 .button {
-	text-align: center;
+	text-align: center;　
 }
 
 .button tr:first-child td {

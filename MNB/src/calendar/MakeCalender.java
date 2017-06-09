@@ -38,7 +38,7 @@ public class MakeCalender extends HttpServlet {
 		CalendarBean calendarBean = new CalendarBean();
 		Calendar calendar = Calendar.getInstance();
 
-		//最初の起動や渡された値に問題があった時の処理
+		//最初の起動や、渡された値に問題があった時のための処理
 		if (request.getParameter("YEAR") == null || request.getParameter("YEAR").length() == 0) {
 			// 何もしない
 		} else {
