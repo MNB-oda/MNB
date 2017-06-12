@@ -38,10 +38,23 @@ public class AccsessContents extends HttpServlet {
 		schedule.setMonth(Integer.valueOf(request.getParameter("MONTH")));
 		schedule.setDay(Integer.valueOf(request.getParameter("DAY")));
 
+		//schedule.detabaseAccses();
+
 		request.setAttribute("year", schedule.getYear());
 		request.setAttribute("month", schedule.getMonth());
 		request.setAttribute("day", schedule.getDay());
 		request.setAttribute("dayOfTheWeek", schedule.getDayOfTheWeek(Integer.valueOf(request.getParameter("DAYOFTHEWEEK"))));
+
+		/*
+		request.setAttribute("han", schedule.getHan());
+		request.setAttribute("number", schedule.getNumber());
+		request.setAttribute("title", schedule.getTitle());
+		request.setAttribute("place", schedule.getPlace());
+		request.setAttribute("belongings", schedule.getBelongings());
+		request.setAttribute("subjects", schedule.getSubjects());
+		request.setAttribute("contact", schedule.getContact());
+		request.setAttribute("content", schedule.getContent());
+		*/
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/schduleContent.jsp");
 		dispatcher.forward(request, response);
