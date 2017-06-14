@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ScheduleDAO;
 import model.ScheduleBean;
 
 /**
@@ -38,14 +39,15 @@ public class AccsessContents extends HttpServlet {
 		schedule.setMonth(Integer.valueOf(request.getParameter("MONTH")));
 		schedule.setDay(Integer.valueOf(request.getParameter("DAY")));
 
-		//schedule.detabaseAccses();
+		ScheduleDAO dao = new ScheduleDAO(schedule);
+		schedule = dao.getDatabase();
 
 		request.setAttribute("year", schedule.getYear());
 		request.setAttribute("month", schedule.getMonth());
 		request.setAttribute("day", schedule.getDay());
 		request.setAttribute("dayOfTheWeek", schedule.getDayOfTheWeek(Integer.valueOf(request.getParameter("DAYOFTHEWEEK"))));
 
-		/*
+		request.setAttribute("id", schedule.getId());
 		request.setAttribute("han", schedule.getHan());
 		request.setAttribute("number", schedule.getNumber());
 		request.setAttribute("title", schedule.getTitle());
@@ -54,7 +56,6 @@ public class AccsessContents extends HttpServlet {
 		request.setAttribute("subjects", schedule.getSubjects());
 		request.setAttribute("contact", schedule.getContact());
 		request.setAttribute("content", schedule.getContent());
-		*/
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/schduleContent.jsp");
 		dispatcher.forward(request, response);
@@ -64,11 +65,10 @@ public class AccsessContents extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	/*
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	*/
 
 }

@@ -90,7 +90,7 @@ td.sche a{
 			while (pointedDay <= thisMonthLastDay) {
 				out.println("<tr>");
 
-				int aaa = pointedDay;
+				int point = pointedDay;
 
 				for (int i = 0; i < 7; i++) {
 					if (pointedDay < 1 || pointedDay > thisMonthLastDay) {
@@ -105,8 +105,8 @@ td.sche a{
 
 				out.println("<tr>");
 				for (int i = 0; i < 7; i++) {
-					out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + aaa + "&DAYOFTHEWEEK=" + i + "\">OK</a></td>");
-					aaa++;
+					out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">OK</a></td>");
+					point++;
 				}
 				out.println("</tr>");
 			}

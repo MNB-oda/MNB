@@ -5,6 +5,15 @@
 	int month = (Integer) request.getAttribute("month");
 	int day = (Integer) request.getAttribute("day");
 	String dayOfTheWeek = (String) request.getAttribute("dayOfTheWeek");
+	String id = (String) request.getAttribute("id");
+	String han = (String) request.getAttribute("han");
+	int number = (Integer) request.getAttribute("number");
+	String title = (String) request.getAttribute("title");
+	String place = (String) request.getAttribute("place");
+	String belongings = (String) request.getAttribute("belongings");
+	String subjects = (String) request.getAttribute("subjects");
+	String contact = (String) request.getAttribute("contact");
+	String content = (String) request.getAttribute("content");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -73,76 +82,74 @@ th {
 </head>
 <body>
 
-	<input type="button" name="CLOSE" value="閉じる">
-	<form method="post" action="">
-		<table class="button">
-			<p>
-			<tr>
-				<td colspan="3"><%=month %>月<%=day %>日（<%=dayOfTheWeek %>）</td>
-			</tr>
+	<input type="button" name="CLOSE" value="閉じる" onClick = window.close()>
 
-			<tr>
-				<td><input type="submit" name="ADD" value="追加"></td>
-				<td><input type="submit" name="UPDATE" value="更新"></td>
-				<td><input type="submit" name="DELETE" value="削除"></td>
-			</tr>
+	<table class="button">
+		<p>
+		<tr>
+			<td colspan="3"><%=month %>月<%=day %>日（<%=dayOfTheWeek %>）</td>
+		</tr>
 
-			</form>
+		<tr>
+			<td><input type="submit" name="ADD" onclick="location.href = '/MNB/ScheduleAssignment?TYPE=add'" value="追加" ></td>
+			<td><input type="submit" name="UPDATE" onclick="location.href = '/MNB/ScheduleAssignment?TYPE=update '" value="更新"></td>
+			<td><input type="submit" name="DELETE" onclick="location.href = '/MNB/ScheduleAssignment?TYPE=delete'" value="削除"></td>
+		</tr>
+
+
 		</table>
 
 		<p>
 		<table class="contents">
 			<tr>
 				<td>講習ID</td>
-				<td>2017521-1-01</td>
+				<td><%= id%></td>
 			</tr>
 
 			<tr>
 				<td>講習班</td>
-				<td>プログラム班</td>
+				<td><%= han%></td>
 			</tr>
 
 			<tr>
 				<td>講習回</td>
-				<td>第2回</td>
+				<td>第<%= number%>回</td>
 			</tr>
 
 			<tr>
 				<td>講習タイトル</td>
-				<td>Unityの基本操作①</td>
+				<td><%= title%></td>
 			</tr>
 
 			<tr>
 				<td>日時</td>
-				<td>5月18日(木)</td>
+				<td><%= month%>月<%= day%>日(<%= dayOfTheWeek%>)</td>
 			</tr>
 
 			<tr>
 				<td>場所</td>
-				<td>21003教室</td>
+				<td><%= place%></td>
 			</tr>
 
 			<tr>
 				<td>持ち物</td>
-				<td>PC、ACアダプター、Unity操作は3Dなのでマウスがあると良い</td>
+				<td><%= belongings%></td>
 			</tr>
 
 			<tr>
 				<td>対象者</td>
-				<td>3Dゲームを作りたい方</td>
+				<td><%= subjects%></td>
 			</tr>
 
 			<tr>
 				<td>関係者連絡先</td>
-				<td>東京電機大学 未来科学部 情報メディア学科 <br>ソフトウェア研究部 プログラム班班長 <br>JK
-					太郎 <br>15FI999@ms.dendai.ac.jp
+				<td><%= contact%>
 				</td>
 			</tr>
 
 			<tr>
 				<td>講習概要</td>
-				<td>今回の講習は新入生向けです。 <br>・Unityソフトのインストールからユーザ登録 <br>・Unityの基本操作
-					<br>不明な点などございましたら、記載されている連絡先にてお願いします。
+				<td><%= content%>
 				</td>
 			</tr>
 

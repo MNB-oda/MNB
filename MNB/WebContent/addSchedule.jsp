@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String han[] = { "プログラム班", "2DCG班", "3DCG班", "サウンド班" };
+	String type = (String)request.getAttribute("type");
 %>
 <html>
 <head>
@@ -59,7 +60,6 @@ div {
 }
 
 
-
 </style>
 
 </head>
@@ -67,7 +67,19 @@ div {
 
 	<form method="post" action="">
 		<table class= "contents">
-		<caption><div><input type="button" name="CLOSE" value="閉じる"></div>追加</caption>
+		<caption><div><input type="button" name="CLOSE" onClick = window.close() value="閉じる"></div>
+		<%switch(type){
+		case "add":
+			out.println("追加");
+			break;
+		case "update":
+			out.println("更新");
+			break;
+		default :
+			break;
+		}
+		%>
+		</caption>
 
 			<tr>
 				<td>講習班</td>

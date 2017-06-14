@@ -1,11 +1,7 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 public class ScheduleBean {
+	private String id;
 	private String han;
 	private int number;
 	private String title;
@@ -17,6 +13,14 @@ public class ScheduleBean {
 	private String subjects;
 	private String contact;
 	private String content;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getHan() {
 		return han;
@@ -127,44 +131,4 @@ public class ScheduleBean {
 			return null;
 		}
 	}
-
-	public void detabaseAccses() {
-		// データベース処理
-		String driverClassName = "org.postgresql.Driver";
-		String url = "jdbc:postgresql://localhost/test";
-		String user = "dbpuser"; // ここはユーザ名
-		String password = "hogehoge"; // ここはパスワード
-		Connection connection;
-		Statement statement;
-		ResultSet resultSet;
-		String sql = "SELECT * FROM schedule WHERE year =" + year + "AND month =" + month
-				+ "AND day =" + day;
-
-		try {
-			Class.forName(driverClassName);
-			connection = DriverManager.getConnection(url, user, password);
-			statement = connection.createStatement();
-
-			resultSet = statement.executeQuery(sql);
-
-			if (resultSet != null) {
-				han = resultSet.getString("han");
-				number = resultSet.getInt("number");
-				title = resultSet.getString("title");
-				place = resultSet.getString("place");
-				belongings = resultSet.getString("belongings");
-				subjects = resultSet.getString("subjects");
-				contact = resultSet.getString("contact");
-				content = resultSet.getString("content");
-			}
-
-			resultSet.close();
-			statement.close();
-			connection.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }
