@@ -5,15 +5,29 @@
 	int month = (Integer) request.getAttribute("month");
 	int day = (Integer) request.getAttribute("day");
 	String dayOfTheWeek = (String) request.getAttribute("dayOfTheWeek");
-	String id = (String) request.getAttribute("id");
-	String han = (String) request.getAttribute("han");
-	int number = (Integer) request.getAttribute("number");
-	String title = (String) request.getAttribute("title");
-	String place = (String) request.getAttribute("place");
-	String belongings = (String) request.getAttribute("belongings");
-	String subjects = (String) request.getAttribute("subjects");
-	String contact = (String) request.getAttribute("contact");
-	String content = (String) request.getAttribute("content");
+
+	String id = "";
+	String han = "";
+	int number = 0;
+	String title = "";
+	String place = "";
+	String belongings = "";
+	String subjects = "";
+	String contact = "";
+	String content = "";
+
+	if((boolean) request.getAttribute("exist")){
+		id = (String) request.getAttribute("id");
+		han = (String) request.getAttribute("han");
+		number = (Integer) request.getAttribute("number");
+		title = (String) request.getAttribute("title");
+		place = (String) request.getAttribute("place");
+		belongings = (String) request.getAttribute("belongings");
+		subjects = (String) request.getAttribute("subjects");
+		contact = (String) request.getAttribute("contact");
+		content = (String) request.getAttribute("content");
+
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,18 +96,22 @@ th {
 </head>
 <body>
 
-	<input type="button" name="CLOSE" value="閉じる" onClick = window.close()>
+	<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
 
 	<table class="button">
-		<p>
 		<tr>
 			<td colspan="3"><%=month %>月<%=day %>日（<%=dayOfTheWeek %>）</td>
 		</tr>
 
 		<tr>
-			<td><input type="submit" name="ADD" onclick="location.href = '/MNB/ScheduleAssignment?TYPE=add'" value="追加" ></td>
-			<td><input type="submit" name="UPDATE" onclick="location.href = '/MNB/ScheduleAssignment?TYPE=update '" value="更新"></td>
-			<td><input type="submit" name="DELETE" onclick="location.href = '/MNB/ScheduleAssignment?TYPE=delete'" value="削除"></td>
+			<%
+			if((boolean) request.getAttribute("exist")){
+				out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=update'\" value=\"更新\"></td>");
+				out.println("<td><input type=\"submit\" name=\"DELETE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=delete'\" value=\"削除\"></td>");
+			}else{
+				out.println("<td><input type=\"submit\" name=\"ADD\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=add'\" value=\"追加\" ></td>");
+			}
+			%>
 		</tr>
 
 

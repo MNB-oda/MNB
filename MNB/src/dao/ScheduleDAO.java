@@ -32,10 +32,11 @@ public class ScheduleDAO {
 
 	private ScheduleBean bean;
 
-	public ScheduleDAO(ScheduleBean sb){
-		bean = sb;
+	public ScheduleDAO(ScheduleBean bean){
+		this.bean = bean;
 	}
 
+	//データベースから指定日時のデータを持ってくる
 	public ScheduleBean getDatabase() {
 		// データベース処理
 		String sql = "SELECT * FROM schedule WHERE year =" + bean.getYear() + "AND month =" + bean.getMonth() + "AND day =" + bean.getDay();
@@ -84,15 +85,72 @@ public class ScheduleDAO {
 		return bean;
 	}
 
+	//指定データをデータベースに挿入
 	public void insertDatabase(){
+		String sql = "SELECT * FROM schedule";
+		try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+		    statement = connection.createStatement();
+		    statement.executeUpdate(
+		    		"INSERT INTO schedule VALUES(" + bean.getId() + bean.getHan() + bean.getNumber()
+		    			+ bean.getTitle());
 
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 	}
 
+	//指定データで同じ日時のデータを更新
 	public void updateDatabase(){
+		String sql = "SELECT * FROM schedule";
+		try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+		    statement = connection.createStatement();
+		    statement.executeUpdate(
+		    		"" );
 
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 	}
 
+	//指定日時のデータを削除
 	public void deleteDatabase(){
+		String sql = "SELECT * FROM schedule";
+		try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+		    statement = connection.createStatement();
+		    statement.executeUpdate(
+		    		"" );
 
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	}
+
+	//指定日時のデータがデータベース内に存在するか
+	public boolean checkExist(){
+		boolean result = false;
+		String sql = "SELECT * FROM schedule WHERE year =" + bean.getYear() + "AND month =" + bean.getMonth() + "AND day =" + bean.getDay();
+
+		try {
+			Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, user, password);
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+			if (resultSet.next()) result = true;
+
+			resultSet.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 }

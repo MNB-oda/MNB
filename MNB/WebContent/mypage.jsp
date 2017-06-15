@@ -105,8 +105,13 @@ td.sche a{
 
 				out.println("<tr>");
 				for (int i = 0; i < 7; i++) {
-					out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">OK</a></td>");
-					point++;
+					if (point < 1 || point > thisMonthLastDay) {
+						out.println("<td class=\"sche\"></td>");
+						point++;
+					} else {
+						out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">講習会</a></td>");
+						point++;
+					}
 				}
 				out.println("</tr>");
 			}

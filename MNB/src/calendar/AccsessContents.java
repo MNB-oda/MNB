@@ -40,22 +40,29 @@ public class AccsessContents extends HttpServlet {
 		schedule.setDay(Integer.valueOf(request.getParameter("DAY")));
 
 		ScheduleDAO dao = new ScheduleDAO(schedule);
-		schedule = dao.getDatabase();
 
 		request.setAttribute("year", schedule.getYear());
 		request.setAttribute("month", schedule.getMonth());
 		request.setAttribute("day", schedule.getDay());
 		request.setAttribute("dayOfTheWeek", schedule.getDayOfTheWeek(Integer.valueOf(request.getParameter("DAYOFTHEWEEK"))));
 
-		request.setAttribute("id", schedule.getId());
-		request.setAttribute("han", schedule.getHan());
-		request.setAttribute("number", schedule.getNumber());
-		request.setAttribute("title", schedule.getTitle());
-		request.setAttribute("place", schedule.getPlace());
-		request.setAttribute("belongings", schedule.getBelongings());
-		request.setAttribute("subjects", schedule.getSubjects());
-		request.setAttribute("contact", schedule.getContact());
-		request.setAttribute("content", schedule.getContent());
+
+		if(dao.checkExist()){
+			schedule = dao.getDatabase();
+			request.setAttribute("exist", true);
+
+			request.setAttribute("id", schedule.getId());
+			request.setAttribute("han", schedule.getHan());
+			request.setAttribute("number", schedule.getNumber());
+			request.setAttribute("title", schedule.getTitle());
+			request.setAttribute("place", schedule.getPlace());
+			request.setAttribute("belongings", schedule.getBelongings());
+			request.setAttribute("subjects", schedule.getSubjects());
+			request.setAttribute("contact", schedule.getContact());
+			request.setAttribute("content", schedule.getContent());
+		}else{
+			request.setAttribute("exist", false);
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/schduleContent.jsp");
 		dispatcher.forward(request, response);
