@@ -1,4 +1,6 @@
 <%@ page import="java.sql.*" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.StudentBean"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,7 +70,6 @@ th {
 	<div align = "right">
 	<input type="button" name="CLOSE" value="閉じる">
 	</div>
-	<form method="post" action="">
 		<table class="contents">
 			<tr>
 				<td colspan="3">登録者一覧</td>
@@ -81,13 +82,13 @@ th {
     // PostgreSQL JDBC 接続
 
     String driverClassName = "org.postgresql.Driver";
-    String url = "jdbc:postgresql://localhost/test";
-    String user = "dbpuser";      // ここはユーザ名
+    String url = "jdbc:postgresql://localhost/tutorial";
+    String user = "wspuser";      // ここはユーザ名
     String password = "hogehoge"; // ここはパスワード
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    String sql = "SELECT * FROM student";
+    String sql = "SELECT id,name FROM student";
 
     // PostgreSQL JDBC ドライバロード
     Class.forName(driverClassName);
@@ -106,13 +107,17 @@ th {
 
     // PostgreSQL JDBC レコードセットリード
     while (resultSet.next()) {
-      String number = resultSet.getString("number");
+      String id = resultSet.getString("id");
       String name = resultSet.getString("name");
 
       out.print("<tr>");
-      out.print("<td>" + number + "</td>");
+      out.print("<td>" + id + "</td>");
       out.print("<td>" + name + "</td>");
-      out.print("<td>" + "<input type="+"submit"+" name="+"change"+" value="+"変更>"+ "</td>");
+      out.print("<td>");
+      out.print("<form method="+"get"+" action="+"StudentController"+">");
+      out.print("<input type="+"submit"+" name="+"change"+" value="+"変更>");
+      out.print("</form>");
+      out.print("</td>");
       out.println("</tr>");
     }
 
@@ -135,6 +140,5 @@ th {
 /*<input type="button" name="change" value="変更">*/
 %>
 		</table>
-	</form>
 </body>
 </html>

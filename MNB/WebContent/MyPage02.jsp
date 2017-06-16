@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.StudentBean"%>
+<%
+	String handle = (String) request.getAttribute("handle");
+	String name = (String) request.getAttribute("name");
+	String id = (String) request.getAttribute("id");
+	String pass = (String) request.getAttribute("pass");
+	String email = (String) request.getAttribute("email");
+	String group = (String) request.getAttribute("group");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,32 +85,32 @@ td {
 
 			<tr>
 				<td>ハンドルネーム</td>
-				<td></td>
+				<td><%=handle %></td>
 			</tr>
 
 			<tr>
 				<td>本名</td>
-				<td></td>
+				<td><%=name %></td>
 			</tr>
 
 			<tr>
 				<td>学籍番号</td>
-				<td></td>
+				<td><%=id %></td>
 			</tr>
 
 			<tr>
 				<td>パスワード</td>
-				<td></td>
+				<td><%=pass %></td>
 			</tr>
 
 			<tr>
 				<td>メールアドレス</td>
-				<td></td>
+				<td><%=email %></td>
 			</tr>
 
 			<tr>
 				<td>所属班</td>
-				<td></td>
+				<td><%=group %></td>
 			</tr>
 
 	</table>

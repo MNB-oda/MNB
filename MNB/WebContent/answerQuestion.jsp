@@ -69,7 +69,7 @@ th {
 	<div align = "right">
 	<input class = "button" type="button" name="CLOSE" value="閉じる">
 	</div>
-	<form method="post" action="">
+	<form action="answer.jsp" method="get">
 		<table class="contents">
 			<tr>
 				<td colspan="3">第2回　プログラム班講義アンケート</td>
@@ -130,7 +130,7 @@ th {
 			</tr>
 		</table>
 		<br>
-		<input type="submit" name="transmission" value="送信">
+		<input type="submit" name="answer" value="送信">
 		<br>
 	</form>
 </body>

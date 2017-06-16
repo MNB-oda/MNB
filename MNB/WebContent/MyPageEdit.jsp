@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.StudentBean"%>
+<%
+	String handle = (String) request.getAttribute("handle");
+	String name = (String) request.getAttribute("name");
+	String id = (String) request.getAttribute("id");
+	String pass = (String) request.getAttribute("pass");
+	String email = (String) request.getAttribute("email");
+	String group = (String) request.getAttribute("group");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,27 +83,27 @@ td {
 
 			<tr>
 				<td>ハンドルネーム</td>
-				<td><input type="text" name="handleName" value=""size = "16"  maxlength="16"></td>
+				<td><input type="text" name="handle" value="<%=handle %>"size = "16"  maxlength="16"></td>
 			</tr>
 
 			<tr>
 				<td>本名</td>
-				<td><input type="text" name="userName" value="" size = "16" maxlength="16"></td>
+				<td><input type="text" name="name" value="<%=name %>" size = "16" maxlength="16"></td>
 			</tr>
 
 			<tr>
 				<td>学籍番号</td>
-				<td><input type="text" name="HANDLENAME" value="" size = "7" maxlength="7"></td>
+				<td><input type="text" name="id" value="<%=id %>" size = "7" maxlength="7"></td>
 			</tr>
 
 			<tr>
 				<td>パスワード</td>
-				<td><input type="text" name="pass" value="" size = "16" maxlength="16"></td>
+				<td><input type="text" name="pass" value="<%=pass %>" size = "16" maxlength="16"></td>
 			</tr>
 
 			<tr>
 				<td>メールアドレス</td>
-				<td><input type="text" name="adress" value="" size = "30" maxlength="50"></td>
+				<td><input type="text" name="email" value="<%=email %>" size = "30" maxlength="50"></td>
 			</tr>
 
 			<tr>
