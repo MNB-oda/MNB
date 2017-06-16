@@ -87,9 +87,7 @@ div {
 			</tr>
 		</table>
 
-		<p>
-			<input type="submit" name="CONFIRM" value="確定">
-		<p>
+
 	</form>
 </body>
 </html>
