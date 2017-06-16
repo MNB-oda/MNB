@@ -15,9 +15,10 @@
 	String subjects = "";
 	String contact = "";
 	String content = "";
+	ScheduleBean bean = null;
 
 	if((boolean) request.getAttribute("exist")){
-		ScheduleBean bean = (ScheduleBean) request.getAttribute("bean");
+		bean = (ScheduleBean) session.getAttribute("bean");
 		id = bean.getId();
 		han = bean.getHan();
 		number = bean.getNumber();

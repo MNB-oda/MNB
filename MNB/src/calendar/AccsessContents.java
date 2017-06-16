@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ScheduleDAO;
 import model.ScheduleBean;
@@ -51,7 +52,11 @@ public class AccsessContents extends HttpServlet {
 			schedule = dao.getDatabase();
 			request.setAttribute("exist", true);
 
-			request.setAttribute("bean", schedule);
+			HttpSession session = request.getSession();
+			if(session.getAttribute("bean") != null){
+				session.removeAttribute("bean");
+			}
+			session.setAttribute("bean", schedule);
 			/*
 			request.setAttribute("id", schedule.getId());
 			request.setAttribute("han", schedule.getHan());

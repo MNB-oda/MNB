@@ -1,11 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="model.ScheduleBean"%>
 <%
 	String han[] = { "プログラム班", "2DCG班", "3DCG班", "サウンド班" };
 	String type = (String)request.getAttribute("type");
+	ScheduleBean bean = null;
+	String id = "";
+	int hansNumber = 0;
+	int number = 0;
+	String title = "";
+	String place = "";
+	String belongings = "";
+	String subjects = "";
+	String contact = "";
+	String content = "";
+
 	if(type == "update"){
-		
+		bean = (ScheduleBean) session.getAttribute("bean");
+		id = bean.getId();
+		number = bean.getNumber();
+		title = bean.getTitle();
+		place = bean.getPlace();
+		belongings = bean.getBelongings();
+		subjects = bean.getSubjects();
+		contact = bean.getContact();
+		content = bean.getContent();
+
+		switch(bean.getHan()){
+		case "2DCG班":
+			hansNumber = 1;
+			break;
+		case "3DCG班":
+			hansNumber = 2;
+			break;
+		case "サウンド班":
+			hansNumber = 3;
+			break;
+		default:
+			break;
+		}
 	}
 %>
 <html>
@@ -91,7 +125,7 @@ div {
 								out.println("<option value = \"");
 								out.println(han[i]);
 								out.println("\"");
-								if (i == 0) {
+								if (i == hansNumber) {
 									out.println("selected");
 								}
 								out.println(">");
@@ -103,12 +137,12 @@ div {
 			</tr>
 			<tr>
 				<td>講習回</td>
-				<td>第<input type="text" name="NUMBER" value="" size="2" maxlength="3">回</td>
+				<td>第<input type="text" name="NUMBER" value="<%= number %>" size="2" maxlength="3">回</td>
 			</tr>
 
 			<tr>
 				<td>講習タイトル</td>
-				<td><input type="text" name="TITLE" value="" maxlength="100" class = "widthMax"></td>
+				<td><input type="text" name="TITLE" value="<%= title %>" maxlength="100" class = "widthMax"></td>
 			</tr>
 
 			<tr>
@@ -118,27 +152,27 @@ div {
 
 			<tr>
 				<td>場所</td>
-				<td><input type="text" name="PLACE" value="" maxlength="100" class = "widthMax"></td>
+				<td><input type="text" name="PLACE" value="<%= place %>" maxlength="100" class = "widthMax"></td>
 			</tr>
 
 			<tr>
 				<td>持ち物</td>
-				<td><input type="text" name="BELONGINGS" value="" maxlength="100" class = "widthMax"></td>
+				<td><input type="text" name="BELONGINGS" value="<%= belongings %>" maxlength="100" class = "widthMax"></td>
 			</tr>
 
 			<tr>
 				<td>対象者</td>
-				<td><input type="text" name="SUBJECTS" value="" maxlength="100" class = "widthMax"></td>
+				<td><input type="text" name="SUBJECTS" value="<%= subjects %>" maxlength="100" class = "widthMax"></td>
 			</tr>
 
 			<tr>
 				<td>関係者連絡先</td>
-				<td><textarea name="CONTACT" rows="3"  wrap="virtual" class = "widthMax"></textarea></td>
+				<td><textarea name="CONTACT" rows="3"  wrap="virtual" class = "widthMax"><%= contact %></textarea></td>
 			</tr>
 
 			<tr>
 				<td>講習概要</td>
-				<td><textarea name="CONTENT" rows="5"  wrap="virtual" class = "widthMax"></textarea></td>
+				<td><textarea name="CONTENT" rows="5"  wrap="virtual" class = "widthMax"><%= content %></textarea></td>
 			</tr>
 		</table>
 
