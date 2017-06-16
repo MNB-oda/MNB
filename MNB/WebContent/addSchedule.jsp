@@ -4,6 +4,9 @@
 <%
 	String han[] = { "プログラム班", "2DCG班", "3DCG班", "サウンド班" };
 	String type = (String)request.getAttribute("type");
+	if(type == "update"){
+		
+	}
 %>
 <html>
 <head>
@@ -64,7 +67,6 @@ div {
 
 </head>
 <body>
-
 	<form method="post" action="">
 		<table class= "contents">
 		<caption><div><input type="button" name="CLOSE" onClick = window.close() value="閉じる"></div>

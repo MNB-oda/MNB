@@ -17,6 +17,17 @@
 	String content = "";
 
 	if((boolean) request.getAttribute("exist")){
+		ScheduleBean bean = (ScheduleBean) request.getAttribute("bean");
+		id = bean.getId();
+		han = bean.getHan();
+		number = bean.getNumber();
+		title = bean.getTitle();
+		place = bean.getPlace();
+		belongings = bean.getBelongings();
+		subjects = bean.getSubjects();
+		contact = bean.getContact();
+		content = bean.getContent();
+		/*
 		id = (String) request.getAttribute("id");
 		han = (String) request.getAttribute("han");
 		number = (Integer) request.getAttribute("number");
@@ -26,6 +37,7 @@
 		subjects = (String) request.getAttribute("subjects");
 		contact = (String) request.getAttribute("contact");
 		content = (String) request.getAttribute("content");
+		*/
 
 	}
 %>
@@ -96,7 +108,7 @@ th {
 </head>
 <body>
 
-	<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
+	<input type="button" name="CLOSE" onClick = history.back() value="戻る">
 
 	<table class="button">
 		<tr>

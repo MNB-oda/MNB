@@ -51,6 +51,8 @@ public class AccsessContents extends HttpServlet {
 			schedule = dao.getDatabase();
 			request.setAttribute("exist", true);
 
+			request.setAttribute("bean", schedule);
+			/*
 			request.setAttribute("id", schedule.getId());
 			request.setAttribute("han", schedule.getHan());
 			request.setAttribute("number", schedule.getNumber());
@@ -60,6 +62,7 @@ public class AccsessContents extends HttpServlet {
 			request.setAttribute("subjects", schedule.getSubjects());
 			request.setAttribute("contact", schedule.getContact());
 			request.setAttribute("content", schedule.getContent());
+			*/
 		}else{
 			request.setAttribute("exist", false);
 		}
