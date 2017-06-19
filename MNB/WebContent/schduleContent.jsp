@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="model.ScheduleBean"%>
@@ -28,18 +29,6 @@
 		subjects = bean.getSubjects();
 		contact = bean.getContact();
 		content = bean.getContent();
-		/*
-		id = (String) request.getAttribute("id");
-		han = (String) request.getAttribute("han");
-		number = (Integer) request.getAttribute("number");
-		title = (String) request.getAttribute("title");
-		place = (String) request.getAttribute("place");
-		belongings = (String) request.getAttribute("belongings");
-		subjects = (String) request.getAttribute("subjects");
-		contact = (String) request.getAttribute("contact");
-		content = (String) request.getAttribute("content");
-		*/
-
 	}
 %>
 

@@ -4,9 +4,15 @@
 <%@ page import="model.ScheduleBean"%>
 <%
 	String han[] = { "プログラム班", "2DCG班", "3DCG班", "サウンド班" };
-	String type = (String)request.getAttribute("type");
-	ScheduleBean bean = null;
-	String id = "";
+	String type = (String)session.getAttribute("type");
+	ScheduleBean bean = (ScheduleBean) session.getAttribute("bean");
+
+	String id = bean.getId();
+	int year = bean.getYear();
+	int month = bean.getMonth();
+	int day = bean.getDay();
+	String dayOfTheWeek = bean.getDayOfTheWeek();
+
 	int hansNumber = 0;
 	int number = 0;
 	String title = "";
@@ -17,16 +23,6 @@
 	String content = "";
 
 	if(type == "update"){
-		bean = (ScheduleBean) session.getAttribute("bean");
-		id = bean.getId();
-		number = bean.getNumber();
-		title = bean.getTitle();
-		place = bean.getPlace();
-		belongings = bean.getBelongings();
-		subjects = bean.getSubjects();
-		contact = bean.getContact();
-		content = bean.getContent();
-
 		switch(bean.getHan()){
 		case "2DCG班":
 			hansNumber = 1;
@@ -40,6 +36,13 @@
 		default:
 			break;
 		}
+		number = bean.getNumber();
+		title = bean.getTitle();
+		place = bean.getPlace();
+		belongings = bean.getBelongings();
+		subjects = bean.getSubjects();
+		contact = bean.getContact();
+		content = bean.getContent();
 	}
 %>
 <html>
@@ -101,7 +104,7 @@ div {
 
 </head>
 <body>
-	<form method="post" action="">
+	<form method="post" action="./DatabaseProcessing">
 		<table class= "contents">
 		<caption><div><input type="button" name="CLOSE" onClick = window.close() value="閉じる"></div>
 		<%switch(type){
@@ -118,13 +121,15 @@ div {
 		</caption>
 
 			<tr>
+				<td>ID</td>
+				<td><%= id%></td>
+			</tr>
+			<tr>
 				<td>講習班</td>
 				<td><select name="HAN">
 						<%
 							for (int i = 0; i < han.length; i++) {
-								out.println("<option value = \"");
-								out.println(han[i]);
-								out.println("\"");
+								out.println("<option value = \"" + han[i] + "\"");
 								if (i == hansNumber) {
 									out.println("selected");
 								}
@@ -147,7 +152,7 @@ div {
 
 			<tr>
 				<td>日時</td>
-				<td></td>
+				<td><%= month%>月<%= day%>日(<%= dayOfTheWeek %>)</td>
 			</tr>
 
 			<tr>

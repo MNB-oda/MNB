@@ -67,7 +67,6 @@ public class MakeCalender extends HttpServlet {
 		request.setAttribute("pointedDay", calendarBean.getPointedDay());
 		request.setAttribute("thisMonthLastDay", calendarBean.getThisMonthLastDay());
 
-
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
 		dispatcher.forward(request, response);
 	}

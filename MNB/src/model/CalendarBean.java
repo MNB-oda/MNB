@@ -6,9 +6,6 @@ import java.util.Calendar;
 public class CalendarBean implements Serializable{
 	Calendar calendar;
 
-	public CalendarBean(){
-	}
-
 	public Calendar getCalendar(){
 		return calendar;
 	}

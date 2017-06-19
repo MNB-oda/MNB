@@ -14,6 +14,8 @@ public class ScheduleBean {
 	private String contact;
 	private String content;
 
+	private String dayOfTheWeek;
+
 	public String getId() {
 		return id;
 	}
@@ -111,24 +113,36 @@ public class ScheduleBean {
 	}
 
 	// 何曜日なのか
-	public String getDayOfTheWeek(int value) {
+	public void setDayOfTheWeek(int value) {
 		switch (value) {
 		case 0:
-			return "日";
+			dayOfTheWeek = "日";
+			break;
 		case 1:
-			return "月";
+			dayOfTheWeek = "月";
+			break;
 		case 2:
-			return "火";
+			dayOfTheWeek = "火";
+			break;
 		case 3:
-			return "水";
+			dayOfTheWeek = "水";
+			break;
 		case 4:
-			return "木";
+			dayOfTheWeek = "木";
+			break;
 		case 5:
-			return "金";
+			dayOfTheWeek = "金";
+			break;
 		case 6:
-			return "土";
+			dayOfTheWeek = "土";
+			break;
 		default:
-			return null;
+			dayOfTheWeek = null;
+			break;
 		}
+	}
+
+	public String getDayOfTheWeek(){
+		return dayOfTheWeek;
 	}
 }

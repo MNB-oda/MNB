@@ -67,11 +67,13 @@ public class ScheduleDAO {
 		    connection = DriverManager.getConnection(url, user, password);
 		    statement = connection.createStatement();
 		    statement.executeUpdate(
-		    		"INSERT INTO schedule VALUES(" + bean.getId() +"," + bean.getHan() + "," +  bean.getNumber() + ","
-		    				+ bean.getTitle() + "," + bean.getYear() + "," + bean.getMonth() + "," + bean.getPlace() + ","
-		    				+ bean.getBelongings() + "," + bean.getSubjects() + "," + bean.getContact() + ","
-		    				+ bean.getContent() + ")");
+		    		"INSERT INTO schedule VALUES('" + bean.getId() +"','" + bean.getHan() + "'," +  bean.getNumber() + ",'"
+		    				+ bean.getTitle() + "'," + bean.getYear() + "," + bean.getMonth() + "," + bean.getDay() + ",'"
+		    				+ bean.getPlace() + "','" + bean.getBelongings() + "','" + bean.getSubjects() + "','"
+		    				+ bean.getContact() + "','" + bean.getContent() + "')");
 
+		    statement.close();
+		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
@@ -85,13 +87,15 @@ public class ScheduleDAO {
 		    connection = DriverManager.getConnection(url, user, password);
 		    statement = connection.createStatement();
 		    statement.executeUpdate(
-		    		"UPDATE schedule SET id =" + bean.getId() + ",han =" + bean.getHan() + ",number =" + bean.getNumber()
-		    									+ ",title =" + bean.getTitle() + ",place =" + bean.getPlace()
-		    									+ ",belongings =" + bean.getBelongings() + ",subjects = " + bean.getSubjects()
-		    									+ ",contact =" + bean.getContact() + ",content = " + bean.getContent()
-		    									+ "WHERE year =" + bean.getYear() + "AND month =" + bean.getMonth()
-		    									+ "AND day =" + bean.getDay());
+		    		"UPDATE schedule SET id =" + bean.getId() + ",han ='" + bean.getHan() + "',number =" + bean.getNumber()
+		    									+ ",title ='" + bean.getTitle() + "',place ='" + bean.getPlace()
+		    									+ "',belongings ='" + bean.getBelongings() + "',subjects = '" + bean.getSubjects()
+		    									+ "',contact ='" + bean.getContact() + "',content = '" + bean.getContent()
+		    									+ "' WHERE year =" + bean.getYear() + " AND month =" + bean.getMonth()
+		    									+ " AND day =" + bean.getDay());
 
+		    statement.close();
+		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
@@ -108,6 +112,8 @@ public class ScheduleDAO {
 		    		"DELETE FROM schedule WHERE year =" + bean.getYear() + "AND month =" + bean.getMonth()
 					+ "AND day =" + bean.getDay() );
 
+		    statement.close();
+		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
@@ -124,8 +130,9 @@ public class ScheduleDAO {
             statement = connection.createStatement();
 
             resultSet = statement.executeQuery(sql);
-
-			if (resultSet.next()) result = true;
+            if(resultSet.next()){
+            	result = true;
+            }
 
 			resultSet.close();
 			connection.close();

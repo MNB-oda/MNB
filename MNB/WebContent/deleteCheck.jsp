@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ScheduleBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-	String title = "プログラム班 第2回 Unityの基本操作① 5月2日（火曜日）";
+	ScheduleBean bean = (ScheduleBean) session.getAttribute("bean");
+	String title = bean.getHan() + " 第" + bean.getNumber() + "回 " + " " + bean.getTitle() + " "
+			+ bean.getMonth() + "月" + bean.getDay() + "日 (" + bean.getDayOfTheWeek() + ")";
 %>
 <html>
 <head>
@@ -18,16 +21,15 @@ body {
 div {
 	text-align: right;
 }
-
-
-
 </style>
 
 </head>
 <body>
-
-	<form method="post" action="">
-		<caption><div><input type="button" name="CLOSE" value="閉じる"></div>
+	<form method = "post" action="./DatabaseProcessing">
+		<caption>
+			<div>
+				<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
+			</div>
 			削除
 		</caption>
 

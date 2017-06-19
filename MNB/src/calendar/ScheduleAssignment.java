@@ -34,20 +34,26 @@ public class ScheduleAssignment extends HttpServlet {
 		// TODO Auto-generated method stub
 		String nextJsp = "";
 		ScheduleBean bean;
+		HttpSession session  = request.getSession();
+
+		if(session.getAttribute("type") != null){
+			session.removeAttribute("type");
+		}
 
 		switch((String)request.getParameter("TYPE")){
 		case "add":
 			nextJsp = "/addSchedule.jsp";
-			request.setAttribute("type", "add");
+			session.setAttribute("type", "add");
 			break;
 
 		case "update":
 			nextJsp = "/addSchedule.jsp";
-			request.setAttribute("type", "update");
+			session.setAttribute("type", "update");
 			break;
 
 		case "delete":
-			nextJsp = "/delete.jsp";
+			nextJsp = "/deleteCheck.jsp";
+			session.setAttribute("type", "delete");
 			break;
 
 		default:

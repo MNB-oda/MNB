@@ -15,7 +15,7 @@ body {
 </style>
 </head>
 <body>
-<input type="button" name="CLOSE" value="閉じる">
+<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
 <p>・完了しました
 
 
