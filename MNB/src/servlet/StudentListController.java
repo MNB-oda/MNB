@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +14,16 @@ import model.StudentBean;
 import model.StudentDAO;
 
 /**
- * Servlet implementation class StudentController
+ * Servlet implementation class StudentListController
  */
-@WebServlet("/StudentController")
-public class StudentController extends HttpServlet {
+@WebServlet("/StudentListController")
+public class StudentListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentController() {
+    public StudentListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +35,13 @@ public class StudentController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		StudentBean studentbean = new StudentBean();
-		request.setCharacterEncoding("UTF-8");
-		studentbean.setId(String.valueOf(request.getParameter("ID")));
-		//studentbean.setId(request.getParameter("id"));
-		studentbean.setName(String.valueOf(request.getParameter("NAME")));
-		//studentbean.setName(request.getParameter("name"));
+		ArrayList<StudentBean> studentList = new ArrayList<StudentBean>();
 		StudentDAO studentdao = new StudentDAO();
-		studentdao.getDatabase(studentbean);
+		studentdao.createStudentList(studentList);
 
-		request.setAttribute("handle", studentbean.getHandle());
-		request.setAttribute("name", studentbean.getName());
-		request.setAttribute("id", studentbean.getId());
-		request.setAttribute("pass", studentbean.getPass());
-		request.setAttribute("email", studentbean.getEmail());
-		request.setAttribute("group", studentbean.getGroup());
+		request.setAttribute("studentList", studentList);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/myPage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/studentList.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -61,5 +52,4 @@ public class StudentController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

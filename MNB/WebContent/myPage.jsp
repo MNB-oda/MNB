@@ -78,7 +78,7 @@ td {
 
 	<p>マイページ</p>
 	<Div Align = left>
-				<input type="submit" name="CONFIRM" value="登録者管理">
+	<input type="submit" name="CONFIRM" value="登録者管理">
 	</Div>
 		<table class= "myPageTable">
 			<caption>登録者一覧</caption>

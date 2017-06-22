@@ -8,14 +8,6 @@ public class StudentBean {
 	private String email;
 	private String group;
 
-	public StudentBean(){
-		handle = "";
-		name = "";
-		id = "";
-		pass = "";
-		email = "";
-		group = "";
-	}
 	public String getHandle() {
 		return handle;
 	}

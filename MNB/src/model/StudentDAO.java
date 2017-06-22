@@ -2,9 +2,9 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class StudentDAO {
 	final private static String dbname = "tutorial";   // データベース名
@@ -16,32 +16,24 @@ public class StudentDAO {
 	Statement statement;
 	ResultSet resultSet;
 
-	public StudentBean getStudent(StudentBean bean){
-		//String sql = "SELECT * FROM student WHERE handle ="
-		//		+ "" + bean.getHandle() + "AND name =" + bean.getName() + "AND id=" + bean.getId()
-		//		+ "AND pass=" + bean.getPass() + "AND email=" + bean.getEmail() + "AND group=" + bean.getGroup();
-		String sql = "SELECT * FROM student where id= ? and pass= ?";
+	public StudentBean getDatabase(StudentBean bean){
+		String sql = "SELECT * FROM student WHERE id= '"+bean.getId()+"'  AND name= '"+bean.getName()+"'";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
             statement = connection.createStatement();
-           PreparedStatement pstmt = connection.prepareStatement(sql);
-
-           pstmt.setString(1, bean.getId());
-           pstmt.setString(2, bean.getId());
 
             resultSet = statement.executeQuery(sql);
 
-            if (resultSet != null) {
-				while(resultSet.next()){
-					bean.setHandle(resultSet.getString("handle"));
-					bean.setName(resultSet.getString("name"));
-					bean.setId(resultSet.getString("id"));
-					bean.setPass(resultSet.getString("pass"));
-					bean.setEmail(resultSet.getString("email"));
-					bean.setGroup(resultSet.getString("group"));
-				}
-			}
+            while (resultSet.next()) {
+            	bean.setHandle(resultSet.getString("handle"));
+            	bean.setName(resultSet.getString("name"));
+                bean.setId(resultSet.getString("id"));
+                bean.setPass(resultSet.getString("pass"));
+                bean.setEmail(resultSet.getString("email"));
+                bean.setGroup(resultSet.getString("group"));
+            }
+
 			resultSet.close();
 			statement.close();
 			connection.close();
@@ -50,6 +42,31 @@ public class StudentDAO {
 			e.printStackTrace();
 		}
 		return bean;
+	}
+
+	public void createStudentList(ArrayList<StudentBean> studentList){
+		String sql = "SELECT id,name FROM student";
+		try{
+			Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, user, password);
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+            	StudentBean bean = new StudentBean();
+            	bean.setId(resultSet.getString("id"));
+            	bean.setName(resultSet.getString("name"));
+                studentList.add(bean);
+            }
+
+			resultSet.close();
+			statement.close();
+			connection.close();
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void insertDatabase(){

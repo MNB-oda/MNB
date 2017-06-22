@@ -36,9 +36,9 @@ public class StudentList extends HttpServlet {
 
 		StudentBean studentbean = new StudentBean();
 		StudentDAO studentdao = new StudentDAO();
-		studentdao.getStudent(studentbean);
-		//studentbean.setId("ID");
-		//studentbean.setName("NAME");
+		studentdao.getDatabase(studentbean);
+		studentbean.setId("ID");
+		studentbean.setName("NAME");
 
 		request.setAttribute("name", studentbean.getName());
 		request.setAttribute("id", studentbean.getId());
