@@ -16,7 +16,13 @@ public class StudentDAO {
 	Statement statement;
 	ResultSet resultSet;
 
-	public StudentBean getDatabase(StudentBean bean){
+	private StudentBean bean;
+
+	public StudentDAO(StudentBean bean){
+		this.bean = bean;
+	}
+
+	public StudentBean getDatabase(){
 		String sql = "SELECT * FROM student WHERE id= '"+bean.getId()+"'  AND name= '"+bean.getName()+"'";
 		try{
 			Class.forName(driverClassName);
@@ -70,14 +76,53 @@ public class StudentDAO {
 	}
 
 	public void insertDatabase(){
+		String sql = "SELECT * FROM student";
+		try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+		    statement = connection.createStatement();
+		    statement.executeUpdate(
+		    		"INSERT INTO schedule VALUES('" + bean.getHandle() +"','" + bean.getName() + "'," +  bean.getId() + ",'"
+		    				+ bean.getPass() + "'," + bean.getEmail() + "," + bean.getGroup() +"')");
 
+		    statement.close();
+		    connection.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 	}
 
 	public void updateDatabase(){
+		String sql = "SELECT * FROM student";
+		try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+		    statement = connection.createStatement();
+		    statement.executeUpdate(
+		    		"UPDATE student SET handle =" + bean.getHandle() + ",name ='" + bean.getName() + "',id =" + bean.getId()
+		    									+ ",pass ='" + bean.getPass() + "',email ='" + bean.getEmail()
+		    									+ "',group ='" + bean.getGroup());
 
+		    statement.close();
+		    connection.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 	}
 
 	public void deleteDatabase(){
+		String sql = "SELECT * FROM student";
+		try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+		    statement = connection.createStatement();
+		    statement.executeUpdate(
+		    		"DELETE FROM schedule WHERE id =" + bean.getId() + "AND name =" + bean.getName());
 
+		    statement.close();
+		    connection.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 	}
 }

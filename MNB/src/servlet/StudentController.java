@@ -40,8 +40,8 @@ public class StudentController extends HttpServlet {
 		//studentbean.setId(request.getParameter("id"));
 		studentbean.setName(String.valueOf(request.getParameter("NAME")));
 		//studentbean.setName(request.getParameter("name"));
-		StudentDAO studentdao = new StudentDAO();
-		studentdao.getDatabase(studentbean);
+		StudentDAO studentdao = new StudentDAO(studentbean);
+		studentdao.getDatabase();
 
 		request.setAttribute("handle", studentbean.getHandle());
 		request.setAttribute("name", studentbean.getName());

@@ -35,8 +35,9 @@ public class StudentListController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		StudentBean studentbean = new StudentBean();
 		ArrayList<StudentBean> studentList = new ArrayList<StudentBean>();
-		StudentDAO studentdao = new StudentDAO();
+		StudentDAO studentdao = new StudentDAO(studentbean);
 		studentdao.createStudentList(studentList);
 
 		request.setAttribute("studentList", studentList);
