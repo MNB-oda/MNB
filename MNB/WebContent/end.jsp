@@ -15,7 +15,7 @@ body {
 </style>
 </head>
 <body>
-<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
+<input type="button" name="CLOSE" onClick = "location.href = '/MNB/MakeCalender'" value="ホームに戻る">
 <p>・完了しました
 
 
