@@ -16,14 +16,8 @@ public class ScheduleDAO {
 	Statement statement;
 	ResultSet resultSet;
 
-	private ScheduleBean bean;
-
-	public ScheduleDAO(ScheduleBean bean){
-		this.bean = bean;
-	}
-
 	//データベースから指定日時のデータを持ってくる
-	public ScheduleBean getDatabase() {
+	public ScheduleBean getDatabase(ScheduleBean bean) {
 		// データベース処理
 		String sql = "SELECT * FROM schedule WHERE year =" + bean.getYear() + "AND month =" + bean.getMonth() + "AND day =" + bean.getDay();
 
@@ -60,7 +54,7 @@ public class ScheduleDAO {
 	}
 
 	//指定データをデータベースに挿入
-	public void insertDatabase(){
+	public void insertDatabase(ScheduleBean bean){
 		String sql = "SELECT * FROM schedule";
 		try {
 		    Class.forName(driverClassName);
@@ -80,7 +74,7 @@ public class ScheduleDAO {
 	}
 
 	//指定データで同じ日時のデータを更新
-	public void updateDatabase(){
+	public void updateDatabase(ScheduleBean bean){
 		String sql = "SELECT * FROM schedule";
 		try {
 		    Class.forName(driverClassName);
@@ -102,7 +96,7 @@ public class ScheduleDAO {
 	}
 
 	//指定日時のデータを削除
-	public void deleteDatabase(){
+	public void deleteDatabase(ScheduleBean bean){
 		String sql = "SELECT * FROM schedule";
 		try {
 		    Class.forName(driverClassName);
@@ -120,7 +114,7 @@ public class ScheduleDAO {
 	}
 
 	//指定日時のデータがデータベース内に存在するか
-	public boolean checkExist(){
+	public boolean checkExist(ScheduleBean bean){
 		boolean result = false;
 		String sql = "SELECT * FROM schedule WHERE year =" + bean.getYear() + "AND month =" + bean.getMonth() + "AND day =" + bean.getDay();
 

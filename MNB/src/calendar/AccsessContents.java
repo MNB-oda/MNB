@@ -42,7 +42,7 @@ public class AccsessContents extends HttpServlet {
 		schedule.setDayOfTheWeek(Integer.valueOf(request.getParameter("DAYOFTHEWEEK")));
 		schedule.setId(String.valueOf(schedule.getYear() + "" + schedule.getMonth() + "" + schedule.getDay()));
 
-		ScheduleDAO dao = new ScheduleDAO(schedule);
+		ScheduleDAO dao = new ScheduleDAO();
 
 		request.setAttribute("year", schedule.getYear());
 		request.setAttribute("month", schedule.getMonth());
@@ -50,8 +50,8 @@ public class AccsessContents extends HttpServlet {
 		request.setAttribute("dayOfTheWeek", schedule.getDayOfTheWeek());
 
 
-		if(dao.checkExist()){
-			schedule = dao.getDatabase();
+		if(dao.checkExist(schedule)){
+			schedule = dao.getDatabase(schedule);
 			request.setAttribute("exist", true);
 		}else{
 			request.setAttribute("exist", false);

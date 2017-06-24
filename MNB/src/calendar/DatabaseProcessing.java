@@ -52,19 +52,19 @@ public class DatabaseProcessing extends HttpServlet {
 		switch((String)session.getAttribute("type")){
 		case "add":
 			setParameter(bean, request);
-			dao = new ScheduleDAO(bean);
-			dao.insertDatabase();
+			dao = new ScheduleDAO();
+			dao.insertDatabase(bean);
 			break;
 
 		case "update":
 			setParameter(bean, request);
-			dao = new ScheduleDAO(bean);
-			dao.updateDatabase();
+			dao = new ScheduleDAO();
+			dao.updateDatabase(bean);
 			break;
 
 		case "delete":
-			dao = new ScheduleDAO(bean);
-			dao.deleteDatabase();
+			dao = new ScheduleDAO();
+			dao.deleteDatabase(bean);
 			break;
 
 		default:

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.StudentBean;
 import model.StudentDAO;
 
 /**
- * Servlet implementation class StudentListController
+ * Servlet implementation class Login
  */
-@WebServlet("/StudentListController")
-public class StudentListController extends HttpServlet {
+@WebServlet("/StudentLogin")
+public class StudentLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentListController() {
+    public StudentLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +33,7 @@ public class StudentListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		StudentBean studentbean = new StudentBean();
-		ArrayList<StudentBean> studentList = new ArrayList<StudentBean>();
-		StudentDAO studentdao = new StudentDAO();
-		studentdao.createStudentList(studentList);
-
-		request.setAttribute("studentList", studentList);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/studentList.jsp");
-		dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -51,6 +41,27 @@ public class StudentListController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		StudentBean student = new StudentBean();
+		student.setId(request.getParameter("id"));
+		student.setPass(request.getParameter("pass"));
+		StudentDAO dao = new StudentDAO();
+
+		boolean result = false;
+		result = dao.check(student);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("login", result);
+		if (result) {
+			// ログインに成功している場合はmember.jspへ
+			session.setAttribute("student", student);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/MakeCalender");
+			dispatcher.forward(request, response);
+		} else {
+			// ログインに失敗している場合はlogin.jspへ
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+		}
 	}
+
 }
