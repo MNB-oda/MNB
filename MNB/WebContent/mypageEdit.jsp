@@ -2,12 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.StudentBean"%>
 <%
-	String handle = (String) request.getAttribute("handle");
-	String name = (String) request.getAttribute("name");
-	String id = (String) request.getAttribute("id");
-	String pass = (String) request.getAttribute("pass");
-	String email = (String) request.getAttribute("email");
-	String group = (String) request.getAttribute("group");
+String handle = (String) request.getAttribute("handle");
+String name = (String) request.getAttribute("name");
+String id = (String) request.getAttribute("id");
+String pass = (String) request.getAttribute("pass");
+String email = (String) request.getAttribute("email");
+String group = (String) request.getAttribute("group");
+/*
+String type = (String)session.getAttribute("type");
+StudentBean bean = (StudentBean) session.getAttribute("bean");
+
+String handle = "";
+String name = "";
+String id = "";
+String pass = "";
+String email = "";
+String group = "";
+handle = bean.getHandle();
+name = bean.getName();
+id = bean.getId();
+pass = bean.getPass();
+email = bean.getEmail();
+group = bean.getGroup();
+*/
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -73,6 +90,7 @@ td {
 
 </head>
 <body>
+	<form method="post" action="./StudentDatabaseProcessing">
 	<p><font size ="5">ソフトウェア研究部</font></p>
 
 
@@ -109,10 +127,35 @@ td {
 			<tr>
 				<td>所属班</td>
 				<td>
-				<input type="checkbox" name = "HAN" value="1">プログラム班
-				<input type="checkbox" name = "HAN" value="2" >2DCG班
-				<input type="checkbox" name = "HAN" value="3" >3DCG班
-				<input type="checkbox" name = "HAN" value="4" >サウンド班
+				<% switch(group){
+				case "プログラム班":
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" checked=\"checked\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" >サウンド班");
+					break;
+				case "2DCG班":
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" checked=\"checked\">2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" >サウンド班");
+					break;
+				case "3DCG班":
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" checked=\"checked\">3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" >サウンド班");
+					break;
+				case "サウンド班":
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" checked=\"checked\">サウンド班");
+					break;
+				default :
+					break;
+				}
+				%>
 
 				</td>
 			</tr>
@@ -122,6 +165,6 @@ td {
 		<p>
 			<input type="submit" name="CONFIRM" value="確定">
 		<p>
-
+	</form>
 </body>
 </html>

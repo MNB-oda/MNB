@@ -112,7 +112,7 @@ public class StudentDAO {
 		    connection = DriverManager.getConnection(url, user, password);
 		    statement = connection.createStatement();
 		    statement.executeUpdate(
-		    		"DELETE FROM schedule WHERE id =" + bean.getId() + "AND name =" + bean.getName());
+		    		"DELETE FROM student WHERE id =" + bean.getId() + "AND name =" + bean.getName());
 
 		    statement.close();
 		    connection.close();

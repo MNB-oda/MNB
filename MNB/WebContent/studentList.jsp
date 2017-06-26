@@ -93,7 +93,9 @@ for(int i = 0; i < studentList.size() ; i++){
     //out.print("<td>");
     //out.print("<input type="+"submit"+" name="+"change"+" value="+"変更>");
     //out.print("</td>");
+
     out.println("<td class=\"sche\"><a href=\"/MNB/StudentController?ID=" + id + "&NAME=" + name + "\">変更</a></td>");
+    //out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = '/MNB/StudentAssignment?TYPE=update'\" value=\"変更\"></td>");
     out.println("</tr>");
     //out.print("</form>");
 }
