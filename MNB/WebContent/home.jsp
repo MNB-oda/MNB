@@ -63,17 +63,62 @@ td.sche a{
 	width: 100%;
 	height: 100%
 }
+
+
+.homeNewList td {
+	text-align: left;
+	padding-right: 20px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.homeNewList caption{
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.homeNewList th {
+	text-align: center;
+}
+
+.homeNewList tr:nth-child(even) td {
+	background-color: #eaeff7;
+}
+
+.homeNewList tr:nth-child(odd) td {
+	background-color: #d7e2f4;
+}
+
+
+.homeNewList {
+	width: 100%;
+}
+
+
+
+
 </style>
 
 </head>
 <body>
 	<p>ソフトウェア研究部</p>
 
+	<Div Align = right>
+	<input type="submit" name="CONFIRM" value="マイページ">
+	</Div>
+
 	<p>
 		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month-1%>"><span>前月</span></a>
 		<%=month%>月
 		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month+1%>"><span>翌月</span></a>
 	</p>
+
+
 
 	<table>
 		<tr>
@@ -117,6 +162,59 @@ td.sche a{
 			}
 		%>
 	</table>
+
+
+	<br>
+	<br>
+	<br>
+		<table class= "homeNewList">
+			<caption>お知らせ</caption>
+
+			<tr>
+				<td>講習情報はありません</td>
+			</tr>
+
+			<tr>
+				<td>講習情報はありません</td>
+			</tr>
+
+			<tr>
+				<td>講習情報はありません</td>
+			</tr>
+
+			<tr>
+				<td>講習情報はありません</td>
+			</tr>
+
+			<tr>
+				<td>講習情報はありません</td>
+			</tr>
+
+			<tr>
+				<td>講習情報はありません</td>
+			</tr>
+		</table>
+
+	<br>
+	<br>
+
+	<Div Align = left>
+	<input type="submit" name="CONFIRM" value="講習アンケート">
+	<input type="submit" name="CONFIRM" value="イベントアンケート">
+	</Div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+<Div Align = left>
+	<input type="submit" name="CONFIRM" value="公式サイト">
+	<input type="submit" name="CONFIRM" value="公式Twitter">
+	</Div>
+
 </body>
 </html>
 
