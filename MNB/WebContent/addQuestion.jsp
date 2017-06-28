@@ -53,8 +53,9 @@ td {
 <script language = "JavaScript">
 <!--
 	var i = 1;
-	//var selectBefore = 1;
 	var selectBefore = [1];
+
+	//質問を追加
     function add() {
         i++;
         // Tbody への参照を取得します
@@ -75,7 +76,7 @@ td {
 
                 mycurrent_form = document.createElement("INPUT");
                 mycurrent_form.type = "TEXT";
-        		mycurrent_form.name = "TITLE";
+        		mycurrent_form.name = "QUESTION" + i;
         		mycurrent_form.value = "";
         		mycurrent_form.maxlength = "100";
         		mycurrent_form.setAttribute("class","widthMax");
@@ -86,12 +87,14 @@ td {
                 // -------
                 // タグ名が TD である要素を生成します
                 mycurrent_cell=document.createElement("td");
-                mycurrent_cell.id = "question" + i;
 
+             	//質問の形式
         		mycurrent_form = document.createElement("INPUT");
         		mycurrent_form.type = "radio";
         		mycurrent_form.name = "TYPE"+ i;
         		mycurrent_form.value = "単体";
+        		mycurrent_form.setAttribute("onChange", "hideKomoku(" + i + ")");
+        		mycurrent_form.setAttribute("checked", "checked");
         		mycurrent_cell.appendChild(mycurrent_form);
         		currenttext = document.createTextNode("単体");
         		mycurrent_cell.appendChild(currenttext);
@@ -100,6 +103,7 @@ td {
         		mycurrent_form.type = "radio";
         		mycurrent_form.name = "TYPE"+ i;
         		mycurrent_form.value = "複数";
+        		mycurrent_form.setAttribute("onChange", "hideKomoku(" + i + ")");
         		mycurrent_cell.appendChild(mycurrent_form);
         		currenttext = document.createTextNode("複数");
         		mycurrent_cell.appendChild(currenttext);
@@ -108,6 +112,7 @@ td {
         		mycurrent_form.type = "radio";
         		mycurrent_form.name = "TYPE"+ i;
         		mycurrent_form.value = "自由";
+        		mycurrent_form.setAttribute("onChange", "hideKomoku(" + i + ")");
         		mycurrent_cell.appendChild(mycurrent_form);
         		currenttext = document.createTextNode("自由");
         		mycurrent_cell.appendChild(currenttext);
@@ -115,11 +120,16 @@ td {
         		mycurrent_form = document.createElement("p");
         		mycurrent_cell.appendChild(mycurrent_form);
 
+        		//表示非表示のためのdiv
+        		notFree = document.createElement("div");
+        		notFree.id = "notFree" + i;
+
+        		//selectbox
         		currenttext = document.createTextNode("項目数");
-        		mycurrent_cell.appendChild(currenttext);
+        		notFree.appendChild(currenttext);
 
         		mycurrent_form = document.createElement("SELECT");
-        		mycurrent_form.name = "KOMOKUSU";
+        		mycurrent_form.name = "KOMOKUSU" + i;
         		mycurrent_form.id = "KOMOKUSU" + i;
         		mycurrent_form.setAttribute("onChange","selectChange("+ i +");");
 
@@ -138,21 +148,23 @@ td {
         		option.appendChild(document.createTextNode("3"));
         		mycurrent_form.appendChild(option);
 
-        		mycurrent_cell.appendChild(mycurrent_form);
+        		notFree.appendChild(mycurrent_form);
 
+        		//選択形式質問内容入力フォーム
         		div = document.createElement("div");
 				div.id = "row" + i + "div1";
 				currenttext = document.createTextNode(1 + ". ");
 				div.appendChild(currenttext);
         		mycurrent_form = document.createElement("INPUT");
         		mycurrent_form.type = "TEXT";
-        		mycurrent_form.name = "ANSWER";
+        		mycurrent_form.name = "ROW" + i + "ANSWER1";
         		mycurrent_form.value  = "";
         		mycurrent_form.maxlength = "100";
         		mycurrent_form.setAttribute("class","widthMax");
 
         		div.appendChild(mycurrent_form);
-        		mycurrent_cell.appendChild(div);
+        		notFree.appendChild(div);
+        		mycurrent_cell.appendChild(notFree);
 
             // その TD セルを TR 行へと付加します
             mycurrent_row.appendChild(mycurrent_cell);
@@ -163,6 +175,7 @@ td {
         selectBefore.push(1);
     }
 
+    //質問を削除
     var delRow = function() {
         var mytable = document.getElementById("tablebody");
         var removeTable = document.getElementById("row"+i);
@@ -176,15 +189,14 @@ td {
         }
     }
 
+    //selectboxの値が変化した時に、その値と同じ数に内容入力フォームを変更
     function selectChange(rowNumber){
     	var thisKomoku = document.getElementById("KOMOKUSU" + rowNumber);
     	var selectNow = thisKomoku.selectedIndex + 1;
-    	var myQuestion = document.getElementById("question" + rowNumber);
-    	console.log(selectBefore[rowNumber-1]);
+    	var myQuestion = document.getElementById("notFree" + rowNumber);
 
     	if(selectBefore[rowNumber-1] < selectNow){
 	    	for(var i = selectBefore[rowNumber-1]; i < selectNow; i++){
-
 				div = document.createElement("div");
 				var number = i+1;
 				div.id = "row" + rowNumber + "div" + number;
@@ -192,7 +204,7 @@ td {
 				div.appendChild(currenttext);
 		    	mycurrent_form = document.createElement("INPUT");
 		        mycurrent_form.type = "TEXT";
-				mycurrent_form.name = "TITLE";
+				mycurrent_form.name = "ROW" + rowNumber + "ANSWER" + i;
 				mycurrent_form.value = "";
 				mycurrent_form.id = "komoku" + number;
 				mycurrent_form.maxlength = "100";
@@ -206,8 +218,17 @@ td {
 				myQuestion.removeChild(removeInput);
     		}
     	}
-
     	selectBefore[rowNumber-1] = selectNow;
+    }
+
+    //自由が選択された際に項目数を非表示にする
+    function hideKomoku(rowNumber){
+    	radio = document.getElementsByName('TYPE' + rowNumber);
+    	if(radio[2].checked){
+    		document.getElementById('notFree' + i).style.display = "none";
+    	}else{
+    		document.getElementById('notFree' + i).style.display = "";
+    	}
     }
 
  -->
@@ -233,20 +254,22 @@ td {
 				</td>
 			</tr>
 			<tr id = "row1">
-				<td>1．<input type="text" name="QUESTION" value="" maxlength="100" class="widthMax"></td>
-				<td id = "question1"><input type = "radio" name = "TYPE" value = "単体" checked>単体
-					<input type = "radio" name = "TYPE" value = "複数">複数
-					<input type = "radio" name = "TYPE" value = "自由">自由
-					<p>
+				<td>1．<input type="text" name="QUESTION1" value="" maxlength="100" class="widthMax"></td>
+				<td><input type = "radio" name = "TYPE1" value = "単体" onClick = "hideKomoku(1)" checked>単体
+					<input type = "radio" name = "TYPE1" value = "複数" onClick = "hideKomoku(1)">複数
+					<input type = "radio" name = "TYPE1" value = "自由" onClick = "hideKomoku(1)">自由
 
-					項目数<select name="KOMOKUSU" id = "KOMOKUSU1" onChange = "selectChange(1);">
+					<p>
+					<div id = notFree1>
+					項目数<select name="KOMOKUSU1" id = "KOMOKUSU1" onChange = "selectChange(1);">
 							<option value = "1" selected>1</option>
 							<option value = "2">2</option>
 							<option value = "3">3</option>
 						</select>
 
 					<div id = "row1div1">1.
-					<input type="text" name="ANSWER" value="" id = "komoku1" maxlength="100" class="widthMax">
+					<input type="text" name="ROW1ANSWER1" value="" id = "komoku1" maxlength="100" class="widthMax">
+					</div>
 					</div>
 				</td>
 			</tr>
