@@ -201,7 +201,7 @@ td {
 				myQuestion.appendChild(div);
 	    	}
     	}else if(selectBefore[rowNumber-1] > selectNow){
-    		for(var i = selectBefore; i > selectNow ; i--){
+    		for(var i = selectBefore[rowNumber-1]; i > selectNow ; i--){
 	    		var removeInput = document.getElementById("row" + rowNumber + "div" + i);
 				myQuestion.removeChild(removeInput);
     		}
