@@ -1,5 +1,4 @@
-
-package calendar;
+package servlet;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -59,15 +58,19 @@ public class MakeCalender extends HttpServlet {
 			}
 		}
 
+		//カレンダーに一日目をセット
 		calendar.set(Calendar.DATE, 1);
 
+		//beanのインスタンス生成
 		calendarBean.setCalendar(calendar);
 
+		//requestにデータ格納
 		request.setAttribute("year", calendarBean.getCalendarYear());
 		request.setAttribute("month", calendarBean.getCalendarMonth() + 1);
 		request.setAttribute("pointedDay", calendarBean.getPointedDay());
 		request.setAttribute("thisMonthLastDay", calendarBean.getThisMonthLastDay());
 
+		//home.jspへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
 		dispatcher.forward(request, response);
 	}

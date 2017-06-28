@@ -1,4 +1,4 @@
-package calendar;
+package servlet;
 
 import java.io.IOException;
 
@@ -36,10 +36,13 @@ public class ScheduleAssignment extends HttpServlet {
 		ScheduleBean bean;
 		HttpSession session  = request.getSession();
 
+		//もし既にtypeがsessionに存在していたら、新しく設定するので削除
 		if(session.getAttribute("type") != null){
 			session.removeAttribute("type");
 		}
 
+		//sessionスコープに追加、更新、削除のどれをするのかを格納
+		//それぞれによって遷移先jspを変更
 		switch((String)request.getParameter("TYPE")){
 		case "add":
 			nextJsp = "/addSchedule.jsp";
@@ -60,6 +63,7 @@ public class ScheduleAssignment extends HttpServlet {
 			break;
 		}
 
+		//それぞれのjspへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextJsp);
 		dispatcher.forward(request, response);
 	}

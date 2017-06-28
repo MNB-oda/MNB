@@ -1,4 +1,4 @@
-package calendar;
+package servlet;
 
 import java.io.IOException;
 
@@ -49,6 +49,7 @@ public class DatabaseProcessing extends HttpServlet {
 		ScheduleBean bean = (ScheduleBean)session.getAttribute("bean");
 		ScheduleDAO dao;
 
+		//追加、更新、削除のどれなのかを判断し、それぞれを実行
 		switch((String)session.getAttribute("type")){
 		case "add":
 			setParameter(bean, request);
@@ -71,8 +72,10 @@ public class DatabaseProcessing extends HttpServlet {
 			break;
 		}
 
+		//sessionスコープをまっさらにする
 		session.invalidate();
 
+		//endへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/end.jsp");
 		dispatcher.forward(request, response);
 	}

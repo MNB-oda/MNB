@@ -1,4 +1,4 @@
-package calendar;
+package servlet;
 
 import java.io.IOException;
 
@@ -16,6 +16,13 @@ import model.ScheduleBean;
 /**
  * Servlet implementation class AccsessContents
  */
+
+/*
+ 役割
+ homeから年月日のデータをもらって、そのデータの講習情報を取ってくる
+ それをscheduleContentに受け渡す
+ */
+
 @WebServlet("/AccsessContents")
 public class AccsessContents extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,6 +43,7 @@ public class AccsessContents extends HttpServlet {
 
 		ScheduleBean schedule = new ScheduleBean();
 
+		//beanに年月日と曜日とIDを登録
 		schedule.setYear(Integer.valueOf(request.getParameter("YEAR")));
 		schedule.setMonth(Integer.valueOf(request.getParameter("MONTH")));
 		schedule.setDay(Integer.valueOf(request.getParameter("DAY")));
@@ -44,12 +52,14 @@ public class AccsessContents extends HttpServlet {
 
 		ScheduleDAO dao = new ScheduleDAO();
 
+		//requestにデータを格納
 		request.setAttribute("year", schedule.getYear());
 		request.setAttribute("month", schedule.getMonth());
 		request.setAttribute("day", schedule.getDay());
 		request.setAttribute("dayOfTheWeek", schedule.getDayOfTheWeek());
 
 
+		//指定日時のデータがデータベース上に存在するかを確認
 		if(dao.checkExist(schedule)){
 			schedule = dao.getDatabase(schedule);
 			request.setAttribute("exist", true);
@@ -57,12 +67,14 @@ public class AccsessContents extends HttpServlet {
 			request.setAttribute("exist", false);
 		}
 
+		//しばらく参照するので、sessionスコープにscheduleBeanを格納
 		HttpSession session = request.getSession();
 		if(session.getAttribute("bean") != null){
 			session.removeAttribute("bean");
 		}
 		session.setAttribute("bean", schedule);
 
+		//scheduleContentへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/schduleContent.jsp");
 		dispatcher.forward(request, response);
 	}

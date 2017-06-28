@@ -131,9 +131,7 @@ public class StudentDAO {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 
 			pstmt.setString(1, bean.getId());
-			System.out.println(bean.getId());
 			pstmt.setString(2, bean.getPass());
-			System.out.println(bean.getPass());
 
 			ResultSet resultSet = pstmt.executeQuery();
 			if (resultSet.next()) result = true;
