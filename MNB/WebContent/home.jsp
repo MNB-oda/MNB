@@ -137,7 +137,7 @@ td.sche a{
 			while (pointedDay <= thisMonthLastDay) {
 				out.println("<tr>");
 
-				int point = pointedDay;
+				int pointer = pointedDay;
 
 				for (int i = 0; i < 7; i++) {
 					if (pointedDay < 1 || pointedDay > thisMonthLastDay) {
@@ -151,21 +151,20 @@ td.sche a{
 				out.println("</tr>");
 
 				out.println("<tr>");
-				int a = 0;
+
+				int beansPointer = 0;
 				for (int i = 0; i < 7; i++) {
-					if (point < 1 || point > thisMonthLastDay) {
+					if (pointer < 1 || pointer > thisMonthLastDay) {
 						out.println("<td class=\"sche\"></td>");
-						point++;
+						pointer++;
 					} else {
-						if(point == beans[a].getDay()){
-							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">" + beans[a].getTitle() + "</a></td>");
-							if(beans[a+1] != null){
-								a++;
-							}
+						if(beans[beansPointer] != null && pointer == beans[beansPointer].getDay()){
+							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getTitle() + "</a></td>");
+							beansPointer++;
 						}else{
-							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\"></a></td>");
+							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\"></a></td>");
 						}
-						point++;
+						pointer++;
 					}
 				}
 				out.println("</tr>");
