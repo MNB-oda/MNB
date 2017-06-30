@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.StudentDAO;
 import model.StudentBean;
-import model.StudentDAO;
 
 /**
  * Servlet implementation class StudentController

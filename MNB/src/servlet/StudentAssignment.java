@@ -33,7 +33,7 @@ public class StudentAssignment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String nextJsp = "";
-		StudentBean bean;
+		StudentBean bean = new StudentBean();;
 		HttpSession session  = request.getSession();
 
 		if(session.getAttribute("type") != null){
@@ -48,6 +48,7 @@ public class StudentAssignment extends HttpServlet {
 
 		case "update":
 			nextJsp = "/mypageEdit.jsp";
+			System.out.println(bean.getHandle());
 			session.setAttribute("type", "update");
 			break;
 /*

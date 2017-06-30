@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.StudentDAO;
 import model.StudentBean;
-import model.StudentDAO;
 
 /**
  * Servlet implementation class Login

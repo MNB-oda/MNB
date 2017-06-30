@@ -2,12 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.StudentBean"%>
 <%
+StudentBean bean = (StudentBean) session.getAttribute("bean");
+if(bean == null){
+	System.out.println("bean == null");
+}
 String handle = (String) request.getAttribute("handle");
 String name = (String) request.getAttribute("name");
 String id = (String) request.getAttribute("id");
 String pass = (String) request.getAttribute("pass");
 String email = (String) request.getAttribute("email");
 String group = (String) request.getAttribute("group");
+
 /*
 String type = (String)session.getAttribute("type");
 StudentBean bean = (StudentBean) session.getAttribute("bean");
@@ -18,6 +23,7 @@ String id = "";
 String pass = "";
 String email = "";
 String group = "";
+System.out.println("bean.getHandle()");
 handle = bean.getHandle();
 name = bean.getName();
 id = bean.getId();
@@ -129,30 +135,34 @@ td {
 				<td>
 				<% switch(group){
 				case "プログラム班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" checked=\"checked\">プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
 					break;
 				case "2DCG班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" checked=\"checked\">2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
 					break;
 				case "3DCG班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" checked=\"checked\">3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
 					break;
 				case "サウンド班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"1\" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"2\" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"3\" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value=\"4\" checked=\"checked\">サウンド班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">サウンド班");
 					break;
 				default :
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
 					break;
 				}
 				%>

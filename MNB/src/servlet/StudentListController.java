@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.StudentDAO;
 import model.StudentBean;
-import model.StudentDAO;
 
 /**
  * Servlet implementation class StudentListController
@@ -35,7 +35,6 @@ public class StudentListController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		StudentBean studentbean = new StudentBean();
 		ArrayList<StudentBean> studentList = new ArrayList<StudentBean>();
 		StudentDAO studentdao = new StudentDAO();
 		studentdao.createStudentList(studentList);

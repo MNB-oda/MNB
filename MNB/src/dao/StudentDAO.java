@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import model.StudentBean;
 
 public class StudentDAO {
 	final private static String dbname = "mnb";   // データベース名
@@ -46,7 +48,8 @@ public class StudentDAO {
 	}
 
 	public void createStudentList(ArrayList<StudentBean> studentList){
-		String sql = "SELECT id,name FROM student";
+		//String sql = "SELECT handle,name,id,pass,email,group FROM student";
+		String sql = "SELECT * FROM student";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
@@ -56,8 +59,12 @@ public class StudentDAO {
 
             while (resultSet.next()) {
             	StudentBean bean = new StudentBean();
-            	bean.setId(resultSet.getString("id"));
+            	bean.setHandle(resultSet.getString("handle"));
             	bean.setName(resultSet.getString("name"));
+            	bean.setId(resultSet.getString("id"));
+            	bean.setPass(resultSet.getString("pass"));
+            	bean.setEmail(resultSet.getString("email"));
+            	bean.setGroup(resultSet.getString("group"));
                 studentList.add(bean);
             }
 
