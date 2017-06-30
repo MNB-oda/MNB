@@ -66,31 +66,22 @@ public class MakeCalender extends HttpServlet {
 		//beanのインスタンス生成
 		calendarBean.setCalendar(calendar);
 
-		//ここ
-		ScheduleBean[] beans = new ScheduleBean[50];
-		/*
-		ScheduleBean bean = new ScheduleBean();
-		bean.setYear(calendarBean.getCalendarYear());
-		bean.setMonth(calendarBean.getCalendarMonth() + 1);
-		*/
+		//講習情報が存在する場合のための
+		ScheduleBean[] beans = new ScheduleBean[32];
 		ScheduleDAO dao = new ScheduleDAO();
 		for(int i=0; i<beans.length; i++){
-			//bean.setDay(i);
-			if(dao.checkExistEXTRA(calendarBean.getCalendarYear(), calendarBean.getCalendarMonth() + 1, i)){
-				beans[i] = dao.getDatabaseEXTRA(calendarBean.getCalendarYear(), calendarBean.getCalendarMonth() + 1, i);
+			ScheduleBean bean = new ScheduleBean();
+			bean.setYear(calendarBean.getCalendarYear());
+			bean.setMonth(calendarBean.getCalendarMonth() + 1);
+			bean.setDay(i);
+			if(dao.checkExist(bean)){
+				beans[i] = dao.getDatabase(bean);
 				System.out.println(beans[i].getTitle());
 				System.out.println(beans[i].getMonth());
 				System.out.println(beans[i].getDay());
 				System.out.println(i);
 			}
 		}
-		System.out.println(beans[13].getTitle());
-		System.out.println(beans[13].getMonth());
-		System.out.println(beans[13].getDay());
-		System.out.println(beans[14].getTitle());
-		System.out.println(beans[14].getMonth());
-		System.out.println(beans[14].getDay());
-
 
 		//requestにデータ格納
 		request.setAttribute("year", calendarBean.getCalendarYear());
