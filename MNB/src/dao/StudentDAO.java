@@ -17,16 +17,31 @@ public class StudentDAO {
 	final private static String url = "jdbc:postgresql://localhost/" + dbname;
 	Connection connection;
 	Statement statement;
+
+	PreparedStatement prepStmt_SI; // IDを指定したSELECT用
+    PreparedStatement prepStmt_S; //SELECT用
+    PreparedStatement prepStmt_I; // INSERT用
+    PreparedStatement prepStmt_U; // UPDATE用
+    PreparedStatement prepStmt_D; // DELETE用
+
+    String strPrepSQL_SI = "SELECT * FROM student WHERE id = ?";
+    String strPrepSQL_S = "SELECT * FROM student";
+    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?)";
+    String strPrepSQL_U = "UPDATE schedule SET handle = ? , name = ? , id = ? , title = ?"
+    						+ ", pass = ? , email = ? , han = ?"
+    						+ "WHERE id = ?";
+    String strPrepSQL_D = "DELETE FROM student WHERE id = ?";
 	ResultSet resultSet;
 
 	public StudentBean getDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student WHERE id= '"+bean.getId()+"'";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
-            statement = connection.createStatement();
+            prepStmt_SI = connection.prepareStatement(strPrepSQL_SI);
 
-            resultSet = statement.executeQuery(sql);
+            prepStmt_SI.setString(1, bean.getId());
+
+            resultSet = prepStmt_SI.executeQuery();
 
             while (resultSet.next()) {
             	bean.setHandle(resultSet.getString("handle"));
@@ -38,7 +53,6 @@ public class StudentDAO {
             }
 
 			resultSet.close();
-			statement.close();
 			connection.close();
 
 		}catch (Exception e) {
@@ -48,14 +62,12 @@ public class StudentDAO {
 	}
 
 	public void createStudentList(ArrayList<StudentBean> studentList){
-		//String sql = "SELECT handle,name,id,pass,email,han FROM student";
-		String sql = "SELECT * FROM student";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
-            statement = connection.createStatement();
+            prepStmt_S = connection.prepareStatement(strPrepSQL_S);
 
-            resultSet = statement.executeQuery(sql);
+            resultSet = prepStmt_S.executeQuery();
 
             while (resultSet.next()) {
             	StudentBean bean = new StudentBean();
@@ -69,7 +81,6 @@ public class StudentDAO {
             }
 
 			resultSet.close();
-			statement.close();
 			connection.close();
 
 		}catch (Exception e) {
@@ -78,16 +89,19 @@ public class StudentDAO {
 	}
 
 	public void insertDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student";
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
-		    statement = connection.createStatement();
-		    statement.executeUpdate(
-		    		"INSERT INTO student VALUES('" + bean.getHandle() +"','" + bean.getName() + "','" +  bean.getId() + "','"
-		    				+ bean.getPass() + "','" + bean.getEmail() + "','" + bean.getHan() +"')"
-		    );
-		    statement.close();
+
+		    prepStmt_I = connection.prepareStatement(strPrepSQL_I);
+		    prepStmt_I.setString(1, bean.getHandle());
+		    prepStmt_I.setString(2, bean.getName());
+		    prepStmt_I.setString(3, bean.getId());
+		    prepStmt_I.setString(4, bean.getPass());
+		    prepStmt_I.setString(5, bean.getEmail());
+		    prepStmt_I.setString(6, bean.getHan());
+		    prepStmt_I.executeUpdate();
+
 		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -95,19 +109,19 @@ public class StudentDAO {
 	}
 
 	public void updateDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student";
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
-		    statement = connection.createStatement();
-		    statement.executeUpdate(
-		    		"UPDATE student SET handle ='" + bean.getHandle() + "',name ='" + bean.getName() + "',id ='" + bean.getId()
-		    									+ "',pass ='" + bean.getPass() + "',email ='" + bean.getEmail()
-		    									+ "',han ='" + bean.getHan()
-		    									+ "' WHERE id ='" + bean.getId() + "'"
-		    									);
 
-		    statement.close();
+		    prepStmt_U = connection.prepareStatement(strPrepSQL_U);
+		    prepStmt_U.setString(1, bean.getHandle());
+		    prepStmt_U.setString(2, bean.getName());
+		    prepStmt_U.setString(3, bean.getId());
+		    prepStmt_U.setString(4, bean.getPass());
+		    prepStmt_U.setString(5, bean.getEmail());
+		    prepStmt_U.setString(6, bean.getHan());
+		    prepStmt_U.executeUpdate();
+
 		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -115,15 +129,14 @@ public class StudentDAO {
 	}
 
 	public void deleteDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student";
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
-		    statement = connection.createStatement();
-		    //System.out.println("DELETE FROM student WHERE id ='" + bean.getId() + "'");
-		    statement.executeUpdate(
-		    		"DELETE FROM student WHERE id ='" + bean.getId() + "'");
-		    statement.close();
+
+		    prepStmt_D = connection.prepareStatement(strPrepSQL_D);
+		    prepStmt_D.setString(1, bean.getId());
+		    prepStmt_D.executeUpdate();
+
 		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
