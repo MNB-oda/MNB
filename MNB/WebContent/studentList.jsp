@@ -77,6 +77,7 @@ th {
 	<div align = "right">
 	<input type="button" name="CLOSE" value="閉じる">
 	</div>
+		<input type="submit" name="ADD" onclick="location.href = 'StudentAssignment?TYPE=add'" value="追加">
 		<table class="contents">
 			<tr>
 				<td colspan="3">登録者一覧</td>
@@ -96,7 +97,10 @@ for(int i = 0; i < studentList.size() ; i++){
 
     //out.println("<td class=\"sche\"><a href=\"/MNB/StudentController?ID=" + id + "&NAME=" + name + "\">変更</a></td>");
     //out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = 'StudentController?ID=" + id + "&NAME=" + name+"'\" value=\"変更\"></td>");
-    out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = 'StudentAssignment?TYPE=update&ID=" + id + "&NAME=" + name+"'\" value=\"変更\"></td>");
+    out.println("<td>");
+    out.println("<input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = 'StudentAssignment?TYPE=update&ID=" + id +"'\" value=\"変更\">");
+    out.println("<input type=\"submit\" name=\"DELETE\" onclick=\"location.href = 'StudentAssignment?TYPE=delete&ID=" + id +"'\" value=\"削除\">");
+    out.println("</td>");
     out.println("</tr>");
 }
 %>

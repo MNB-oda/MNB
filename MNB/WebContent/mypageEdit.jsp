@@ -11,12 +11,22 @@
 	String pass = "";
 	String email = "";
 	String han = "";
-	handle = bean.getHandle();
-	name = bean.getName();
-	id = bean.getId();
-	pass = bean.getPass();
-	email = bean.getEmail();
-	han = bean.getHan();
+	switch(type){
+	case "add":
+
+		break;
+	case "update":
+		handle = bean.getHandle();
+		name = bean.getName();
+		id = bean.getId();
+		pass = bean.getPass();
+		email = bean.getEmail();
+		han = bean.getHan();
+		break;
+	default :
+		break;
+	}
+	//out.println("<td><input type=\"text\" name=\"id\" value=" + id + " size = \"7\" maxlength=\"7\" readonly></td>");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,8 +34,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>マイページ</title>
 <style>
-
-
 body {
 	background-color: #ceecff;
 	text-align: center;
@@ -103,9 +111,19 @@ td {
 
 			<tr>
 				<td>学籍番号</td>
-				<td><input type="text" name="id" value="<%=id %>" size = "7" maxlength="7" readonly></td>
+				<%
+				switch(type){
+				case "add":
+					out.println("<td><input type=\"text\" name=\"id\" value=\"\" size = \"7\" maxlength=\"7\"></td>");
+					break;
+				case "update":
+					out.println("<td><input type=\"text\" name=\"id\" value="+ id +" size = \"7\" maxlength=\"7\" readonly></td>");
+					break;
+				default :
+					break;
+				}
+				%>
 			</tr>
-
 			<tr>
 				<td>パスワード</td>
 				<td><input type="text" name="pass" value="<%=pass %>" size = "16" maxlength="16"></td>
@@ -146,7 +164,7 @@ td {
 					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\"  checked=\"checked\">サウンド班");
 					break;
 				default :
-					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" checked=\"checked\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" >プログラム班");
 					out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
 					out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
 					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");

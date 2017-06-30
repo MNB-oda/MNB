@@ -20,7 +20,7 @@ public class StudentDAO {
 	ResultSet resultSet;
 
 	public StudentBean getDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student WHERE id= '"+bean.getId()+"'  AND name= '"+bean.getName()+"'";
+		String sql = "SELECT * FROM student WHERE id= '"+bean.getId()+"'";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
@@ -84,9 +84,9 @@ public class StudentDAO {
 		    connection = DriverManager.getConnection(url, user, password);
 		    statement = connection.createStatement();
 		    statement.executeUpdate(
-		    		"INSERT INTO schedule VALUES('" + bean.getHandle() +"','" + bean.getName() + "'," +  bean.getId() + ",'"
-		    				+ bean.getPass() + "'," + bean.getEmail() + "," + bean.getHan() +"')");
-
+		    		"INSERT INTO student VALUES('" + bean.getHandle() +"','" + bean.getName() + "','" +  bean.getId() + "','"
+		    				+ bean.getPass() + "','" + bean.getEmail() + "','" + bean.getHan() +"')"
+		    );
 		    statement.close();
 		    connection.close();
 		} catch (Exception e) {
@@ -120,9 +120,9 @@ public class StudentDAO {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
 		    statement = connection.createStatement();
+		    //System.out.println("DELETE FROM student WHERE id ='" + bean.getId() + "'");
 		    statement.executeUpdate(
-		    		"DELETE FROM student WHERE id =" + bean.getId() + "AND name =" + bean.getName());
-
+		    		"DELETE FROM student WHERE id ='" + bean.getId() + "'");
 		    statement.close();
 		    connection.close();
 		} catch (Exception e) {
