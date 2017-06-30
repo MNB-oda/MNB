@@ -151,13 +151,17 @@ td.sche a{
 				out.println("</tr>");
 
 				out.println("<tr>");
+				int a = 0;
 				for (int i = 0; i < 7; i++) {
 					if (point < 1 || point > thisMonthLastDay) {
 						out.println("<td class=\"sche\"></td>");
 						point++;
 					} else {
-						if(beans[point] != null){
-							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">" + beans[point].getTitle() + "</a></td>");
+						if(point == beans[a].getDay()){
+							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">" + beans[a].getTitle() + "</a></td>");
+							if(beans[a+1] != null){
+								a++;
+							}
 						}else{
 							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\"></a></td>");
 						}

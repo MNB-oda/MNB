@@ -66,22 +66,13 @@ public class MakeCalender extends HttpServlet {
 		//beanのインスタンス生成
 		calendarBean.setCalendar(calendar);
 
-		//講習情報が存在する場合のための
-		ScheduleBean[] beans = new ScheduleBean[32];
+		//講習情報が存在する場合にはタイトルを表示するための処理
+		ScheduleBean[] beans;
+		ScheduleBean bean = new ScheduleBean();
+		bean.setYear(calendarBean.getCalendarYear());
+		bean.setMonth(calendarBean.getCalendarMonth() + 1);
 		ScheduleDAO dao = new ScheduleDAO();
-		for(int i=0; i<beans.length; i++){
-			ScheduleBean bean = new ScheduleBean();
-			bean.setYear(calendarBean.getCalendarYear());
-			bean.setMonth(calendarBean.getCalendarMonth() + 1);
-			bean.setDay(i);
-			if(dao.checkExist(bean)){
-				beans[i] = dao.getDatabase(bean);
-				System.out.println(beans[i].getTitle());
-				System.out.println(beans[i].getMonth());
-				System.out.println(beans[i].getDay());
-				System.out.println(i);
-			}
-		}
+		beans = dao.getDatabaseYM(bean);
 
 		//requestにデータ格納
 		request.setAttribute("year", calendarBean.getCalendarYear());

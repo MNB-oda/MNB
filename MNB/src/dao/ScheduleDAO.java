@@ -21,7 +21,7 @@ public class ScheduleDAO {
     PreparedStatement prepStmt_D; // DELETE用
 
     String strPrepSQL_SYMD = "SELECT * FROM schedule WHERE year = ? AND month = ? AND day = ?";
-    String strPrepSQL_SYM = "SELECT * FROM schedule WHERE year = ? AND month = ?";
+    String strPrepSQL_SYM = "SELECT * FROM schedule WHERE year = ? AND month = ? ORDER BY day ASC";
     String strPrepSQL_I = "INSERT INTO schedule VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String strPrepSQL_U = "UPDATE schedule SET id = ? , han = ? , number = ? , title = ?"
     						+ ", place = ? , belongings = ? , subjects = ? , contact = ? , content = ?"
@@ -67,6 +67,51 @@ public class ScheduleDAO {
 
 		return bean;
 	}
+
+	//データベースから指定日時のデータを持ってくる
+		public ScheduleBean[] getDatabaseYM(ScheduleBean bean) {
+			// データベース処理
+			ScheduleBean beans[] = new ScheduleBean[32];
+
+			try {
+				Class.forName(driverClassName);
+				connection = DriverManager.getConnection(url, user, password);
+				prepStmt_SYM = connection.prepareStatement(strPrepSQL_SYM);
+
+				prepStmt_SYM.setInt(1, bean.getYear());
+				prepStmt_SYM.setInt(2, bean.getMonth());
+
+	            resultSet = prepStmt_SYM.executeQuery();
+
+	            int i=0;
+				if (resultSet != null) {
+					while(resultSet.next()){
+						ScheduleBean newBean = new ScheduleBean();
+						newBean.setId(resultSet.getString("id"));
+						newBean.setHan(resultSet.getString("han"));
+						newBean.setNumber(resultSet.getInt("number"));
+						newBean.setTitle(resultSet.getString("title"));
+						newBean.setYear(resultSet.getInt("year"));
+						newBean.setMonth(resultSet.getInt("month"));
+						newBean.setDay(resultSet.getInt("day"));
+						newBean.setPlace(resultSet.getString("place"));
+						newBean.setBelongings(resultSet.getString("belongings"));
+						newBean.setSubjects(resultSet.getString("subjects"));
+						newBean.setContact(resultSet.getString("contact"));
+						newBean.setContent(resultSet.getString("content"));
+						beans[i] = newBean;
+						i++;
+					}
+				}
+				resultSet.close();
+				connection.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return beans;
+		}
 
 	//指定データをデータベースに挿入
 	public void insertDatabase(ScheduleBean bean){
