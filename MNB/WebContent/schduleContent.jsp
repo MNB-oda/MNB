@@ -1,7 +1,39 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ScheduleBean"%>
+<%
+	int month = (Integer) request.getAttribute("month");
+	int day = (Integer) request.getAttribute("day");
+	String dayOfTheWeek = (String) request.getAttribute("dayOfTheWeek");
+
+	String id = "";
+	String han = "";
+	int number = 0;
+	String title = "";
+	String place = "";
+	String belongings = "";
+	String subjects = "";
+	String contact = "";
+	String content = "";
+	ScheduleBean bean = null;
+
+	if((boolean) request.getAttribute("exist")){
+		bean = (ScheduleBean) session.getAttribute("bean");
+		id = bean.getId();
+		han = bean.getHan();
+		number = bean.getNumber();
+		title = bean.getTitle();
+		place = bean.getPlace();
+		belongings = bean.getBelongings();
+		subjects = bean.getSubjects();
+		contact = bean.getContact();
+		content = bean.getContent();
+	}
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang=>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>講習情報</title>
@@ -11,21 +43,27 @@ body {
 }
 
 table {
-	font-size: 20px;
 	border: 2px solid #ffffff;
-	width: 100%;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 td {
-	border: 1px solid #000000;
+	border: 1px solid #ffffff;
 }
 
 th {
-	border: 1px solid #000000;
+	border: 1px solid #ffffff;
 }
 
 .button {
 	text-align: center;
+}
+
+.button tr:first-child td {
+	background-color: #0099f2;
+	color: #ffffff;
 }
 
 .button tr:nth-child(even) td {
@@ -35,6 +73,7 @@ th {
 .contents td {
 	text-align: left;
 	padding-right: 20px;
+	padding-left: 10px;
 }
 
 .contents th {
@@ -42,11 +81,11 @@ th {
 	padding-right: 20px;
 }
 
-.contents tr:nth-child(even) td {
+.contents tr:nth-child(even) td, th {
 	background-color: #d7e2f4;
 }
 
-.contents tr:nth-child(odd) td {
+.contents tr:nth-child(odd) td, th {
 	background-color: #eaeff7;
 }
 
@@ -54,86 +93,83 @@ th {
 	background-color: #0099f2;
 	color: #ffffff;
 }
-
-.contents th:nth-child(even) td {
-	background-color: #d7e2f4;
-}
-
-.contents th:nth-child(odd) td {
-	background-color: #eaeff7;
-}
-
-
 </style>
 
 </head>
 <body>
 
-	<input type="button" name="CLOSE" value="閉じる">
-	<form method="post" action="">
-		<table class="button">
-			<p>
-			<tr>
-				<td colspan="3">5月18日（木）</td>
-			</tr>
+	<input type="button" name="CLOSE" onClick = history.back() value="戻る">
 
-			<tr>
-				<td><input type="submit" name="ADD" value="追加"></td>
-				<td><input type="submit" name="UPDATE" value="更新"></td>
-				<td><input type="submit" name="DELETE" value="削除"></td>
-			</tr>
+	<table class="button">
+		<tr>
+			<td colspan="3"><%=month %>月<%=day %>日（<%=dayOfTheWeek %>）</td>
+		</tr>
 
-			</form>
+		<tr>
+			<%
+			if((boolean) request.getAttribute("exist")){
+				out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=update'\" value=\"更新\"></td>");
+				out.println("<td><input type=\"submit\" name=\"DELETE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=delete'\" value=\"削除\"></td>");
+			}else{
+				out.println("<td><input type=\"submit\" name=\"ADD\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=add'\" value=\"追加\" ></td>");
+			}
+			%>
+		</tr>
+
+
 		</table>
 
 		<p>
-		<table class = "contents">
+		<table class="contents">
 			<tr>
 				<td>講習ID</td>
-				<td>2017521-1-01</td>
+				<td><%= id%></td>
 			</tr>
 
 			<tr>
-				<th>講習班</th>
-				<td>プログラム班</td>
+				<td>講習班</td>
+				<td><%= han%></td>
 			</tr>
 
 			<tr>
-				<th>講習回</th>
-				<td>第2回</td>
+				<td>講習回</td>
+				<td>第<%= number%>回</td>
 			</tr>
 
 			<tr>
-				<th>講習タイトル</th>
-				<td>Unityの基本操作①</td>
+				<td>講習タイトル</td>
+				<td><%= title%></td>
 			</tr>
 
 			<tr>
-				<th>場所</th>
-				<td>21003教室</td>
+				<td>日時</td>
+				<td><%= month%>月<%= day%>日(<%= dayOfTheWeek%>)</td>
 			</tr>
 
 			<tr>
-				<th>持ち物</th>
-				<td>PC、ACアダプター、Unity操作は3Dなのでマウスがあると良い</td>
+				<td>場所</td>
+				<td><%= place%></td>
 			</tr>
 
 			<tr>
-				<th>対象者</th>
-				<td>3Dゲームを作りたい方</td>
+				<td>持ち物</td>
+				<td><%= belongings%></td>
 			</tr>
 
 			<tr>
-				<th>関係者連絡先</th>
-				<td>東京電機大学 未来科学部 情報メディア学科 <br>ソフトウェア研究部 プログラム班班長 <br>JK
-					太郎 <br>15FI999@ms.dendai.ac.jp
+				<td>対象者</td>
+				<td><%= subjects%></td>
+			</tr>
+
+			<tr>
+				<td>関係者連絡先</td>
+				<td><%= contact%>
 				</td>
 			</tr>
 
 			<tr>
-				<th>講習概要</th>
-				<td>今回の講習は新入生向けです。 <br>・Unityソフトのインストールからユーザ登録 <br>・Unityの基本操作
-					<br>不明な点などございましたら、記載されている連絡先にてお願いします。
+				<td>講習概要</td>
+				<td><%= content%>
 				</td>
 			</tr>
 
