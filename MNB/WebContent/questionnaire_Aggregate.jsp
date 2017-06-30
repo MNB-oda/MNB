@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>＊日程管理システム・アンケート編集</title>
+<title>＊日程管理システム・アンケート集計</title>
 <style>
 body {
 	background-color: #ceecff;

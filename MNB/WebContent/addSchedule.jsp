@@ -107,7 +107,8 @@ div {
 	<form method="post" action="./DatabaseProcessing">
 		<table class= "contents">
 		<caption><div><input type="button" name="CLOSE" onClick = window.close() value="閉じる"></div>
-		<%switch(type){
+		<%
+		switch(type){
 		case "add":
 			out.println("追加");
 			break;

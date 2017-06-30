@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="model.CalendarBean"%>
+<%@ page import="model.ScheduleBean"%>
 
 <%
 	int year = (Integer) request.getAttribute("year");
 	int month = (Integer) request.getAttribute("month");
 	int pointedDay = (Integer) request.getAttribute("pointedDay");
 	int thisMonthLastDay = (Integer) request.getAttribute("thisMonthLastDay");
+	ScheduleBean beans[] = (ScheduleBean[])request.getAttribute("beans");
 %>
 
 
@@ -154,7 +156,11 @@ td.sche a{
 						out.println("<td class=\"sche\"></td>");
 						point++;
 					} else {
-						out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">講習会</a></td>");
+						if(beans[point] != null){
+							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\">" + beans[point].getTitle() + "</a></td>");
+						}else{
+							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + point + "&DAYOFTHEWEEK=" + i + "\"></a></td>");
+						}
 						point++;
 					}
 				}
@@ -199,8 +205,8 @@ td.sche a{
 	<br>
 
 	<Div Align = left>
-	<input type="submit" name="CONFIRM" value="講習アンケート">
-	<input type="submit" name="CONFIRM" value="イベントアンケート">
+	<input type="submit" name="CONFIRM" value="講習アンケート" onClick = "location.href = '/MNB/AccsessQuestions?TYPE=kosyu'">
+	<input type="submit" name="CONFIRM" value="イベントアンケート" onClick = "location.href = '/MNB/AccsessQuestions?TYPE=event'">
 	</Div>
 
 	<br>

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ScheduleDAO;
 import model.CalendarBean;
+import model.ScheduleBean;
 
 /**
  * Servlet implementation class MakeCalender
@@ -64,11 +66,38 @@ public class MakeCalender extends HttpServlet {
 		//beanのインスタンス生成
 		calendarBean.setCalendar(calendar);
 
+		//ここ
+		ScheduleBean[] beans = new ScheduleBean[50];
+		/*
+		ScheduleBean bean = new ScheduleBean();
+		bean.setYear(calendarBean.getCalendarYear());
+		bean.setMonth(calendarBean.getCalendarMonth() + 1);
+		*/
+		ScheduleDAO dao = new ScheduleDAO();
+		for(int i=0; i<beans.length; i++){
+			//bean.setDay(i);
+			if(dao.checkExistEXTRA(calendarBean.getCalendarYear(), calendarBean.getCalendarMonth() + 1, i)){
+				beans[i] = dao.getDatabaseEXTRA(calendarBean.getCalendarYear(), calendarBean.getCalendarMonth() + 1, i);
+				System.out.println(beans[i].getTitle());
+				System.out.println(beans[i].getMonth());
+				System.out.println(beans[i].getDay());
+				System.out.println(i);
+			}
+		}
+		System.out.println(beans[13].getTitle());
+		System.out.println(beans[13].getMonth());
+		System.out.println(beans[13].getDay());
+		System.out.println(beans[14].getTitle());
+		System.out.println(beans[14].getMonth());
+		System.out.println(beans[14].getDay());
+
+
 		//requestにデータ格納
 		request.setAttribute("year", calendarBean.getCalendarYear());
 		request.setAttribute("month", calendarBean.getCalendarMonth() + 1);
 		request.setAttribute("pointedDay", calendarBean.getPointedDay());
 		request.setAttribute("thisMonthLastDay", calendarBean.getThisMonthLastDay());
+		request.setAttribute("beans", beans);
 
 		//home.jspへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.StudentDAO;
-import model.StudentBean;
-
 /**
- * Servlet implementation class StudentListController
+ * Servlet implementation class AccsessQuestions
  */
-@WebServlet("/StudentListController")
-public class StudentListController extends HttpServlet {
+@WebServlet("/AccsessQuestions")
+public class AccsessQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentListController() {
+    public AccsessQuestions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +29,15 @@ public class StudentListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
 
-		ArrayList<StudentBean> studentList = new ArrayList<StudentBean>();
-		StudentDAO studentdao = new StudentDAO();
-		studentdao.createStudentList(studentList);
+		String type = (String)request.getParameter("TYPE");
+		//アンケートの種類を格納
+		request.setAttribute("type", type);
 
-		request.setAttribute("studentList", studentList);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/studentList.jsp");
+		//questionInfo.jspへ飛ぶ
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/questionInfo.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -52,4 +48,5 @@ public class StudentListController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

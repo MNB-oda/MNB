@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+String type = (String)request.getAttribute("type");
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,21 +39,34 @@ th {
 </div>
 <br>
 
-<input type="button" name="ADD" value="追加">
+<input type="button" name="ADD" value="追加" onClick = "location.href = '/MNB/addQuestion.jsp'">
 <br>
 
 <table class = "table">
 			<tr>
-				<th>講習アンケート一覧</th>
+				<th>
+				<%
+				switch(type){
+				case "kosyu":
+					out.println("講習アンケート一覧");
+					break;
+				case "event":
+					out.println("イベントアンケート一覧");
+					break;
+				default :
+					break;
+				}
+				%>
+				</th>
 			</tr>
 			</table>
 
 			<div style="overflow-y:scroll;">
 		<table class = "table">
 				<tr>
-					<td><a href = "test1.html">[5/2]第2回　プログラム班の講義アンケート</a></td>
-					<td align = "center"><input type="button" name="ADD" value="追加"></td>
-					<td align = "center"><input type="button" name="DEL" value="削除"></td>
+					<td><a href = "/MNB/QuestionMethodAssignment?TYPE=answer">[5/2]第2回　プログラム班の講義アンケート</a></td>
+					<td align = "center"><input type="button" name="AGGREGATE" value="集計" onClick = "location.href = '/MNB/QuestionMethodAssignment?TYPE=aggregate'"></td>
+					<td align = "center"><input type="button" name="DELETE" value="削除" onClick = "location.href = '/MNB/QuestionMethodAssignment?TYPE=delete'"></td>
 				</tr>
 		</table>
 	</div>
