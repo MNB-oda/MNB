@@ -13,7 +13,6 @@
 	String han = "";
 	switch(type){
 	case "add":
-
 		break;
 	case "update":
 		handle = bean.getHandle();
@@ -93,8 +92,18 @@ td {
 	<form method="post" action="./StudentDatabaseProcessing">
 	<p><font size ="5">ソフトウェア研究部</font></p>
 
-
-	<p>登録情報変更</p>
+	<%
+	switch(type){
+	case "add":
+		out.println("<p>登録情報追加</p>");
+		break;
+	case "update":
+		out.println("<p>登録情報変更</p>");
+		break;
+	default :
+		break;
+	}
+	%>
 
 		<table class= "myPageTable">
 			<caption>登録者一覧</caption>
