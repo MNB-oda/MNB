@@ -101,7 +101,54 @@ td.sche a{
 	width: 100%;
 }
 
+/*botton*/
+.square_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FFF;
+    background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+    transition: .4s;
+}
 
+.square_btn:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
+/*Twitter*/
+.fl_tw2{/*ボタンの背景*/
+  color: #FFF;/*文字・アイコン色*/
+  border-radius: 7px;/*角丸に*/
+  display: inline-block;
+  height: 50px;/*高さ*/
+  width: 400px;/*幅*/
+  text-align: center;/*中身を中央寄せ*/
+  font-size: 25px;/*文字のサイズ*/
+  line-height: 50px;/*高さと合わせる*/
+  vertical-align: middle;/*垂直中央寄せ*/
+  background: #1da1f3;
+  overflow: hidden;/*はみ出た部分を隠す*/
+  text-decoration:none;/*下線は消す*/
+}
+
+.fl_tw2 .fa-twitter {
+    text-shadow: 2px 2px 0px #4287d6;
+    font-size: 30px;
+}
+
+.fl_tw2 span {/*テキスト*/
+  display:inline-block;
+  transition: .5s}
+
+.fl_tw2:hover span{/*ホバーで一周回転*/
+  -webkit-transform: rotateX(360deg);
+  -ms-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+}
 
 
 </style>
@@ -207,9 +254,10 @@ td.sche a{
 	<br>
 	<br>
 
-	<Div Align = left>
-	<input type="submit" name="CONFIRM" value="講習アンケート" onClick = "location.href = '/MNB/AccsessQuestions?TYPE=kosyu'">
-	<input type="submit" name="CONFIRM" value="イベントアンケート" onClick = "location.href = '/MNB/AccsessQuestions?TYPE=event'">
+	<Div Align = center>
+	<a href="#"  onClick = "location.href = '/MNB/AccsessQuestions?TYPE=kosyu'" class="square_btn">講習アンケート</a>
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	<a href="#"  onClick = "location.href = '/MNB/AccsessQuestions?TYPE=event'" class="square_btn">イベントアンケート</a>
 	</Div>
 
 	<br>
@@ -219,9 +267,13 @@ td.sche a{
 	<br>
 	<br>
 
-<Div Align = left>
-	<input type="submit" name="CONFIRM" value="公式サイト">
-	<input type="submit" name="CONFIRM" value="公式Twitter">
+<Div Align = center>
+	<a href="#" class="square_btn">公式サイト</a>
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	<a href="#" class="fl_tw2">
+  	<span>ソフ研 公式Twitter(@sofken_tdu)</span>
+	</a>
+
 	</Div>
 
 </body>
