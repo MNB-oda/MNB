@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import model.BigQuestionBean;
 import model.SmallQuestionBean;
 
 public class QuestonDAO {
@@ -26,16 +25,10 @@ public class QuestonDAO {
 
     ResultSet resultSet;
 
-    public SmallQuestionBean getDatabase(BigQuestionBean bean){
+    public SmallQuestionBean getDatabase(SmallQuestionBean bean){
     	return bean;
     }
-    public void insertDatabase(BigQuestionBean bean){
-
-    }
-    public void updateDatabase(BigQuestionBean bean){
-
-    }
-    public void deleteDatabase(BigQuestionBean bean){
+    public void insertDatabase(SmallQuestionBean bean){
 
     }
 }
