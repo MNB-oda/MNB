@@ -7,8 +7,6 @@
 
 <title>アンケート追加</title>
 
-
-
 <style>
 body {
 	background-color: #ceecff;
@@ -283,7 +281,7 @@ td {
 			<input type="button" name="DELETE" value="削除" id = deleteRow onClick = "delRow();" disabled = "true" >
 		<p>
 		<p>
-			<input type="submit" name="CONFIRM" value="確定">
+			<input type="submit" name="CONFIRM" value="確定" onClick = "">
 		<p>
 
 		</form>
