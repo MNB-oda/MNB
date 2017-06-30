@@ -6,7 +6,7 @@ public class StudentBean {
 	private String id;
 	private String pass;
 	private String email;
-	private String group;
+	private String han;
 
 	public String getHandle() {
 		return handle;
@@ -38,11 +38,11 @@ public class StudentBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getGroup() {
-		return group;
+	public String getHan() {
+		return han;
 	}
-	public void setGroup(String group) {
-		this.group = group;
+	public void setHan(String han) {
+		this.han = han;
 	}
 
 }

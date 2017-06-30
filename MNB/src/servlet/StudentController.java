@@ -36,17 +36,19 @@ public class StudentController extends HttpServlet {
 
 		StudentBean studentbean = new StudentBean();
 		request.setCharacterEncoding("UTF-8");
-		studentbean.setId(String.valueOf(request.getParameter("ID")));
-		studentbean.setName(String.valueOf(request.getParameter("NAME")));
+		studentbean.setId((String)request.getParameter("ID"));
+		studentbean.setName((String)request.getParameter("NAME"));
 		StudentDAO studentdao = new StudentDAO();
-		studentdao.getDatabase(studentbean);
+		studentbean = studentdao.getDatabase(studentbean);
 
 		request.setAttribute("handle", studentbean.getHandle());
 		request.setAttribute("name", studentbean.getName());
 		request.setAttribute("id", studentbean.getId());
 		request.setAttribute("pass", studentbean.getPass());
 		request.setAttribute("email", studentbean.getEmail());
-		request.setAttribute("group", studentbean.getGroup());
+		request.setAttribute("han", studentbean.getHan());
+		request.setAttribute("bean", studentbean);
+		//System.out.println(studentbean);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/mypageEdit.jsp");
 		dispatcher.forward(request, response);

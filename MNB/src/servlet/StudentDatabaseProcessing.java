@@ -48,27 +48,27 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		StudentDAO dao;
 
 		//追加、更新、削除のどれなのかを判断し、それぞれを実行
-		switch((String)session.getAttribute("type")){
-		case "add":
-			setParameter(bean, request);
-			dao = new StudentDAO();
-			dao.insertDatabase(bean);
-			break;
+				switch((String)session.getAttribute("type")){
+				case "add":
+					setParameter(bean, request);
+					dao = new StudentDAO();
+					dao.insertDatabase(bean);
+					break;
 
-		case "update":
-			setParameter(bean, request);
-			dao = new StudentDAO();
-			dao.updateDatabase(bean);
-			break;
+				case "update":
+					setParameter(bean, request);
+					dao = new StudentDAO();
+					dao.updateDatabase(bean);
+					break;
 
-		case "delete":
-			dao = new StudentDAO();
-			dao.deleteDatabase(bean);
-			break;
+				case "delete":
+					dao = new StudentDAO();
+					dao.deleteDatabase(bean);
+					break;
 
-		default:
-			break;
-		}
+				default:
+					break;
+				}
 
 		//sessionスコープをまっさらにする
 		session.invalidate();
@@ -83,6 +83,6 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		bean.setId((String)request.getParameter("id"));
 		bean.setPass((String)request.getParameter("pass"));
 		bean.setEmail((String)request.getParameter("email"));
-		bean.setGroup((String)request.getParameter("group"));
+		bean.setHan((String)request.getParameter("han"));
 	}
 }

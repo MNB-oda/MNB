@@ -34,7 +34,7 @@ public class StudentDAO {
                 bean.setId(resultSet.getString("id"));
                 bean.setPass(resultSet.getString("pass"));
                 bean.setEmail(resultSet.getString("email"));
-                bean.setGroup(resultSet.getString("group"));
+                bean.setHan(resultSet.getString("han"));
             }
 
 			resultSet.close();
@@ -48,7 +48,7 @@ public class StudentDAO {
 	}
 
 	public void createStudentList(ArrayList<StudentBean> studentList){
-		//String sql = "SELECT handle,name,id,pass,email,group FROM student";
+		//String sql = "SELECT handle,name,id,pass,email,han FROM student";
 		String sql = "SELECT * FROM student";
 		try{
 			Class.forName(driverClassName);
@@ -64,7 +64,7 @@ public class StudentDAO {
             	bean.setId(resultSet.getString("id"));
             	bean.setPass(resultSet.getString("pass"));
             	bean.setEmail(resultSet.getString("email"));
-            	bean.setGroup(resultSet.getString("group"));
+            	bean.setHan(resultSet.getString("han"));
                 studentList.add(bean);
             }
 
@@ -85,7 +85,7 @@ public class StudentDAO {
 		    statement = connection.createStatement();
 		    statement.executeUpdate(
 		    		"INSERT INTO schedule VALUES('" + bean.getHandle() +"','" + bean.getName() + "'," +  bean.getId() + ",'"
-		    				+ bean.getPass() + "'," + bean.getEmail() + "," + bean.getGroup() +"')");
+		    				+ bean.getPass() + "'," + bean.getEmail() + "," + bean.getHan() +"')");
 
 		    statement.close();
 		    connection.close();
@@ -101,9 +101,11 @@ public class StudentDAO {
 		    connection = DriverManager.getConnection(url, user, password);
 		    statement = connection.createStatement();
 		    statement.executeUpdate(
-		    		"UPDATE student SET handle =" + bean.getHandle() + ",name ='" + bean.getName() + "',id =" + bean.getId()
-		    									+ ",pass ='" + bean.getPass() + "',email ='" + bean.getEmail()
-		    									+ "',group ='" + bean.getGroup());
+		    		"UPDATE student SET handle ='" + bean.getHandle() + "',name ='" + bean.getName() + "',id ='" + bean.getId()
+		    									+ "',pass ='" + bean.getPass() + "',email ='" + bean.getEmail()
+		    									+ "',han ='" + bean.getHan()
+		    									+ "' WHERE id ='" + bean.getId() + "'"
+		    									);
 
 		    statement.close();
 		    connection.close();

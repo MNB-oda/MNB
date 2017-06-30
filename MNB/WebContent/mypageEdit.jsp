@@ -2,35 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.StudentBean"%>
 <%
-StudentBean bean = (StudentBean) session.getAttribute("bean");
-if(bean == null){
-	System.out.println("bean == null");
-}
-String handle = (String) request.getAttribute("handle");
-String name = (String) request.getAttribute("name");
-String id = (String) request.getAttribute("id");
-String pass = (String) request.getAttribute("pass");
-String email = (String) request.getAttribute("email");
-String group = (String) request.getAttribute("group");
+	String type = (String) session.getAttribute("type");
+	StudentBean bean = (StudentBean) session.getAttribute("bean");
 
-/*
-String type = (String)session.getAttribute("type");
-StudentBean bean = (StudentBean) session.getAttribute("bean");
-
-String handle = "";
-String name = "";
-String id = "";
-String pass = "";
-String email = "";
-String group = "";
-System.out.println("bean.getHandle()");
-handle = bean.getHandle();
-name = bean.getName();
-id = bean.getId();
-pass = bean.getPass();
-email = bean.getEmail();
-group = bean.getGroup();
-*/
+	String handle = "";
+	String name = "";
+	String id = "";
+	String pass = "";
+	String email = "";
+	String han = "";
+	handle = bean.getHandle();
+	name = bean.getName();
+	id = bean.getId();
+	pass = bean.getPass();
+	email = bean.getEmail();
+	han = bean.getHan();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -117,7 +103,7 @@ td {
 
 			<tr>
 				<td>学籍番号</td>
-				<td><input type="text" name="id" value="<%=id %>" size = "7" maxlength="7"></td>
+				<td><input type="text" name="id" value="<%=id %>" size = "7" maxlength="7" readonly></td>
 			</tr>
 
 			<tr>
@@ -133,36 +119,37 @@ td {
 			<tr>
 				<td>所属班</td>
 				<td>
-				<% switch(group){
+				<%
+				switch(han){
 				case "プログラム班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" checked=\"checked\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
 					break;
 				case "2DCG班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\"  checked=\"checked\">2DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
 					break;
 				case "3DCG班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\"  checked=\"checked\">3DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
 					break;
 				case "サウンド班":
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" checked=\"checked\">サウンド班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\"  checked=\"checked\">サウンド班");
 					break;
 				default :
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >プログラム班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >2DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >3DCG班");
-					out.println("<input type=\"checkbox\" name = \"HAN\" value="+ group +" >サウンド班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" checked=\"checked\">プログラム班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
+					out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
 					break;
 				}
 				%>
