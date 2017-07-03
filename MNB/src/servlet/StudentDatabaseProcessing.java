@@ -83,6 +83,10 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		bean.setId((String)request.getParameter("id"));
 		bean.setPass((String)request.getParameter("pass"));
 		bean.setEmail((String)request.getParameter("email"));
-		bean.setHan((String)request.getParameter("han"));
+		//bean.setHan((String[])request.getParameterValues("han"));//getParameterValues：パラメータ名に対して値が複数ある場合
+		bean.setIsProhan(Boolean.valueOf(request.getParameter("program")));
+    	bean.setIs2dcghan(Boolean.valueOf(request.getParameter("2dcg")));
+    	bean.setIs3dcghan(Boolean.valueOf(request.getParameter("3dcg")));
+    	bean.setIsMusichan(Boolean.valueOf(request.getParameter("music")));
 	}
 }

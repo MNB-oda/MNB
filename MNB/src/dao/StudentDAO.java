@@ -26,9 +26,9 @@ public class StudentDAO {
 
     String strPrepSQL_SI = "SELECT * FROM student WHERE id = ?";
     String strPrepSQL_S = "SELECT * FROM student";
-    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?)";
-    String strPrepSQL_U = "UPDATE schedule SET handle = ? , name = ? , id = ? , title = ?"
-    						+ ", pass = ? , email = ? , han = ?"
+    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String strPrepSQL_U = "UPDATE student SET handle = ? , name = ? , id = ? ,"
+    						+ "pass = ? , email = ?  , program = ? , cg2d = ? , cg3d = ? , music = ?  "
     						+ "WHERE id = ?";
     String strPrepSQL_D = "DELETE FROM student WHERE id = ?";
 	ResultSet resultSet;
@@ -49,7 +49,10 @@ public class StudentDAO {
                 bean.setId(resultSet.getString("id"));
                 bean.setPass(resultSet.getString("pass"));
                 bean.setEmail(resultSet.getString("email"));
-                bean.setHan(resultSet.getString("han"));
+                bean.setIsProhan(resultSet.getBoolean("program"));
+            	bean.setIs2dcghan(resultSet.getBoolean("cg2d"));
+            	bean.setIs3dcghan(resultSet.getBoolean("cg3d"));
+            	bean.setIsMusichan(resultSet.getBoolean("music"));
             }
 
 			resultSet.close();
@@ -76,7 +79,10 @@ public class StudentDAO {
             	bean.setId(resultSet.getString("id"));
             	bean.setPass(resultSet.getString("pass"));
             	bean.setEmail(resultSet.getString("email"));
-            	bean.setHan(resultSet.getString("han"));
+            	bean.setIsProhan(resultSet.getBoolean("program"));
+            	bean.setIs2dcghan(resultSet.getBoolean("cg2d"));
+            	bean.setIs3dcghan(resultSet.getBoolean("cg3d"));
+            	bean.setIsMusichan(resultSet.getBoolean("music"));
                 studentList.add(bean);
             }
 
@@ -99,7 +105,11 @@ public class StudentDAO {
 		    prepStmt_I.setString(3, bean.getId());
 		    prepStmt_I.setString(4, bean.getPass());
 		    prepStmt_I.setString(5, bean.getEmail());
-		    prepStmt_I.setString(6, bean.getHan());
+		    prepStmt_I.setBoolean(6, bean.isProhan());
+		    prepStmt_I.setBoolean(7, bean.isIs2dcghan());
+		    prepStmt_I.setBoolean(8, bean.isIs3dcghan());
+		    prepStmt_I.setBoolean(9, bean.isMusichan());
+		  //bean.setHan((String[])request.getParameterValues("han"));
 		    prepStmt_I.executeUpdate();
 
 		    connection.close();
@@ -119,7 +129,12 @@ public class StudentDAO {
 		    prepStmt_U.setString(3, bean.getId());
 		    prepStmt_U.setString(4, bean.getPass());
 		    prepStmt_U.setString(5, bean.getEmail());
-		    prepStmt_U.setString(6, bean.getHan());
+		    prepStmt_U.setBoolean(6, bean.isProhan());
+		    prepStmt_U.setBoolean(7, bean.isIs2dcghan());
+		    prepStmt_U.setBoolean(8, bean.isIs3dcghan());
+		    prepStmt_U.setBoolean(9, bean.isMusichan());
+		    prepStmt_U.setString(10, bean.getId());
+		    System.out.println(prepStmt_U);
 		    prepStmt_U.executeUpdate();
 
 		    connection.close();

@@ -6,7 +6,11 @@ public class StudentBean {
 	private String id;
 	private String pass;
 	private String email;
-	private String han;
+	//private boolean hasAdmi;
+	private boolean isProhan;
+	private boolean is2dcghan;
+	private boolean is3dcghan;
+	private boolean isMusichan;
 
 	public String getHandle() {
 		return handle;
@@ -35,14 +39,39 @@ public class StudentBean {
 	public String getEmail() {
 		return email;
 	}
+	/*
+	public boolean hasAdmi() {
+		return hasAdmi;
+	}
+	public void setHasAdmi(boolean hasAdmi) {
+		this.hasAdmi = hasAdmi;
+	}
+	*/
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getHan() {
-		return han;
+	public boolean isProhan() {
+		return isProhan;
 	}
-	public void setHan(String han) {
-		this.han = han;
+	public void setIsProhan(boolean isProhan) {
+		this.isProhan = isProhan;
 	}
-
+	public boolean isIs2dcghan() {
+		return is2dcghan;
+	}
+	public void setIs2dcghan(boolean is2dcghan) {
+		this.is2dcghan = is2dcghan;
+	}
+	public boolean isIs3dcghan() {
+		return is3dcghan;
+	}
+	public void setIs3dcghan(boolean is3dcghan) {
+		this.is3dcghan = is3dcghan;
+	}
+	public boolean isMusichan() {
+		return isMusichan;
+	}
+	public void setIsMusichan(boolean isMusichan) {
+		this.isMusichan = isMusichan;
+	}
 }
