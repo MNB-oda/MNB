@@ -66,6 +66,23 @@ td {
 .widthMax {
 	width: 100%;
 }
+/*ボタン2*/
+.square_btn2{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FFF;
+    background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+    transition: .4s;
+}
+
+.square_btn2:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #604dff 100%);
+}
 
 
 
@@ -78,7 +95,7 @@ td {
 
 	<p>マイページ</p>
 	<Div Align = left>
-	<input type="submit" name="CONFIRM" value="登録者管理">
+	<a href="#"  onClick = "location.href = 'studentList.jsp'" class="square_btn2">登録者一覧へ</a>
 	</Div>
 		<table class= "myPageTable">
 			<caption>登録者一覧</caption>

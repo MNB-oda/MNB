@@ -9,6 +9,10 @@
 	int pointedDay = (Integer) request.getAttribute("pointedDay");
 	int thisMonthLastDay = (Integer) request.getAttribute("thisMonthLastDay");
 	ScheduleBean beans[] = (ScheduleBean[])request.getAttribute("beans");
+	String str1 = "プログラム班";
+	String str2 = "2DCG班";
+	String str3 = "3DCG班";
+	String str4 = "サウンド班";
 %>
 
 
@@ -19,21 +23,28 @@
 <title>スケジュール管理</title>
 
 <style>
+
+
+body {background-color: #ceecff}
+
+
+
 table {
-	border: 1px solid #ffffff;
-	width: 90%;
+	border: 1px solid #000;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 td {
-	width: 12%;
-	border-top: 1px solid #ffffff;
-	border-left: 1px solid #ffffff;
+	width: 14%;
 	vertical-align: top;
-	padding: 2px;
+	border-right: 1px solid #ccc;
+
+
 }
 
 td.week {
-	color: #ffffff;
+	color: #FFF;
 	background-color: #55aaff;
 	text-align: center;
 }
@@ -46,17 +57,20 @@ td.sunday {
 
 td.day {
 	background-color: #95c9ff;
-	text-align: left;
+	font-weight: bold;
+	text-align: center;
+	border-top: 1px solid #ffffff;
 }
 
 td.holiday {
 	background-color: #95c9ff;
-	text-align: left;
+	text-align: center;
 }
 
 td.sche {
-	background-color: #95c9ff;
-	text-align: left;
+	/*background-color: #95c9ff;*/
+	font-weight: bold;
+	text-align: center;
 	height: 80px;
 }
 
@@ -76,7 +90,7 @@ td.sche a{
 }
 
 .homeNewList caption{
-	border: 1px solid #ffffff;
+	/*border: 1px solid #ffffff;*/
 	background-color: #0099f4;
 	padding-right: 10px;
 	padding-left: 10px;
@@ -101,8 +115,27 @@ td.sche a{
 	width: 100%;
 }
 
-/*botton*/
+/*ボタン---------------------------------------------------------------------------------------*/
+/*ボタン1*/
 .square_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FF0;
+    background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+    transition: .4s;
+}
+
+.square_btn:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #604dff 100%);
+}
+
+/*ボタン2*/
+.square_btn2{
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -110,13 +143,13 @@ td.sche a{
     font-weight: bold;
     color: #FFF;
     background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
-    background-image: linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
     transition: .4s;
 }
 
-.square_btn:hover{
+.square_btn2:hover{
     background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
-    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #604dff 100%);
 }
 
 /*Twitter*/
@@ -158,7 +191,8 @@ td.sche a{
 	<p>ソフトウェア研究部</p>
 
 	<Div Align = right>
-	<input type="submit" name="CONFIRM" value="マイページ">
+		<a href="#"  onClick = "location.href = 'myPage.jsp'" class="square_btn">マイページ</a>
+
 	</Div>
 
 	<p>
@@ -206,7 +240,15 @@ td.sche a{
 						pointer++;
 					} else {
 						if(beans[beansPointer] != null && pointer == beans[beansPointer].getDay()){
-							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getTitle() + "</a></td>");
+
+							/*班による色表示を変える*/
+							String han = beans[beansPointer].getHan();
+							if(str1.equals(han))out.println("<td class=\"sche\" bgcolor= #ee87b4><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getTitle() + "</a></td>");
+							else if(str2.equals(han))out.println("<td class=\"sche\" bgcolor= #7fff00><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getTitle() + "</a></td>");
+							else if(str3.equals(han))out.println("<td class=\"sche\" bgcolor= #00a0e9 ><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getHan() +"<br>"+ beans[beansPointer].getTitle() +"</a></td>");
+							else if(str4.equals(han))out.println("<td class=\"sche\" bgcolor= #f2e55c><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getTitle() + "</a></td>");
+							/*例外：どの班にも所属してなかったら*/
+							else	out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">" + beans[beansPointer].getTitle() + "</a></td>");
 							beansPointer++;
 						}else{
 							out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\"></a></td>");
@@ -224,7 +266,7 @@ td.sche a{
 	<br>
 	<br>
 		<table class= "homeNewList">
-			<caption>お知らせ</caption>
+			<caption><a href = "newsList.jsp"><u>お知らせ</u></a></caption>
 
 			<tr>
 				<td>講習情報はありません</td>
@@ -255,9 +297,10 @@ td.sche a{
 	<br>
 
 	<Div Align = center>
-	<a href="#"  onClick = "location.href = '/MNB/AccsessQuestions?TYPE=kosyu'" class="square_btn">講習アンケート</a>
+	<a href="#"  onClick = "location.href = 'questionInfo.jsp?TYPE=kosyu'" class="square_btn">講習アンケート</a>
 	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<a href="#"  onClick = "location.href = '/MNB/AccsessQuestions?TYPE=event'" class="square_btn">イベントアンケート</a>
+	<a href="#"  onClick = "location.href = 'eventQuestionList.jsp?TYPE=event'" class="square_btn">イベントアンケート</a>
+	<!-- 	<a href="#"  onClick = "location.href = '/MNB/AccsessQuestions?TYPE=event'" class="square_btn">イベントアンケート</a>	-->
 	</Div>
 
 	<br>
@@ -268,9 +311,9 @@ td.sche a{
 	<br>
 
 <Div Align = center>
-	<a href="#" class="square_btn">公式サイト</a>
+	<a href="http://www.sg.dendai.ac.jp/s1g-src/" class="square_btn">公式サイト</a>
 	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<a href="#" class="fl_tw2">
+	<a href="https://twitter.com/sofken_tdu" class="fl_tw2">
   	<span>ソフ研 公式Twitter(@sofken_tdu)</span>
 	</a>
 
