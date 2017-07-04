@@ -134,10 +134,10 @@ td.sche a{
 		</tr>
 
 		<%
+			int beansPointer = 0;
+			int pointer = pointedDay;
 			while (pointedDay <= thisMonthLastDay) {
 				out.println("<tr>");
-
-				int pointer = pointedDay;
 
 				for (int i = 0; i < 7; i++) {
 					if (pointedDay < 1 || pointedDay > thisMonthLastDay) {
@@ -152,7 +152,6 @@ td.sche a{
 
 				out.println("<tr>");
 
-				int beansPointer = 0;
 				for (int i = 0; i < 7; i++) {
 					if (pointer < 1 || pointer > thisMonthLastDay) {
 						out.println("<td class=\"sche\"></td>");
