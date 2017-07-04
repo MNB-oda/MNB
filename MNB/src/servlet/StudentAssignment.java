@@ -62,10 +62,10 @@ public class StudentAssignment extends HttpServlet {
 			session.setAttribute("id", studentbean.getId());
 			session.setAttribute("pass", studentbean.getPass());
 			session.setAttribute("email", studentbean.getEmail());
-			request.setAttribute("program", studentbean.isProhan());
-			request.setAttribute("2dcg", studentbean.isIs2dcghan());
-			request.setAttribute("3dcg", studentbean.isIs3dcghan());
-			request.setAttribute("music", studentbean.isMusichan());
+			//request.setAttribute("program", studentbean.isProhan());
+			//request.setAttribute("2dcg", studentbean.isIs2dcghan());
+			//request.setAttribute("3dcg", studentbean.isIs3dcghan());
+			//request.setAttribute("music", studentbean.isMusichan());
 			session.setAttribute("bean", studentbean);
 			nextJsp = "/mypageEdit.jsp";
 			session.setAttribute("type", "update");

@@ -109,7 +109,6 @@ public class StudentDAO {
 		    prepStmt_I.setBoolean(7, bean.isIs2dcghan());
 		    prepStmt_I.setBoolean(8, bean.isIs3dcghan());
 		    prepStmt_I.setBoolean(9, bean.isMusichan());
-		  //bean.setHan((String[])request.getParameterValues("han"));
 		    prepStmt_I.executeUpdate();
 
 		    connection.close();
@@ -134,7 +133,6 @@ public class StudentDAO {
 		    prepStmt_U.setBoolean(8, bean.isIs3dcghan());
 		    prepStmt_U.setBoolean(9, bean.isMusichan());
 		    prepStmt_U.setString(10, bean.getId());
-		    System.out.println(prepStmt_U);
 		    prepStmt_U.executeUpdate();
 
 		    connection.close();

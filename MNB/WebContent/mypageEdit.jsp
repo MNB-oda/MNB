@@ -32,7 +32,6 @@
 	default:
 		break;
 	}
-	//out.println("<td><input type=\"text\" name=\"id\" value=" + id + " size = \"7\" maxlength=\"7\" readonly></td>");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -91,7 +90,6 @@ td {
 	width: 100%;
 }
 </style>
-
 </head>
 <body>
 	<form method="post" action="./StudentDatabaseProcessing">
@@ -160,24 +158,24 @@ td {
 				<td>
 					<%
 						if (isprogram) {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\" checked=\"checked\">プログラム班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" checked=\"checked\">プログラム班");
 						} else {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\">プログラム班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
 						}
 						if (is2dcg) {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\"  checked=\"checked\">2DCG班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\"  checked=\"checked\">2DCG班");
 						} else {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\" >2DCG班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
 						}
 						if (is3dcg) {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\"  checked=\"checked\">3DCG班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\"  checked=\"checked\">3DCG班");
 						} else {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\" >3DCG班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
 						}
 						if (ismusic) {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\"  checked=\"checked\">サウンド班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\"  checked=\"checked\">サウンド班");
 						} else {
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"TRUE\" >サウンド班");
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
 						}
 						/*
 						switch(han){
