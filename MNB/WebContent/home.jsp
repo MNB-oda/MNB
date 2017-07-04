@@ -25,14 +25,18 @@
 <style>
 
 
-body {background-color: #ceecff}
+body {
+	background-color: #ceecff;
+	margin:0px;
+}
 
 
 
 table {
 	border: 1px solid #000;
-	width: 100%;
+	width: 90%;
 	border-collapse: collapse;
+	margin-left:68px;
 }
 
 td {
@@ -92,7 +96,7 @@ td.sche a{
 .homeNewList caption{
 	/*border: 1px solid #ffffff;*/
 	background-color: #0099f4;
-	padding-right: 10px;
+	padding-right: 20px;
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -112,7 +116,7 @@ td.sche a{
 
 
 .homeNewList {
-	width: 100%;
+	width: 90%;
 }
 
 /*ボタン---------------------------------------------------------------------------------------*/
@@ -188,19 +192,22 @@ td.sche a{
 
 </head>
 <body>
-	<p>ソフトウェア研究部</p>
+   <Div Align = center>
+	<p><font size="7">ソフトウェア研究部日程管理システム</font></p>
+	</Div>
 
 	<Div Align = right>
 		<a href="#"  onClick = "location.href = 'myPage.jsp'" class="square_btn">マイページ</a>
 
 	</Div>
 
+ <Div Align = center>
 	<p>
 		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month-1%>"><span>前月</span></a>
-		<%=month%>月
+		<font size="5"><%=month%>月</font>
 		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month+1%>"><span>翌月</span></a>
 	</p>
-
+</Div>
 
 
 	<table>
@@ -298,29 +305,31 @@ td.sche a{
 
 	<Div Align = center>
 	<a href="#"  onClick = "location.href = 'questionInfo.jsp?TYPE=kosyu'" class="square_btn">講習アンケート</a>
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+	<br>
+	<br>
+	<br>
+
 	<a href="#"  onClick = "location.href = 'eventQuestionList.jsp?TYPE=event'" class="square_btn">イベントアンケート</a>
 	<!-- 	<a href="#"  onClick = "location.href = '/MNB/AccsessQuestions?TYPE=event'" class="square_btn">イベントアンケート</a>	-->
 	</Div>
 
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
 <Div Align = center>
 	<a href="http://www.sg.dendai.ac.jp/s1g-src/" class="square_btn">公式サイト</a>
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<a href="https://twitter.com/sofken_tdu" class="fl_tw2">
-  	<span>ソフ研 公式Twitter(@sofken_tdu)</span>
-	</a>
+	<!-- &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; --> <!--(半角スペース用)-->
 
-    /*以下ウィジェット*/
+	<br>
+	<br>
+    <br>
+
+	 <!-- 以下ウィジェット(SRC公式) -->
 	<a class="twitter-timeline" width = "320px" height = "400px"
 	 href="https://twitter.com/sofken_tdu">Tweets by @sofken_tdu</a>
 	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 	</Div>
 
