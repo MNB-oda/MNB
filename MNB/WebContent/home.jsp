@@ -317,6 +317,11 @@ td.sche a{
   	<span>ソフ研 公式Twitter(@sofken_tdu)</span>
 	</a>
 
+    /*以下ウィジェット*/
+	<a class="twitter-timeline" width = "320px" height = "400px"
+	 href="https://twitter.com/sofken_tdu">Tweets by @sofken_tdu</a>
+	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 	</Div>
 
 </body>
