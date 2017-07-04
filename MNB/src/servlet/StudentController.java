@@ -46,7 +46,10 @@ public class StudentController extends HttpServlet {
 		request.setAttribute("id", studentbean.getId());
 		request.setAttribute("pass", studentbean.getPass());
 		request.setAttribute("email", studentbean.getEmail());
-		request.setAttribute("han", studentbean.getHan());
+		request.setAttribute("isprogram", studentbean.isProhan());
+		request.setAttribute("is2dcg", studentbean.isIs2dcghan());
+		request.setAttribute("is3dcg", studentbean.isIs3dcghan());
+		request.setAttribute("ismusic", studentbean.isMusichan());
 		request.setAttribute("bean", studentbean);
 		//System.out.println(studentbean);
 

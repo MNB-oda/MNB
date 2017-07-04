@@ -17,16 +17,31 @@ public class StudentDAO {
 	final private static String url = "jdbc:postgresql://localhost/" + dbname;
 	Connection connection;
 	Statement statement;
+
+	PreparedStatement prepStmt_SI; // IDを指定したSELECT用
+    PreparedStatement prepStmt_S; //SELECT用
+    PreparedStatement prepStmt_I; // INSERT用
+    PreparedStatement prepStmt_U; // UPDATE用
+    PreparedStatement prepStmt_D; // DELETE用
+
+    String strPrepSQL_SI = "SELECT * FROM student WHERE id = ?";
+    String strPrepSQL_S = "SELECT * FROM student";
+    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String strPrepSQL_U = "UPDATE student SET handle = ? , name = ? , id = ? ,"
+    						+ "pass = ? , email = ?  , program = ? , cg2d = ? , cg3d = ? , music = ?  "
+    						+ "WHERE id = ?";
+    String strPrepSQL_D = "DELETE FROM student WHERE id = ?";
 	ResultSet resultSet;
 
 	public StudentBean getDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student WHERE id= '"+bean.getId()+"'";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
-            statement = connection.createStatement();
+            prepStmt_SI = connection.prepareStatement(strPrepSQL_SI);
 
-            resultSet = statement.executeQuery(sql);
+            prepStmt_SI.setString(1, bean.getId());
+
+            resultSet = prepStmt_SI.executeQuery();
 
             while (resultSet.next()) {
             	bean.setHandle(resultSet.getString("handle"));
@@ -34,11 +49,13 @@ public class StudentDAO {
                 bean.setId(resultSet.getString("id"));
                 bean.setPass(resultSet.getString("pass"));
                 bean.setEmail(resultSet.getString("email"));
-                bean.setHan(resultSet.getString("han"));
+                bean.setIsProhan(resultSet.getBoolean("program"));
+            	bean.setIs2dcghan(resultSet.getBoolean("cg2d"));
+            	bean.setIs3dcghan(resultSet.getBoolean("cg3d"));
+            	bean.setIsMusichan(resultSet.getBoolean("music"));
             }
 
 			resultSet.close();
-			statement.close();
 			connection.close();
 
 		}catch (Exception e) {
@@ -48,14 +65,12 @@ public class StudentDAO {
 	}
 
 	public void createStudentList(ArrayList<StudentBean> studentList){
-		//String sql = "SELECT handle,name,id,pass,email,han FROM student";
-		String sql = "SELECT * FROM student";
 		try{
 			Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, user, password);
-            statement = connection.createStatement();
+            prepStmt_S = connection.prepareStatement(strPrepSQL_S);
 
-            resultSet = statement.executeQuery(sql);
+            resultSet = prepStmt_S.executeQuery();
 
             while (resultSet.next()) {
             	StudentBean bean = new StudentBean();
@@ -64,12 +79,14 @@ public class StudentDAO {
             	bean.setId(resultSet.getString("id"));
             	bean.setPass(resultSet.getString("pass"));
             	bean.setEmail(resultSet.getString("email"));
-            	bean.setHan(resultSet.getString("han"));
+            	bean.setIsProhan(resultSet.getBoolean("program"));
+            	bean.setIs2dcghan(resultSet.getBoolean("cg2d"));
+            	bean.setIs3dcghan(resultSet.getBoolean("cg3d"));
+            	bean.setIsMusichan(resultSet.getBoolean("music"));
                 studentList.add(bean);
             }
 
 			resultSet.close();
-			statement.close();
 			connection.close();
 
 		}catch (Exception e) {
@@ -78,16 +95,23 @@ public class StudentDAO {
 	}
 
 	public void insertDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student";
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
-		    statement = connection.createStatement();
-		    statement.executeUpdate(
-		    		"INSERT INTO student VALUES('" + bean.getHandle() +"','" + bean.getName() + "','" +  bean.getId() + "','"
-		    				+ bean.getPass() + "','" + bean.getEmail() + "','" + bean.getHan() +"')"
-		    );
-		    statement.close();
+
+		    prepStmt_I = connection.prepareStatement(strPrepSQL_I);
+		    prepStmt_I.setString(1, bean.getHandle());
+		    prepStmt_I.setString(2, bean.getName());
+		    prepStmt_I.setString(3, bean.getId());
+		    prepStmt_I.setString(4, bean.getPass());
+		    prepStmt_I.setString(5, bean.getEmail());
+		    prepStmt_I.setBoolean(6, bean.isProhan());
+		    prepStmt_I.setBoolean(7, bean.isIs2dcghan());
+		    prepStmt_I.setBoolean(8, bean.isIs3dcghan());
+		    prepStmt_I.setBoolean(9, bean.isMusichan());
+		  //bean.setHan((String[])request.getParameterValues("han"));
+		    prepStmt_I.executeUpdate();
+
 		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -95,19 +119,24 @@ public class StudentDAO {
 	}
 
 	public void updateDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student";
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
-		    statement = connection.createStatement();
-		    statement.executeUpdate(
-		    		"UPDATE student SET handle ='" + bean.getHandle() + "',name ='" + bean.getName() + "',id ='" + bean.getId()
-		    									+ "',pass ='" + bean.getPass() + "',email ='" + bean.getEmail()
-		    									+ "',han ='" + bean.getHan()
-		    									+ "' WHERE id ='" + bean.getId() + "'"
-		    									);
 
-		    statement.close();
+		    prepStmt_U = connection.prepareStatement(strPrepSQL_U);
+		    prepStmt_U.setString(1, bean.getHandle());
+		    prepStmt_U.setString(2, bean.getName());
+		    prepStmt_U.setString(3, bean.getId());
+		    prepStmt_U.setString(4, bean.getPass());
+		    prepStmt_U.setString(5, bean.getEmail());
+		    prepStmt_U.setBoolean(6, bean.isProhan());
+		    prepStmt_U.setBoolean(7, bean.isIs2dcghan());
+		    prepStmt_U.setBoolean(8, bean.isIs3dcghan());
+		    prepStmt_U.setBoolean(9, bean.isMusichan());
+		    prepStmt_U.setString(10, bean.getId());
+		    System.out.println(prepStmt_U);
+		    prepStmt_U.executeUpdate();
+
 		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -115,15 +144,14 @@ public class StudentDAO {
 	}
 
 	public void deleteDatabase(StudentBean bean){
-		String sql = "SELECT * FROM student";
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
-		    statement = connection.createStatement();
-		    //System.out.println("DELETE FROM student WHERE id ='" + bean.getId() + "'");
-		    statement.executeUpdate(
-		    		"DELETE FROM student WHERE id ='" + bean.getId() + "'");
-		    statement.close();
+
+		    prepStmt_D = connection.prepareStatement(strPrepSQL_D);
+		    prepStmt_D.setString(1, bean.getId());
+		    prepStmt_D.executeUpdate();
+
 		    connection.close();
 		} catch (Exception e) {
 		    e.printStackTrace();
