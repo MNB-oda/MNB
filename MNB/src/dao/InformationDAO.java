@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.InformationBean;
 
@@ -14,27 +14,54 @@ public class InformationDAO {
 	private String user = "wspuser"; // ここはユーザ名
 	private String password = "hogehoge"; // ここはパスワード
 	private Connection connection;
-	private Statement statement;
 	private ResultSet resultSet;
 
-	private InformationBean bean;
-
+	private PreparedStatement prepStmt_L; // LIST作成用
 	private PreparedStatement prepStmt_S; // SELECT用
 	private PreparedStatement prepStmt_I; // INSERT用
 	private PreparedStatement prepStmt_U; // UPDATE用
 	private PreparedStatement prepStmt_D; // DELETE用
 
+	private String strPrepSQL_L = "SELECT * FROM information";
 	private String strPrepSQL_S = "SELECT * FROM information WHERE id = ?";
 	private String strPrepSQL_I = "INSERT INTO information VALUES(?, ?, ?)";
 	private String strPrepSQL_U = "UPDATE information SET title = ?, content = ? WHERE id = ?";
 	private String strPrepSQL_D = "DELETE FROM information WHERE id = ?";
 
-	public InformationDAO(InformationBean bean){
-		this.bean = bean;
+	public InformationDAO(){
+	}
+
+	//
+	public ArrayList<InformationBean> createInformationList(){
+		ArrayList<InformationBean> list = new ArrayList<InformationBean>();
+		try{
+			Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, user, password);
+            prepStmt_L = connection.prepareStatement(strPrepSQL_L);
+
+            resultSet = prepStmt_L.executeQuery();
+
+            while (resultSet.next()) {
+            	InformationBean bean = new InformationBean();
+				bean.setId(resultSet.getString("id"));
+				bean.setTitle(resultSet.getString("title"));
+				bean.setContent(resultSet.getString("content"));
+                list.add(bean);
+            }
+
+			resultSet.close();
+			connection.close();
+
+			return list;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	//データベースから指定IDのデータを持ってくる
-	public InformationBean getDatabase() {
+	public InformationBean getDatabase(InformationBean bean) {
 		// データベース処理
 		try {
 			Class.forName(driverClassName);
@@ -64,7 +91,7 @@ public class InformationDAO {
 	}
 
 	//指定データをデータベースに挿入
-	public void insertDatabase(){
+	public void insertDatabase(InformationBean bean){
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
@@ -84,7 +111,7 @@ public class InformationDAO {
 	}
 
 	//指定データで同じIDのデータを更新
-	public void updateDatabase(){
+	public void updateDatabase(InformationBean bean){
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
@@ -103,7 +130,7 @@ public class InformationDAO {
 	}
 
 	//指定IDのデータを削除
-	public void deleteDatabase(){
+	public void deleteDatabase(InformationBean bean){
 		try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
@@ -120,7 +147,7 @@ public class InformationDAO {
 	}
 
 	//指定IDのデータがデータベース内に存在するか
-	public boolean checkExist(){
+	public boolean checkExist(InformationBean bean){
 		boolean result = false;
 		try {
 			Class.forName(driverClassName);
