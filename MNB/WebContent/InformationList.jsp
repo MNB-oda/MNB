@@ -4,6 +4,8 @@
 <%@ page import="java.util.*"%>
 <%
 	ArrayList<InformationBean> list = (ArrayList<InformationBean>)request.getAttribute("list");
+	InformationBean bean = list.get(0);
+	request.setAttribute("bean", bean);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

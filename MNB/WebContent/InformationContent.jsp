@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.InformationBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-	String title = "[5/3]学術発表会について";
-	String content = "あああああおおおおおみょんみょんみょんみょん";
+	InformationBean bean = (InformationBean)session.getAttribute("bean");
 %>
 <html>
 <head>
@@ -73,7 +73,7 @@ div {
 			<tr>
 				<td style="background:#5a9bd5">
 					<%
-						out.println(title);
+						out.println(bean.getTitle());
 					%>
 				</td>
 			</tr>
@@ -81,7 +81,7 @@ div {
 			<tr>
 				<td>
 					<%
-						out.println(content);
+						out.println(bean.getContent());
 					%>
 				</td>
 			</tr>

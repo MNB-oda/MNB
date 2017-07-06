@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.InformationBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	session.setAttribute("type", "add");
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>お知らせ追加・更新</title>
+<title>お知らせ追加</title>
 
 <style>
 body {
@@ -50,19 +54,32 @@ td {
 
 </head>
 <body>
-	<form action="post" method="">
+	<form action="InformationDatabaseProcessing" method="post">
 		<p>
 			<input type="button" name="CLOSE" value="閉じる">
 		<p>
 		<table class = information>
-			<tr>
-				<td>タイトル</td>
-				<td>[5/3]  <input type="text" name="TITLE" value="学術発表会について" maxlength="100" class="widthMax"></td>
-			</tr>
-			<tr>
-				<td>概要</td>
-				<td><textarea name="CONTENT" rows="15"  wrap="virtual" class = "widthMax">概要ぶちこめやオラァ!!</textarea></td>
-			</tr>
+		<%
+			out.println("<tr>");
+			out.println("<td>タイトル</td>");
+			out.println("<td><input"
+					+ " type=\"text\""
+					+ " name=\"TITLE\""
+					+ " value=\"\""
+					+ " maxlength=\"100\""
+					+ " class=\"widthMax\"></td>");
+			out.println("</tr>");
+
+			out.println("<tr>");
+			out.println("<td>内容</td>");
+			out.println("<td><textarea"
+					+ " name=\"CONTENT\""
+					+ " rows=\"15\""
+					+ " wrap=\"virtual\""
+					+ " class = \"widthMax\">"
+					+ "</textarea></td>");
+			out.println("</tr>");
+		%>
 		</table>
 
 		<p>

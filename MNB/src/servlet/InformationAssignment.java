@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.InformationDAO;
 import model.InformationBean;
@@ -37,26 +38,35 @@ public class InformationAssignment extends HttpServlet {
 		//次のjspのURLのための変数
 		String nextJsp = "";
 		InformationBean bean = new InformationBean();
-		InformationDAO dao = new InformationDAO();
+		InformationDAO dao;
 		request.setCharacterEncoding("UTF-8");
-
+		HttpSession session = request.getSession();
 
 		//typeによって次のjspを判断
 		switch((String)request.getParameter("TYPE")){
 		case "display":
 			nextJsp = "/InformationContent.jsp";
-			bean.setId((String)request.getParameter("TYPE"));
+			bean.setId((String)request.getParameter("ID"));
+			dao = new InformationDAO();
 			bean = dao.getDatabase(bean);
-			request.setAttribute("list", bean);
+			session.setAttribute("bean", bean);
 			break;
 		case "add":
-			nextJsp = "";
+			nextJsp = "/InformationCreate.jsp";
 			break;
 		case "update":
-			nextJsp = "";
+			nextJsp = "/InformationUpdate.jsp";
+			bean.setId((String)request.getParameter("ID"));
+			dao = new InformationDAO();
+			bean = dao.getDatabase(bean);
+			session.setAttribute("bean", bean);
 			break;
 		case "delete":
-			nextJsp = "";
+			nextJsp = "/InformationDeleteCheck.jsp";
+			bean.setId((String)request.getParameter("ID"));
+			dao = new InformationDAO();
+			bean = dao.getDatabase(bean);
+			session.setAttribute("bean", bean);
 			break;
 		default:
 			break;
