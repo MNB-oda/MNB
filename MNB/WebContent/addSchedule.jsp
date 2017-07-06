@@ -22,6 +22,7 @@
 	String contact = "";
 	String content = "";
 
+	//更新の画面なら現在のデータを表示
 	if(type == "update"){
 		switch(bean.getHan()){
 		case "2DCG班":

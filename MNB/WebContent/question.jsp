@@ -1,23 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="model.BigQuestionBean"%>
-<%@ page import="model.SmallQuestionBean"%>
-<%@ page import="model.QuestionContentBean"%>
-<%
-BigQuestionBean bigBean = (BigQuestionBean)request.getAttribute("bigBean");
-SmallQuestionBean[] smallBeans = (SmallQuestionBean[])request.getAttribute("smallBeans");
-QuestionContentBean[] contentBeans = (QuestionContentBean[])request.getAttribute("contentBeans");
-%>
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>アンケート回答</title>
 <!--  <link rel="stylesheet" type="text/css" href="main.css"> -->
-<%
-
-%>
 <style>
 body {
 	background-color: #ceecff;
@@ -81,22 +69,11 @@ th {
 	<div align = "right">
 	<input class = "button" type="button" name="CLOSE" value="閉じる">
 	</div>
-	<form action="answer.jsp" method="get">
+	<form method="post" action="">
 		<table class="contents">
 			<tr>
-				<td colspan="3">第2回　プログラム班講義アンケート<%= bigBean.getTitle()%></td>
+				<td colspan="3">第2回　プログラム班講義アンケート</td>
 			</tr>
-			<%
-			for(int i=0; i<smallBeans.length; i++){
-				out.println("<tr>");
-				out.println("<td>" + smallBeans[i].getTitle() + "</td>");
-				out.println("<td>");
-				for(int j=0; j<contentBeans.length; j++){
-				}
-				out.println("<td>");
-				out.println("</tr>");
-			}
-			%>
 			<tr>
 				<td>今回の講義開始時刻</td>
 				<td>
@@ -153,7 +130,7 @@ th {
 			</tr>
 		</table>
 		<br>
-		<input type="submit" name="answer" value="送信">
+		<input type="submit" name="transmission" value="送信">
 		<br>
 	</form>
 </body>

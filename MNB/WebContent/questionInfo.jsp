@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="model.BigQuestionBean"%>
 <%
-//String type = (String)request.getAttribute("type");
-String type = "kosyu";
+BigQuestionBean[] bigBean = (BigQuestionBean[])request.getAttribute("bigBeans");
+String type = (String)request.getAttribute("type");
 %>
 
 <html>
@@ -40,7 +41,7 @@ th {
 </div>
 <br>
 
-<input type="button" name="ADD" value="追加" onClick = "location.href = '/MNB/addQuestion.jsp'">
+<input type="button" name="ADD" value="追加" onClick = "location.href = '/MNB/QuestionMethodAssignment?TYPE=add&QUESTIONTYPE=<%= type%>'">
 <br>
 
 <table class = "table">
@@ -48,10 +49,10 @@ th {
 				<th>
 				<%
 				switch(type){
-				case "kosyu":
+				case "講習アンケート":
 					out.println("講習アンケート一覧");
 					break;
-				case "event":
+				case "イベントアンケート":
 					out.println("イベントアンケート一覧");
 					break;
 				default :
@@ -64,11 +65,16 @@ th {
 
 			<div style="overflow-y:scroll;">
 		<table class = "table">
-				<tr>
-					<td><a href = "/MNB/QuestionMethodAssignment?TYPE=answer">[5/2]第2回　プログラム班の講義アンケート</a></td>
-					<td align = "center"><input type="button" name="AGGREGATE" value="集計" onClick = "location.href = '/MNB/QuestionMethodAssignment?TYPE=aggregate'"></td>
-					<td align = "center"><input type="button" name="DELETE" value="削除" onClick = "location.href = '/MNB/QuestionMethodAssignment?TYPE=delete'"></td>
-				</tr>
+				<%
+				//アンケートタイトルの表示
+				for(int i=0; i<bigBean.length; i++){
+					out.println("<tr>");
+					out.println("<td><a href = \"/MNB/QuestionMethodAssignment?TYPE=answer&ID=" + bigBean[i].getId() + "\">" + bigBean[i].getTitle() + "</a></td>");
+					out.println("<td align = \"center\"><input type=\"button\" name=\"AGGREGATE\" value=\"集計\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=aggregate&ID=" + bigBean[i].getId() + "'\"></td>");
+					out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=delete&ID=" + bigBean[i].getId() + "'\"></td>");
+					out.println("</tr>");
+				}
+				%>
 		</table>
 	</div>
 

@@ -1,13 +1,17 @@
 package model;
 
-import java.util.ArrayList;
-
 public class SmallQuestionBean {
+	private String id;
 	private String title;
 	private String questionType;
-	private int numberOfItems;
-	private ArrayList<String> questions;
+	private int row;
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -20,16 +24,10 @@ public class SmallQuestionBean {
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
 	}
-	public int getNumberOfItems() {
-		return numberOfItems;
+	public int getRow() {
+		return row;
 	}
-	public void setNumberOfItems(int numberOfItems) {
-		this.numberOfItems = numberOfItems;
-	}
-	public ArrayList<String> getQuestions() {
-		return questions;
-	}
-	public void setQuestions(ArrayList<String> questions) {
-		this.questions = questions;
+	public void setRow(int row) {
+		this.row = row;
 	}
 }

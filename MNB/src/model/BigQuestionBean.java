@@ -1,12 +1,16 @@
 package model;
 
-import java.util.ArrayList;
-
 public class BigQuestionBean {
+	private String id;
 	private String title;
 	private String type;
-	private ArrayList<SmallQuestionBean> bean;
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -18,11 +22,5 @@ public class BigQuestionBean {
 	}
 	public void setType(String type) {
 		this.type = type;
-	}
-	public ArrayList<SmallQuestionBean> getBean() {
-		return bean;
-	}
-	public void setBean(ArrayList<SmallQuestionBean> bean) {
-		this.bean = bean;
 	}
 }
