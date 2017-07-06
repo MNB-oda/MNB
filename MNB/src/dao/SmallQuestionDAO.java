@@ -19,8 +19,8 @@ public class SmallQuestionDAO {
     PreparedStatement prepStmt_I; // INSERT用
     PreparedStatement prepStmt_D; // DELETE用
 
-    String strPrepSQL_S = "SELECT * FROM smallQuestion WHERE id = ?";
-    String strPrepSQL_I = "INSERT INTO smallQuestion VALUES(?, ?, ?)";
+    String strPrepSQL_S = "SELECT * FROM smallQuestion WHERE id = ? ORDER BY row ASC";
+    String strPrepSQL_I = "INSERT INTO smallQuestion VALUES(?, ?, ?, ?)";
     String strPrepSQL_D = "DELETE FROM smallQuestion WHERE id = ?";
 
     ResultSet resultSet;

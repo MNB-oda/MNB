@@ -19,11 +19,13 @@ public class BigQuestionDAO {
 	PreparedStatement prepStmt_SI; // IDを指定してただ一つのみ引き出すSELECT用
     PreparedStatement prepStmt_I; // INSERT用
     PreparedStatement prepStmt_D; // DELETE用
+    PreparedStatement prepStmt_C; // ID作成のためのCOUNT用
 
     String strPrepSQL_S = "SELECT * FROM bigQuestion WHERE type = ?";
     String strPrepSQL_SI = "SELECT * FROM bigQuestion WHERE id = ?";
     String strPrepSQL_I = "INSERT INTO bigQuestion VALUES(?, ?, ?)";
     String strPrepSQL_D = "DELETE FROM bigQuestion WHERE id = ?";
+    String strPrepSQL_C = "SELECT COUNT(*) AS count FROM bigQuestion WHERE type = ?";
 
     ResultSet resultSet;
 
@@ -62,14 +64,15 @@ public class BigQuestionDAO {
     	try {
 	    	Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
-			prepStmt_S = connection.prepareStatement(strPrepSQL_S);
+			prepStmt_SI = connection.prepareStatement(strPrepSQL_SI);
 
-			prepStmt_S.setString(1, bean.getId());
+			prepStmt_SI.setString(1, bean.getId());
 
-			resultSet = prepStmt_S.executeQuery();
+			resultSet = prepStmt_SI.executeQuery();
 
 			if(resultSet != null){
 				while(resultSet.next()){
+					bean.setId(resultSet.getString("id"));
 					bean.setType(resultSet.getString("type"));
 					bean.setTitle(resultSet.getString("title"));
 				}
@@ -116,5 +119,28 @@ public class BigQuestionDAO {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
+    }
+
+    public int getLines(BigQuestionBean bean){
+    	int count = 0;
+    	try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+
+		    prepStmt_C = connection.prepareStatement(strPrepSQL_C);
+		    prepStmt_C.setString(1, bean.getType());
+		    resultSet = prepStmt_C.executeQuery();
+
+		    if(resultSet != null){
+				while(resultSet.next()){
+					count = resultSet.getInt("count");
+				}
+			}
+
+		    connection.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+    	return count;
     }
 }

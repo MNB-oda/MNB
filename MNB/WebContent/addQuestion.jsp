@@ -58,6 +58,7 @@ td {
 <script language = "JavaScript">
 <!--
 	var i = 1;
+	//
 	var selectBefore = [1];
 
 	//質問を追加
@@ -187,7 +188,9 @@ td {
         var mytable = document.getElementById("tablebody");
         var removeTable = document.getElementById("row"+i);
         mytable.removeChild(removeTable);
-        selectNumber[i-1] = null;
+
+        //lengthを一つ短くして、最後尾のデータを削除
+        selectBefore.length = selectBefore.length-1;
         i--;
 
         // テーブルの数（行の数）が0の場合は
@@ -217,7 +220,7 @@ td {
 
 			    	mycurrent_form = document.createElement("INPUT");
 			        mycurrent_form.type = "TEXT";
-					mycurrent_form.name = "ROW" + rowNumber + "ANSWER" + i;
+					mycurrent_form.name = "ROW" + rowNumber + "ANSWER" + number;
 					mycurrent_form.value = "";
 					mycurrent_form.id = "komoku" + number;
 					mycurrent_form.maxlength = "100";

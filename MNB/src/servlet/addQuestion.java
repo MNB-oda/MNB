@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,7 +54,11 @@ public class addQuestion extends HttpServlet {
 		QuestionContentDAO contentDAO = new QuestionContentDAO();
 
 		//共通のid
-		String id = "";
+		BigQuestionBean subBean = new BigQuestionBean();
+		subBean.setType(request.getParameter("QUESTIONTYPE"));
+		int count = bigDAO.getLines(subBean);
+		Calendar calendar = Calendar.getInstance();
+		String id = String.valueOf(calendar.get(Calendar.YEAR)) + String.valueOf(calendar.get(Calendar.MONTH)) + String.valueOf(calendar.get(Calendar.DATE)) + count;
 
 		//大きなくくりの挿入
 		BigQuestionBean bigBean = new BigQuestionBean();
@@ -77,7 +82,7 @@ public class addQuestion extends HttpServlet {
 
 			//項目数には制限があるのでfor文でcontentBeanを挿入
 			//自由の場合は項目数などが無いので、id以外を0とnullに
-			if(smallBean.getQuestionType() == "自由"){
+			if(smallBean.getQuestionType().equals("自由")){
 				QuestionContentBean contentBean = new QuestionContentBean();
 				contentBean.setId(id);
 				contentBean.setChoicesNumber(0);
@@ -85,7 +90,7 @@ public class addQuestion extends HttpServlet {
 				contentBean.setContent(null);
 				contentDAO.insertDatabase(contentBean);
 			}else{
-				for(int answerNumber = 1; answerNumber <= Integer.valueOf(request.getParameter("KOMOKUSU")); answerNumber++){
+				for(int answerNumber = 1; answerNumber < Integer.valueOf(request.getParameter("KOMOKUSU" + rowNumber)) + 1; answerNumber++){
 					QuestionContentBean contentBean = new QuestionContentBean();
 					contentBean.setId(id);
 					contentBean.setChoicesNumber(answerNumber);

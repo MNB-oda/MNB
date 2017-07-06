@@ -19,7 +19,7 @@ public class QuestionContentDAO {
     PreparedStatement prepStmt_I; // INSERT用
     PreparedStatement prepStmt_D; // DELETE用
 
-    String strPrepSQL_S = "SELECT * FROM questionContent WHERE id = ?";
+    String strPrepSQL_S = "SELECT * FROM questionContent WHERE id = ? ORDER BY row, choicesNumber ASC";
     String strPrepSQL_I = "INSERT INTO questionContent VALUES(?, ?, ?, ?)";
     String strPrepSQL_D = "DELETE FROM questionContent WHERE id = ?";
 
@@ -64,8 +64,8 @@ public class QuestionContentDAO {
 
 		    prepStmt_I = connection.prepareStatement(strPrepSQL_I);
 		    prepStmt_I.setString(1, bean.getId());
-		    prepStmt_I.setInt(2, bean.getChoicesNumber());
-		    prepStmt_I.setInt(3, bean.getRow());
+		    prepStmt_I.setInt(2, bean.getRow());
+		    prepStmt_I.setInt(3, bean.getChoicesNumber());
 		    prepStmt_I.setString(4, bean.getContent());
 
 		    prepStmt_I.executeUpdate();

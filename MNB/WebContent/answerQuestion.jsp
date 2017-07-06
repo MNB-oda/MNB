@@ -81,76 +81,62 @@ th {
 	<div align = "right">
 	<input class = "button" type="button" name="CLOSE" value="閉じる">
 	</div>
-	<form action="answer.jsp" method="get">
+	<form method="post" action="">
 		<table class="contents">
 			<tr>
-				<td colspan="3">第2回　プログラム班講義アンケート<%= bigBean.getTitle()%></td>
+				<td colspan="3"><%= bigBean.getTitle()%></td>
 			</tr>
 			<%
+			//contentBeansのどこまで描画しているかの変数
+			int pointer = 1;
+
+			//アンケート描画
 			for(int i=0; i<smallBeans.length; i++){
 				out.println("<tr>");
 				out.println("<td>" + smallBeans[i].getTitle() + "</td>");
 				out.println("<td>");
-				for(int j=0; j<contentBeans.length; j++){
+
+				//アンケートの選択形式で描画を変更
+				switch(smallBeans[i].getQuestionType()){
+
+				//単体選択（ラジオボタン）
+				case "単体":
+					for(int j=pointer; j<contentBeans.length; j++){
+						//今描こうとしてる部分の列が現在書いてる列のものじゃなかったら、pointerを更新して描画終了
+						if(contentBeans[j].getRow() != i+1){
+							pointer = j;
+							break;
+						}
+						out.println("<input type=\"radio\" name=\"q" + i + "\" value=\""+ contentBeans[j].getContent() + "\" />" + contentBeans[j].getContent());
+					}
+					break;
+
+				//複数選択（セレクトボックス）
+				case "複数":
+					for(int j=pointer; j<contentBeans.length; j++){
+						//上と同様
+						if(contentBeans[j].getRow() != i+1){
+							pointer = j;
+							break;
+						}
+						out.println("<input type=\"checkBox\" name=\"q" + i + "\" value=\""+ contentBeans[j].getContent() + "\" />" + contentBeans[j].getContent());
+					}
+					break;
+
+				//自由記入（テキストボックス）
+				case "自由":
+					out.println("<textarea name=\"q" + i + "\" rows=\"4\" cols=\"40\"></textarea>");
+					pointer++;
+					break;
+
+				default:
+					break;
 				}
+
 				out.println("<td>");
 				out.println("</tr>");
 			}
 			%>
-			<tr>
-				<td>今回の講義開始時刻</td>
-				<td>
-				<input type="radio" name="q1" value="早すぎ" />早すぎ
-				<input type="radio" name="q1" value="ちょうど良い" />ちょうど良い
-				<input type="radio" name="q1" value= "遅い"/>遅い
-				</td>
-			</tr>
-			<tr>
-				<td>今回の講義終了時刻</td>
-				<td>
-				<input type="radio" name="q2" value="早すぎ" />早すぎ
-				<input type="radio" name="q2" value="ちょうど良い" />ちょうど良い
-				<input type="radio" name="q2" value= "遅い"/>遅い
-				</td>
-			</tr>
-			<tr>
-				<td>今回の講義時間</td>
-				<td>
-				<input type="radio" name="q3" value="短い" />短い
-				<input type="radio" name="q3" value="ちょうど良い" />ちょうど良い
-				<input type="radio" name="q3" value= "長い"/>長い
-				</td>
-			</tr>
-			<tr>
-				<td>今回の講義の難易度</td>
-				<td>
-				<input type="radio" name="q4" value="難しい" />難しい
-				<input type="radio" name="q4" value="ちょうど良い" />ちょうど良い
-				<input type="radio" name="q4" value= "簡単すぎ"/>簡単すぎ
-				</td>
-			</tr>
-			<tr>
-				<td>Unityを学びたい？</td>
-				<td>
-				<input type="radio" name="q5" value="はい" />はい
-				<input type="radio" name="q5" value="いいえ" />いいえ
-				</td>
-			</tr>
-			<tr>
-				<td>次の中から何が作りたい？(複数可)</td>
-				<td>
-				<input type="checkbox" name="q6" value="2Dゲーム" />2Dゲーム<br>
-				<input type="checkbox" name="q6" value="3Dゲーム" />3Dゲーム<br>
-				<input type="checkbox" name="q6" value="Winソフトウェア" />Winソフトウェア<br>
-				<input type="checkbox" name="q6" value="ここにない" />ここにない<br>
-				</td>
-			</tr>
-			<tr>
-				<td>何か質問、要望があればどうぞ(120字)</td>
-				<td>
-				<textarea name="q7" rows="4" cols="40"></textarea>
-				</td>
-			</tr>
 		</table>
 		<br>
 		<input type="submit" name="answer" value="送信">

@@ -54,6 +54,7 @@ public class QuestionMethodAssignment extends HttpServlet {
 		switch((String)request.getParameter("TYPE")){
 
 		case "add":
+			//アンケートのタイプを投げる
 			request.setAttribute("questionType", request.getParameter("QUESTIONTYPE"));
 			nextJsp = "/addQuestion.jsp";
 			break;
