@@ -121,6 +121,18 @@ td.sche a{
 
 /*ボタン---------------------------------------------------------------------------------------*/
 /*ボタン1*/
+.square_btn_mypage{
+	position:absolute;right:30px;top:30px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FF0;
+    background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+    transition: .4s;
+}
 .square_btn{
     display: inline-block;
     padding: 0.5em 1em;
@@ -132,7 +144,6 @@ td.sche a{
     background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
     transition: .4s;
 }
-
 .square_btn:hover{
     background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
     background-image: linear-gradient(45deg, #709dff 50%, #604dff 100%);
@@ -187,19 +198,20 @@ td.sche a{
   transform: rotateX(360deg);
 }
 
+a.title{
+margin:30px 0px 0px 130px;
+}
 
 </style>
 
 </head>
 <body>
-   <Div Align = center>
-	<p><font size="7">ソフトウェア研究部日程管理システム</font></p>
-	</Div>
 
-	<Div Align = right>
-		<a href="#"  onClick = "location.href = 'myPage.jsp'" class="square_btn">マイページ</a>
+	 <a class="title"><img src = "../MNB/titlelogo2.png" alt="タイトル" whidth="345" height="216" align="middle" >
+	 <font size="7">ソフトウェア研究部日程管理システム</font></a>
 
-	</Div>
+		<a href="#"  onClick = "location.href = 'myPage.jsp'" class="square_btn_mypage">マイページ</a>
+
 
  <Div Align = center>
 	<p>
@@ -326,7 +338,7 @@ td.sche a{
     <br>
 
 	 <!-- 以下ウィジェット(SRC公式) -->
-	<a class="twitter-timeline" width = "320px" height = "400px"
+	<a class="twitter-timeline" width = "680px" height = "400px"
 	 href="https://twitter.com/sofken_tdu">Tweets by @sofken_tdu</a>
 	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
