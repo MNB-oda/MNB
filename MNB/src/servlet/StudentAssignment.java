@@ -49,6 +49,7 @@ public class StudentAssignment extends HttpServlet {
 		switch((String)request.getParameter("TYPE")){
 		case "add":
 			studentbean = studentdao.getDatabase(studentbean);
+			session.setAttribute("bean", studentbean);
 			nextJsp = "/mypageEdit.jsp";
 			session.setAttribute("type", "add");
 			break;
