@@ -47,10 +47,11 @@ th {
 <font size = "2"> 東京電機大学　ソフトウェア研究部 </font>
 <br>
 <br>
-
+	<p>
 	<div align = "center">
 		<input type="submit" name="ADD" onclick="location.href = 'InformationAssignment?TYPE=add'" value="追加">
 	</div>
+	</p>
 	<table>
 			<tr>
 				<th>お知らせ一覧</th>
