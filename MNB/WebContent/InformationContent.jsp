@@ -30,10 +30,6 @@ th {
 	border: 1px solid #ffffff;
 }
 
-div {
-	text-align: right;
-}
-
 .contents td {
 	text-align: left;
 	padding-right: 20px;
@@ -66,14 +62,23 @@ div {
 </head>
 <body>
 
-	<form method="post" action="">
+		<p>
+<%
+	out.println("<div align = \"center\">");
+	//更新ボタン
+	out.println("<input type=\"button\" name=\"UPDATE\" value=\"更新\""
+			+ " onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + bean.getId() +"'\">");
+	//削除ボタン
+	out.println("<input type=\"button\" name=\"DELETE\" value=\"削除\""
+			+ " onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + bean.getId() +"'\">");
+	out.println("</div>");
+%>
+		<p>
 		<table class= "contents">
-		<caption><div><input type="button" name="CLOSE" value="閉じる"></div></caption>
-
 			<tr>
 				<td style="background:#5a9bd5">
 					<%
-						out.println(bean.getTitle());
+					out.println(bean.getTitle());
 					%>
 				</td>
 			</tr>
@@ -81,13 +86,21 @@ div {
 			<tr>
 				<td>
 					<%
-						out.println(bean.getContent());
+					StringBuilder sb = new StringBuilder();
+					sb.append(bean.getContent());
+					while(true) {
+						int i = sb.indexOf("\r");
+						if(i == -1) {break;}
+						else {
+							sb.replace(i, i+1, "<br>");
+						}
+					}
+					out.println(sb);
 					%>
 				</td>
 			</tr>
 		</table>
 
 
-	</form>
 </body>
 </html>

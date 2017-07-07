@@ -57,9 +57,9 @@ td {
 </head>
 <body>
 	<form action="InformationDatabaseProcessing" method="post">
-		<p>
+		<div Align = "right">
 			<input type="button" name="CLOSE" value="閉じる">
-		<p>
+		</div>
 		<table class = information>
 		<%
 			out.println("<tr>");

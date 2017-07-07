@@ -4,10 +4,11 @@
 <%@ page import="model.BigQuestionBean"%>
 <%@ page import="model.SmallQuestionBean"%>
 <%@ page import="model.QuestionContentBean"%>
+<%@ page import="java.util.ArrayList"%>
 <%
 BigQuestionBean bigBean = (BigQuestionBean)request.getAttribute("bigBean");
-SmallQuestionBean[] smallBeans = (SmallQuestionBean[])request.getAttribute("smallBeans");
-QuestionContentBean[] contentBeans = (QuestionContentBean[])request.getAttribute("contentBeans");
+ArrayList<SmallQuestionBean> smallBeans = (ArrayList<SmallQuestionBean>)request.getAttribute("smallBeans");
+ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)request.getAttribute("contentBeans");
 %>
 
 <html>
@@ -88,44 +89,45 @@ th {
 			</tr>
 			<%
 			//contentBeansのどこまで描画しているかの変数
-			int pointer = 1;
+			int pointer =0;
 
 			//アンケート描画
-			for(int i=0; i<smallBeans.length; i++){
+			for(int i=0; i<smallBeans.size(); i++){
 				out.println("<tr>");
-				out.println("<td>" + smallBeans[i].getTitle() + "</td>");
+				out.println("<td>" + smallBeans.get(i).getTitle() + "</td>");
 				out.println("<td>");
 
 				//アンケートの選択形式で描画を変更
-				switch(smallBeans[i].getQuestionType()){
+				switch(smallBeans.get(i).getQuestionType()){
 
 				//単体選択（ラジオボタン）
 				case "単体":
-					for(int j=pointer; j<contentBeans.length; j++){
+					for(int j=pointer; j<contentBeans.size(); j++){
 						//今描こうとしてる部分の列が現在書いてる列のものじゃなかったら、pointerを更新して描画終了
-						if(contentBeans[j].getRow() != i+1){
+						if(contentBeans.get(j).getRow() != i+1){
 							pointer = j;
 							break;
 						}
-						out.println("<input type=\"radio\" name=\"q" + i + "\" value=\""+ contentBeans[j].getContent() + "\" />" + contentBeans[j].getContent());
+						out.println("<input type=\"radio\" name=\"q" + i + "\" value=\""+ contentBeans.get(j).getContent() + "\" />" + contentBeans.get(j).getContent());
 					}
 					break;
 
 				//複数選択（セレクトボックス）
 				case "複数":
-					for(int j=pointer; j<contentBeans.length; j++){
+					for(int j=pointer; j<contentBeans.size(); j++){
 						//上と同様
-						if(contentBeans[j].getRow() != i+1){
+						if(contentBeans.get(j).getRow() != i+1){
 							pointer = j;
 							break;
 						}
-						out.println("<input type=\"checkBox\" name=\"q" + i + "\" value=\""+ contentBeans[j].getContent() + "\" />" + contentBeans[j].getContent());
+						out.println("<input type=\"checkBox\" name=\"q" + i + "\" value=\""+ contentBeans.get(j).getContent() + "\" />" + contentBeans.get(j).getContent());
 					}
 					break;
 
 				//自由記入（テキストボックス）
 				case "自由":
 					out.println("<textarea name=\"q" + i + "\" rows=\"4\" cols=\"40\"></textarea>");
+					//たぶんここがおかしい
 					pointer++;
 					break;
 
@@ -133,7 +135,7 @@ th {
 					break;
 				}
 
-				out.println("<td>");
+				out.println("</td>");
 				out.println("</tr>");
 			}
 			%>
