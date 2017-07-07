@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.BigQuestionDAO;
 import dao.QuestionContentDAO;
@@ -67,12 +69,12 @@ public class QuestionMethodAssignment extends HttpServlet {
 
 			SmallQuestionBean smallBean = new SmallQuestionBean();
 			smallBean.setId(id);
-			SmallQuestionBean[] smallBeans = (SmallQuestionBean[])smallDAO.getDatabase(smallBean).toArray(new SmallQuestionBean[0]);
+			ArrayList<SmallQuestionBean> smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
 			request.setAttribute("smallBeans", smallBeans);
 
 			QuestionContentBean contentBean = new QuestionContentBean();
 			contentBean.setId(id);
-			QuestionContentBean[] contentBeans = (QuestionContentBean[])contentDAO.getDatabase(contentBean).toArray(new QuestionContentBean[0]);
+			ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
 			request.setAttribute("contentBeans", contentBeans);
 
 			nextJsp = "/answerQuestion.jsp";
@@ -85,9 +87,11 @@ public class QuestionMethodAssignment extends HttpServlet {
 		case "delete":
 			bigBean.setId(id);
 			bigBean = bigDAO.getDatabaseById(bigBean);
-			request.setAttribute("bigBean", bigBean);
+			bigBean.getTitle();
+			HttpSession session = request.getSession();
+			session.setAttribute("deleteBean", bigBean);
 
-			nextJsp = "/deleteCheck.jsp";
+			nextJsp = "/questionDeleteCheck.jsp";
 			break;
 
 		default:
