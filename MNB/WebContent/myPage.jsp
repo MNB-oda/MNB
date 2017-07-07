@@ -2,17 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.StudentBean"%>
 <%
-	StudentBean bean = (StudentBean) session.getAttribute("bean");
+	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 	//String handle = (String) request.getAttribute("handle");
-	String handle = bean.getHandle();
-	String name = bean.getName();
-	String id = bean.getId();
-	String pass = bean.getPass();
-	String email = bean.getEmail();
-	boolean isprogram = bean.isProhan();
-	boolean is2dcg = bean.isIs2dcghan();
-	boolean is3dcg = bean.isIs3dcghan();
-	boolean ismusic = bean.isMusichan();
+	String handle = studentBean.getHandle();
+	String name = studentBean.getName();
+	String id = studentBean.getId();
+	String pass = studentBean.getPass();
+	String email = studentBean.getEmail();
+	boolean isprogram = studentBean.isProhan();
+	boolean is2dcg = studentBean.isIs2dcghan();
+	boolean is3dcg = studentBean.isIs3dcghan();
+	boolean ismusic = studentBean.isMusichan();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

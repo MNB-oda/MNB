@@ -49,28 +49,28 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		StudentBean bean = (StudentBean) session.getAttribute("bean");
+		StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 		StudentDAO dao;
 
 		// 追加、更新、削除のどれなのかを判断し、それぞれを実行
 		switch ((String) session.getAttribute("type")) {
 		case "add":
-			setParameter(bean, request);
+			setParameter(studentBean, request);
 			dao = new StudentDAO();
-			checkBoxCheck(bean, request);
-			dao.insertDatabase(bean);
+			checkBoxCheck(studentBean, request);
+			dao.insertDatabase(studentBean);
 			break;
 
 		case "update":
-			setParameter(bean, request);
+			setParameter(studentBean, request);
 			dao = new StudentDAO();
-			checkBoxCheck(bean, request);
-			dao.updateDatabase(bean);
+			checkBoxCheck(studentBean, request);
+			dao.updateDatabase(studentBean);
 			break;
 
 		case "delete":
 			dao = new StudentDAO();
-			dao.deleteDatabase(bean);
+			dao.deleteDatabase(studentBean);
 			break;
 
 		default:
@@ -91,7 +91,6 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		bean.setId((String) request.getParameter("id"));
 		bean.setPass((String) request.getParameter("pass"));
 		bean.setEmail((String) request.getParameter("email"));
-		// bean.setHan((String[])request.getParameterValues("han"));//getParameterValues：パラメータ名に対して値が複数ある場合
 		bean.setIsProhan(Boolean.valueOf(request.getParameter("program")));
 		bean.setIs2dcghan(Boolean.valueOf(request.getParameter("2dcg")));
 		bean.setIs3dcghan(Boolean.valueOf(request.getParameter("3dcg")));

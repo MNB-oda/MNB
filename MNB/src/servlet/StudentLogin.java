@@ -43,19 +43,19 @@ public class StudentLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 
-		StudentBean student = new StudentBean();
-		student.setId(request.getParameter("id"));
-		student.setPass(request.getParameter("pass"));
+		StudentBean studentBean = new StudentBean();
+		studentBean.setId(request.getParameter("id"));
+		studentBean.setPass(request.getParameter("pass"));
 		StudentDAO dao = new StudentDAO();
 
 		boolean result = false;
-		result = dao.check(student);
+		result = dao.check(studentBean);
 
 		HttpSession session = request.getSession();
 		session.setAttribute("login", result);
 		if (result) {
 			// ログインに成功している場合はmember.jspへ
-			session.setAttribute("student", student);
+			session.setAttribute("studentBean", studentBean);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MakeCalender");
 			dispatcher.forward(request, response);
 		} else {
