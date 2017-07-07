@@ -2,12 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.StudentBean"%>
 <%
-	String handle = (String) request.getAttribute("handle");
-	String name = (String) request.getAttribute("name");
-	String id = (String) request.getAttribute("id");
-	String pass = (String) request.getAttribute("pass");
-	String email = (String) request.getAttribute("email");
-	String group = (String) request.getAttribute("group");
+	StudentBean bean = (StudentBean) session.getAttribute("bean");
+	//String handle = (String) request.getAttribute("handle");
+	String handle = bean.getHandle();
+	String name = bean.getName();
+	String id = bean.getId();
+	String pass = bean.getPass();
+	String email = bean.getEmail();
+	boolean isprogram = bean.isProhan();
+	boolean is2dcg = bean.isIs2dcghan();
+	boolean is3dcg = bean.isIs3dcghan();
+	boolean ismusic = bean.isMusichan();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -78,7 +83,7 @@ td {
 
 	<p>マイページ</p>
 	<Div Align = left>
-	<input type="submit" name="CONFIRM" value="登録者管理">
+	<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentListController'" value="登録者管理">
 	</Div>
 		<table class= "myPageTable">
 			<caption>登録者一覧</caption>
@@ -110,13 +115,36 @@ td {
 
 			<tr>
 				<td>所属班</td>
-				<td><%=group %></td>
+				<td>
+					<%
+						if (isprogram) {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" checked=\"checked\">プログラム班");
+						} else {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
+						}
+						if (is2dcg) {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\"  checked=\"checked\">2DCG班");
+						} else {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
+						}
+						if (is3dcg) {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\"  checked=\"checked\">3DCG班");
+						} else {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
+						}
+						if (ismusic) {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\"  checked=\"checked\">サウンド班");
+						} else {
+							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
+						}
+					%>
+				</td>
 			</tr>
 
 	</table>
 
 		<p>
-			<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentAssignment?TYPE=update'"value="変更">
+			<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentAssignment?TYPE=update&ID= <%= id %>'" value="変更">
 		<p>
 
 </body>

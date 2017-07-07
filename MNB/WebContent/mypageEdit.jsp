@@ -109,7 +109,7 @@ td {
 				break;
 			}
 		%>
-
+		<br>
 		<table class="myPageTable">
 			<caption>登録者一覧</caption>
 
@@ -134,7 +134,7 @@ td {
 						break;
 					case "update":
 						out.println("<td><input type=\"text\" name=\"id\" value=" + id
-								+ " size = \"7\" maxlength=\"7\" readonly></td>");
+								+ " size = \"7\" maxlength=\"7\" readonly>　変更出来ません</td>" );
 						break;
 					default:
 						break;
@@ -177,42 +177,7 @@ td {
 						} else {
 							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
 						}
-						/*
-						switch(han){
-						case "プログラム班":
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" checked=\"checked\">プログラム班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
-							break;
-						case "2DCG班":
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\"  checked=\"checked\">2DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
-							break;
-						case "3DCG班":
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\"  checked=\"checked\">3DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
-							break;
-						case "サウンド班":
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\">プログラム班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\"  checked=\"checked\">サウンド班");
-							break;
-						default :
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"プログラム班\" >プログラム班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"2DCG班\" >2DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"3DCG班\" >3DCG班");
-							out.println("<input type=\"checkbox\" name = \"han\" value=\"サウンド班\" >サウンド班");
-							break;
-						}
-						*/
 					%>
-
 				</td>
 			</tr>
 

@@ -26,8 +26,8 @@ public class StudentDAO {
 
     String strPrepSQL_SI = "SELECT * FROM student WHERE id = ?";
     String strPrepSQL_S = "SELECT * FROM student";
-    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    String strPrepSQL_U = "UPDATE student SET handle = ? , name = ? , id = ? ,"
+    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    String strPrepSQL_U = "UPDATE student SET handle = ? , name = ? , "
     						+ "pass = ? , email = ?  , program = ? , cg2d = ? , cg3d = ? , music = ?  "
     						+ "WHERE id = ?";
     String strPrepSQL_D = "DELETE FROM student WHERE id = ?";
@@ -125,14 +125,13 @@ public class StudentDAO {
 		    prepStmt_U = connection.prepareStatement(strPrepSQL_U);
 		    prepStmt_U.setString(1, bean.getHandle());
 		    prepStmt_U.setString(2, bean.getName());
-		    prepStmt_U.setString(3, bean.getId());
-		    prepStmt_U.setString(4, bean.getPass());
-		    prepStmt_U.setString(5, bean.getEmail());
-		    prepStmt_U.setBoolean(6, bean.isProhan());
-		    prepStmt_U.setBoolean(7, bean.isIs2dcghan());
-		    prepStmt_U.setBoolean(8, bean.isIs3dcghan());
-		    prepStmt_U.setBoolean(9, bean.isMusichan());
-		    prepStmt_U.setString(10, bean.getId());
+		    prepStmt_U.setString(3, bean.getPass());
+		    prepStmt_U.setString(4, bean.getEmail());
+		    prepStmt_U.setBoolean(5, bean.isProhan());
+		    prepStmt_U.setBoolean(6, bean.isIs2dcghan());
+		    prepStmt_U.setBoolean(7, bean.isIs3dcghan());
+		    prepStmt_U.setBoolean(8, bean.isMusichan());
+		    prepStmt_U.setString(9, bean.getId());
 		    prepStmt_U.executeUpdate();
 
 		    connection.close();
