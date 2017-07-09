@@ -25,8 +25,8 @@ public class StudentDAO {
     PreparedStatement prepStmt_D; // DELETE用
 
     String strPrepSQL_SI = "SELECT * FROM student WHERE id = ?";
-    String strPrepSQL_S = "SELECT * FROM student";
-    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    String strPrepSQL_S = "SELECT * FROM student ORDER BY id ASC";
+    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String strPrepSQL_U = "UPDATE student SET handle = ? , name = ? , "
     						+ "pass = ? , email = ?  , program = ? , cg2d = ? , cg3d = ? , music = ?  "
     						+ "WHERE id = ?";

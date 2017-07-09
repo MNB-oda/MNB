@@ -3,7 +3,7 @@
 <%@ page import="model.StudentBean"%>
 <%
 	String type = (String) session.getAttribute("type");
-	StudentBean bean = (StudentBean) session.getAttribute("bean");
+	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 
 	String handle = "";
 	String name = "";
@@ -19,15 +19,15 @@
 	case "add":
 		break;
 	case "update":
-		handle = bean.getHandle();
-		name = bean.getName();
-		id = bean.getId();
-		pass = bean.getPass();
-		email = bean.getEmail();
-		isprogram = bean.isProhan();
-		is2dcg = bean.isIs2dcghan();
-		is3dcg = bean.isIs3dcghan();
-		ismusic = bean.isMusichan();
+		handle = studentBean.getHandle();
+		name = studentBean.getName();
+		id = studentBean.getId();
+		pass = studentBean.getPass();
+		email = studentBean.getEmail();
+		isprogram = studentBean.isProhan();
+		is2dcg = studentBean.isIs2dcghan();
+		is3dcg = studentBean.isIs3dcghan();
+		ismusic = studentBean.isMusichan();
 		break;
 	default:
 		break;

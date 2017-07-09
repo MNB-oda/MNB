@@ -34,7 +34,7 @@ public class StudentAssignment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String nextJsp = "";
-		StudentBean studentbean = new StudentBean();
+		StudentBean studentBean = new StudentBean();
 		StudentDAO studentdao = new StudentDAO();
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
@@ -48,40 +48,30 @@ public class StudentAssignment extends HttpServlet {
 		//それぞれによって遷移先jspを変更
 		switch((String)request.getParameter("TYPE")){
 		case "add":
-			studentbean = studentdao.getDatabase(studentbean);
+			studentBean = studentdao.getDatabase(studentBean);
+			session.setAttribute("studentBean", studentBean);
 			nextJsp = "/mypageEdit.jsp";
 			session.setAttribute("type", "add");
 			break;
 
 		case "update":
-			studentbean.setId((String)request.getParameter("ID"));
-			studentbean = studentdao.getDatabase(studentbean);
+			studentBean.setId((String)request.getParameter("ID"));
+			studentBean = studentdao.getDatabase(studentBean);
 
-			session.setAttribute("handle", studentbean.getHandle());
-			session.setAttribute("name", studentbean.getName());
-			session.setAttribute("id", studentbean.getId());
-			session.setAttribute("pass", studentbean.getPass());
-			session.setAttribute("email", studentbean.getEmail());
-			//request.setAttribute("program", studentbean.isProhan());
-			//request.setAttribute("2dcg", studentbean.isIs2dcghan());
-			//request.setAttribute("3dcg", studentbean.isIs3dcghan());
-			//request.setAttribute("music", studentbean.isMusichan());
-			session.setAttribute("bean", studentbean);
+			session.setAttribute("handle", studentBean.getHandle());
+			session.setAttribute("name", studentBean.getName());
+			session.setAttribute("id", studentBean.getId());
+			session.setAttribute("pass", studentBean.getPass());
+			session.setAttribute("email", studentBean.getEmail());
+			session.setAttribute("studentBean", studentBean);
 			nextJsp = "/mypageEdit.jsp";
 			session.setAttribute("type", "update");
 			break;
 
 		case "delete":
-			studentbean.setId((String)request.getParameter("ID"));
-			studentbean = studentdao.getDatabase(studentbean);
-
-			//session.setAttribute("handle", studentbean.getHandle());
-			//session.setAttribute("name", studentbean.getName());
-			//session.setAttribute("id", studentbean.getId());
-			//session.setAttribute("pass", studentbean.getPass());
-			//session.setAttribute("email", studentbean.getEmail());
-			//session.setAttribute("han", studentbean.getHan());
-			session.setAttribute("bean", studentbean);
+			studentBean.setId((String)request.getParameter("ID"));
+			studentBean = studentdao.getDatabase(studentBean);
+			session.setAttribute("studentBean", studentBean);
 			nextJsp = "/studentDeleteCheck.jsp";
 			session.setAttribute("type", "delete");
 			break;
