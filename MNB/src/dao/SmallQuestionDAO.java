@@ -17,11 +17,9 @@ public class SmallQuestionDAO {
 
 	PreparedStatement prepStmt_S; // SELECT用
     PreparedStatement prepStmt_I; // INSERT用
-    PreparedStatement prepStmt_D; // DELETE用
 
     String strPrepSQL_S = "SELECT * FROM smallQuestion WHERE id = ? ORDER BY row ASC";
     String strPrepSQL_I = "INSERT INTO smallQuestion VALUES(?, ?, ?, ?)";
-    String strPrepSQL_D = "DELETE FROM smallQuestion WHERE id = ?";
 
     ResultSet resultSet;
 
@@ -72,21 +70,6 @@ public class SmallQuestionDAO {
 
 		    connection.close();
     	} catch (Exception e) {
-		    e.printStackTrace();
-		}
-    }
-
-    public void deleteDatabase(SmallQuestionBean bean){
-    	try {
-		    Class.forName(driverClassName);
-		    connection = DriverManager.getConnection(url, user, password);
-
-		    prepStmt_D = connection.prepareStatement(strPrepSQL_D);
-		    prepStmt_D.setString(1, bean.getId());
-		    prepStmt_D.executeUpdate();
-
-		    connection.close();
-		} catch (Exception e) {
 		    e.printStackTrace();
 		}
     }

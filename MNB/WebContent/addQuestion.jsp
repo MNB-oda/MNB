@@ -262,7 +262,8 @@ td {
 			<input type="button" name="CLOSE" value="閉じる" onClick = "window.close();">
 		<p>
 
-		<form method="post" action ="./addQuestion" name = "question">
+		<form method="post" action ="./QuestionDatabaseProcessing" name = "question">
+		<input type='hidden' name='methodType' value="add">
 		<table class = question>
 		<tbody id = tablebody>
 			<tr>

@@ -89,7 +89,7 @@ public class QuestionDatabaseProcessing extends HttpServlet {
 					QuestionContentBean contentBean = new QuestionContentBean();
 					contentBean.setId(id);
 					contentBean.setChoicesNumber(0);
-					contentBean.setRow(0);
+					contentBean.setRow(rowNumber);
 					contentBean.setContent(null);
 					contentDAO.insertDatabase(contentBean);
 				}else{
