@@ -17,9 +17,11 @@ public class QuestionContentDAO {
 
 	PreparedStatement prepStmt_S; // SELECT用
     PreparedStatement prepStmt_I; // INSERT用
+    PreparedStatement prepStmt_D; // DELETE用
 
     String strPrepSQL_S = "SELECT * FROM questionContent WHERE id = ? ORDER BY row, choicesNumber ASC";
     String strPrepSQL_I = "INSERT INTO questionContent VALUES(?, ?, ?, ?)";
+    String strPrepSQL_D = "DELETE FROM questionContent WHERE id = ?";
 
     ResultSet resultSet;
 
@@ -70,6 +72,21 @@ public class QuestionContentDAO {
 
 		    connection.close();
     	} catch (Exception e) {
+		    e.printStackTrace();
+		}
+    }
+
+    public void deleteDatabase(QuestionContentBean bean){
+    	try {
+		    Class.forName(driverClassName);
+		    connection = DriverManager.getConnection(url, user, password);
+
+		    prepStmt_D = connection.prepareStatement(strPrepSQL_D);
+		    prepStmt_D.setString(1, bean.getId());
+		    prepStmt_D.executeUpdate();
+
+		    connection.close();
+		} catch (Exception e) {
 		    e.printStackTrace();
 		}
     }

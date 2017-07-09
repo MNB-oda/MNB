@@ -83,14 +83,13 @@ public class QuestionDatabaseProcessing extends HttpServlet {
 				smallBean.setRow(rowNumber);
 				smallDAO.insertDatabase(smallBean);
 
-
 				//項目数には制限があるのでfor文でcontentBeanを挿入
 				//自由の場合は項目数などが無いので、id以外を0とnullに
 				if(smallBean.getQuestionType().equals("自由")){
 					QuestionContentBean contentBean = new QuestionContentBean();
 					contentBean.setId(id);
 					contentBean.setChoicesNumber(0);
-					contentBean.setRow(rowNumber);
+					contentBean.setRow(0);
 					contentBean.setContent(null);
 					contentDAO.insertDatabase(contentBean);
 				}else{
@@ -101,7 +100,6 @@ public class QuestionDatabaseProcessing extends HttpServlet {
 						contentBean.setRow(rowNumber);
 						contentBean.setContent(request.getParameter("ROW" + rowNumber + "ANSWER" + answerNumber));
 						contentDAO.insertDatabase(contentBean);
-
 					}
 				}
 

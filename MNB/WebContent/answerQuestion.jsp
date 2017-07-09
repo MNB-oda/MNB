@@ -82,15 +82,14 @@ th {
 	<div align = "right">
 	<input class = "button" type="button" name="CLOSE" value="閉じる">
 	</div>
-	<form method="post" action="./AnswerDatabaseProcessing">
-	<input type='hidden' name='questionID' value=<%= bigBean.getId() %>>
+	<form method="post" action="">
 		<table class="contents">
 			<tr>
 				<td colspan="3"><%= bigBean.getTitle()%></td>
 			</tr>
 			<%
 			//contentBeansのどこまで描画しているかの変数
-			int pointer = 0;
+			int pointer =0;
 
 			//アンケート描画
 			for(int i=0; i<smallBeans.size(); i++){
@@ -110,7 +109,6 @@ th {
 							break;
 						}
 						out.println("<input type=\"radio\" name=\"q" + i + "\" value=\""+ contentBeans.get(j).getContent() + "\" />" + contentBeans.get(j).getContent());
-						out.println("<input type=\"hidden\" name=\"q"+ i + "type\" value=\"radio\">");
 					}
 					break;
 
@@ -123,14 +121,13 @@ th {
 							break;
 						}
 						out.println("<input type=\"checkBox\" name=\"q" + i + "\" value=\""+ contentBeans.get(j).getContent() + "\" />" + contentBeans.get(j).getContent());
-						out.println("<input type=\"hidden\" name=\"q"+ i +"type\" value=\"select\">");
 					}
 					break;
 
 				//自由記入（テキストボックス）
 				case "自由":
 					out.println("<textarea name=\"q" + i + "\" rows=\"4\" cols=\"40\"></textarea>");
-					out.println("<input type=\"hidden\" name=\"q"+ i +"type\" value=\"free\">");
+					//たぶんここがおかしい
 					pointer++;
 					break;
 
