@@ -29,8 +29,21 @@ body {
 	background-color: #ceecff;
 	margin:0px;
 }
+#header h1.title{
+   margin: 0px 0px 0px 170px;
+}
 
+#calender p.month{
 
+	font-size: 225%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#calender a.monthsize{
+	font-size: 1.5em;
+	font-size: 150%;
+}
 
 table {
 	border: 1px solid #000;
@@ -51,12 +64,14 @@ td.week {
 	color: #FFF;
 	background-color: #55aaff;
 	text-align: center;
+	font-size:200%;
 }
 
 td.sunday {
 	color: #ff0000;
 	background-color: #55aaff;
 	text-align: center;
+	font-size:200%;
 }
 
 td.day {
@@ -64,18 +79,20 @@ td.day {
 	font-weight: bold;
 	text-align: center;
 	border-top: 1px solid #ffffff;
+	font-size:175%;
 }
 
 td.holiday {
 	background-color: #95c9ff;
 	text-align: center;
+
 }
 
 td.sche {
 	/*background-color: #95c9ff;*/
 	font-weight: bold;
 	text-align: center;
-	height: 80px;
+	height: 100px;
 }
 
 td.sche a{
@@ -85,12 +102,14 @@ td.sche a{
 }
 
 
+
 .homeNewList td {
 	text-align: left;
 	padding-right: 20px;
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	font-size:125%;
 }
 
 .homeNewList caption{
@@ -100,7 +119,10 @@ td.sche a{
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	font-size:150%;
 }
+
+
 
 .homeNewList th {
 	text-align: center;
@@ -112,6 +134,7 @@ td.sche a{
 
 .homeNewList tr:nth-child(odd) td {
 	background-color: #d7e2f4;
+
 }
 
 
@@ -206,20 +229,21 @@ margin:30px 0px 0px 130px;
 
 </head>
 <body>
+<div id=header>
+	 <h1 class="title"><img src = "../MNB/titlelogo2-1.png" alt="タイトル" width="1600" height="250" ></h1>
 
-	 <a class="title"><img src = "../MNB/titlelogo2.png" alt="タイトル" whidth="345" height="216" align="middle" >
-	 <font size="7">ソフトウェア研究部日程管理システム</font></a>
-
+</div>
 		<a href="#"  onClick = "location.href = 'myPage.jsp'" class="square_btn_mypage">マイページ</a>
 
-
- <Div Align = center>
-	<p>
+<br>
+<br>
+ <div id=calender>
+	<p class="month">
 		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month-1%>"><span>前月</span></a>
-		<font size="5"><%=month%>月</font>
+		<a class="monthsize"><%=month%>月</a>
 		<a href="/MNB/MakeCalender?YEAR=<%=year%>&MONTH=<%=month+1%>"><span>翌月</span></a>
 	</p>
-</Div>
+</div>
 
 
 	<table>
@@ -284,9 +308,9 @@ margin:30px 0px 0px 130px;
 	<br>
 	<br>
 	<br>
+	<div id=newsListtable>
 		<table class= "homeNewList">
 			<caption><a href = "newsList.jsp"><u>お知らせ</u></a></caption>
-
 			<tr>
 				<td>講習情報はありません</td>
 			</tr>
@@ -311,7 +335,7 @@ margin:30px 0px 0px 130px;
 				<td>講習情報はありません</td>
 			</tr>
 		</table>
-
+ </div>
 	<br>
 	<br>
 
