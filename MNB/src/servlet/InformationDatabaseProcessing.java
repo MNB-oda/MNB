@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -82,10 +83,15 @@ public class InformationDatabaseProcessing extends HttpServlet {
 	}
 
 	private String createId(InformationDAO dao) {
-		String id;
+		String id = "";
 		ArrayList<InformationBean> list = dao.createInformationList();
-		DecimalFormat dformat = new DecimalFormat("000");
-		id = dformat.format(list.size());
+		Calendar cal = Calendar.getInstance();
+		DecimalFormat dformat = new DecimalFormat("00");
+		id = id + cal.get(Calendar.YEAR);
+		id = id + dformat.format(cal.get(Calendar.MONTH)+1);
+		id = id + dformat.format(cal.get(Calendar.DATE));
+		id = dao.getNewId(id);
+		System.out.println(id);
 		return id;
 	}
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import model.InformationBean;
@@ -21,12 +22,14 @@ public class InformationDAO {
 	private PreparedStatement prepStmt_I; // INSERT用
 	private PreparedStatement prepStmt_U; // UPDATE用
 	private PreparedStatement prepStmt_D; // DELETE用
+	private PreparedStatement prepStmt_C; // COUNT用
 
 	private String strPrepSQL_L = "SELECT * FROM information";
 	private String strPrepSQL_S = "SELECT * FROM information WHERE id = ?";
 	private String strPrepSQL_I = "INSERT INTO information VALUES(?, ?, ?)";
 	private String strPrepSQL_U = "UPDATE information SET title = ?, content = ? WHERE id = ?";
 	private String strPrepSQL_D = "DELETE FROM information WHERE id = ?";
+	private String strPrepSQL_C = "SELECT COUNT(*) AS cnt FROM information WHERE id LIKE ?";
 
 	public InformationDAO(){
 	}
@@ -167,5 +170,37 @@ public class InformationDAO {
 		}
 
 		return result;
+	}
+
+	//データベースから指定IDのデータを持ってくる
+	public String getNewId(String str) {
+		// データベース処理
+		try {
+			Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, user, password);
+            prepStmt_C = connection.prepareStatement(strPrepSQL_C);
+    		DecimalFormat dformat = new DecimalFormat("00");
+
+    		for(int i = 0; i < 100; i++) {
+    			prepStmt_C.setString(1, str + dformat.format(i));
+
+            	resultSet = prepStmt_C.executeQuery();
+
+				if (resultSet != null) {
+					resultSet.next();
+					if(resultSet.getInt("cnt") == 0) {
+						str = str + dformat.format(i);
+						break;
+					}
+				}
+    		}
+			resultSet.close();
+			connection.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return str;
 	}
 }
