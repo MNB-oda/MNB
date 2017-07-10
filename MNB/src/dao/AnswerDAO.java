@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.AnswerBean;
+import model.AnswerContainer;
 
 public class AnswerDAO {
 	String driverClassName = "org.postgresql.Driver";
@@ -14,30 +16,34 @@ public class AnswerDAO {
 	String password = "hogehoge"; // ここはパスワード
 	Connection connection;
 
-	PreparedStatement prepStmt_S; // SELECT用
+	PreparedStatement prepStmt_CR; // 回答者人数を数える用
+	PreparedStatement prepStmt_CA; // それぞれの回答の数を数える用
+	PreparedStatement prepStmt_CF; // 自由記入の回答内容を取り出す用
     PreparedStatement prepStmt_I; // INSERT用
 
-    String strPrepSQL_S = "SELECT * FROM answer WHERE id = ? ORDER BY row, choicesNumber ASC";
-    String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?)";
+    String strPrepSQL_CR = "SELECT COUNT(DISTINCT respondentID) AS amount FROM answer WHERE questionID = ?";
+    String strPrepSQL_CA = "SELECT smallQuestionLine, answerNumber, COUNT(*) AS amount FROM answer "
+    						+ "WHERE questionID = ? GROUP BY smallQuestionLine, answernumber "
+    						+ "ORDER BY smallQuestionLine,answerNumber;";
+    String strPrepSQL_CF = "SELECT smallQuestionLine,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
+    String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
     ResultSet resultSet;
 
-    public AnswerBean getDatabase(AnswerBean bean){
+    public int countRespndent(AnswerBean bean){
+    	int amount = 0;
     	try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
-			prepStmt_S = connection.prepareStatement(strPrepSQL_S);
+			prepStmt_CR = connection.prepareStatement(strPrepSQL_CR);
 
-			prepStmt_S.setString(1, bean.getQuestionID());
+			prepStmt_CR.setString(1, bean.getQuestionID());
 
-			resultSet = prepStmt_S.executeQuery();
+			resultSet = prepStmt_CR.executeQuery();
 
 			if(resultSet != null){
 				while(resultSet.next()){
-					bean.setQuestionID(resultSet.getString("questionID"));
-					bean.setRespondentID(resultSet.getString("respondentID"));
-					bean.setTypeIsFree(resultSet.getBoolean("typeIsFree"));
-					bean.setAnswer(resultSet.getString("answer"));
+					amount = resultSet.getInt("amount");
 				}
 			}
 
@@ -48,7 +54,82 @@ public class AnswerDAO {
 			e.printStackTrace();
 		}
 
-    	return bean;
+    	return amount;
+    }
+
+    public ArrayList<AnswerContainer> countAnswer(AnswerBean bean, ArrayList<AnswerContainer> answersAmount){
+    	try {
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_CA = connection.prepareStatement(strPrepSQL_CA);
+
+			prepStmt_CA.setString(1, bean.getQuestionID());
+
+			resultSet = prepStmt_CA.executeQuery();
+
+			if(resultSet != null){
+				while(resultSet.next()){
+
+					for(int i=0; i<answersAmount.size(); i++){
+						//もし列と回答番号の一致するデータがあれば、そのデータを格納
+						if(answersAmount.get(i).getQuestionLine() == resultSet.getInt("smallQuestionLine")
+								&& answersAmount.get(i).getAnswerNumber() == resultSet.getInt("answerNumber")){
+
+							answersAmount.get(i).setAnswersAmount(resultSet.getInt("amount"));
+						}
+					}
+
+				}
+			}
+
+			resultSet.close();
+			connection.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+    	return answersAmount;
+    }
+
+    public ArrayList<ArrayList<String>> getFreeAnswers(AnswerBean bean){
+    	ArrayList<ArrayList<String>> linesFreeAnswers = new ArrayList<ArrayList<String>>();
+    	try {
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_CF = connection.prepareStatement(strPrepSQL_CF);
+
+			prepStmt_CF.setString(1, bean.getQuestionID());
+			prepStmt_CF.setInt(2, bean.getAnswerNumber());
+
+			resultSet = prepStmt_CF.executeQuery();
+
+			int linePointer = 0;
+			ArrayList<String> freeAnswers = new ArrayList<String>();
+			if(resultSet != null){
+				while(resultSet.next()){
+					if(linePointer == 0){
+						linePointer = resultSet.getInt("smallQuestionLine");
+					}
+					//回答の行が変化したら格納する配列番号を変える
+					if(linePointer != resultSet.getInt("smallQuestionLine")){
+						linesFreeAnswers.add(freeAnswers);
+						freeAnswers = new ArrayList<String>();
+					}
+					freeAnswers.add(resultSet.getString("freeAnswer"));
+				}
+				//resultSet.next()との関係上、最後の行の回答配列を入れる瞬間が無いため
+				linesFreeAnswers.add(freeAnswers);
+			}
+
+			resultSet.close();
+			connection.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+    	return linesFreeAnswers;
     }
 
     public void insertDatabase(AnswerBean bean){
@@ -59,8 +140,9 @@ public class AnswerDAO {
 		    prepStmt_I = connection.prepareStatement(strPrepSQL_I);
 		    prepStmt_I.setString(1, bean.getQuestionID());
 		    prepStmt_I.setString(2, bean.getRespondentID());
-		    prepStmt_I.setBoolean(3, bean.getTypeIsFree());
-		    prepStmt_I.setString(4, bean.getAnswer());
+		    prepStmt_I.setInt(3, bean.getSmallQuestionLine());
+		    prepStmt_I.setInt(4, bean.getAnswerNumber());
+		    prepStmt_I.setString(5, bean.getFreeAnswer());
 
 		    prepStmt_I.executeUpdate();
 

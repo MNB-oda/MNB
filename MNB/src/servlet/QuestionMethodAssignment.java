@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AnswerDAO;
 import dao.BigQuestionDAO;
 import dao.QuestionContentDAO;
 import dao.SmallQuestionDAO;
+import model.AnswerBean;
+import model.AnswerContainer;
 import model.BigQuestionBean;
 import model.QuestionContentBean;
 import model.SmallQuestionBean;
@@ -45,6 +48,10 @@ public class QuestionMethodAssignment extends HttpServlet {
 		QuestionContentDAO contentDAO  = new QuestionContentDAO();
 
 		BigQuestionBean bigBean = new BigQuestionBean();
+		SmallQuestionBean smallBean = new SmallQuestionBean();
+		QuestionContentBean contentBean = new QuestionContentBean();
+		ArrayList<SmallQuestionBean> smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
+		ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
 
 		//Questionそれぞれの要素に共通するID
 		String id = request.getParameter("ID");
@@ -67,20 +74,58 @@ public class QuestionMethodAssignment extends HttpServlet {
 			bigBean = bigDAO.getDatabaseById(bigBean);
 			request.setAttribute("bigBean", bigBean);
 
-			SmallQuestionBean smallBean = new SmallQuestionBean();
+			smallBean = new SmallQuestionBean();
 			smallBean.setId(id);
-			ArrayList<SmallQuestionBean> smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
+			smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
 			request.setAttribute("smallBeans", smallBeans);
 
-			QuestionContentBean contentBean = new QuestionContentBean();
+			contentBean = new QuestionContentBean();
 			contentBean.setId(id);
-			ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
+			contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
 			request.setAttribute("contentBeans", contentBeans);
 
 			nextJsp = "/answerQuestion.jsp";
 			break;
 
 		case "aggregate":
+			bigBean.setId(id);
+			bigBean = bigDAO.getDatabaseById(bigBean);
+			request.setAttribute("bigBean", bigBean);
+
+			smallBean = new SmallQuestionBean();
+			smallBean.setId(id);
+			smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
+			request.setAttribute("smallBeans", smallBeans);
+
+			contentBean = new QuestionContentBean();
+			contentBean.setId(id);
+			contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
+			request.setAttribute("contentBeans", contentBeans);
+
+			AnswerBean ansBean = new AnswerBean();
+			AnswerDAO ansDAO = new AnswerDAO();
+			ansBean.setQuestionID(id);
+
+			//回答者の人数を持ってくる
+			int respondentAmount = ansDAO.countRespndent(ansBean);
+			request.setAttribute("respondentAmount", respondentAmount);
+
+			//単体、複数選択のデータを持ってくる
+			//AnswerContainerは回答の行、回答番号、集計結果を格納しているクラス
+			//一度集計結果が0のデータを全行に対して作成し、それを引数としてDAOに投げ、更新して返す
+			ArrayList<AnswerContainer> answersAmount = new ArrayList<AnswerContainer>();
+			for(int i=0; i<contentBeans.size(); i++){
+				AnswerContainer add = new AnswerContainer(contentBeans.get(i).getRow(), contentBeans.get(i).getChoicesNumber(), 0);
+				answersAmount.add(add);
+			}
+			answersAmount = ansDAO.countAnswer(ansBean, answersAmount);
+			request.setAttribute("answersAmount", answersAmount);
+
+			//自由記入の部分のデータを別で持ってくる
+			ansBean.setAnswerNumber(0);
+			ArrayList<ArrayList<String>> allFreeAnswer = ansDAO.getFreeAnswers(ansBean);
+			request.setAttribute("allFreeAnswer", allFreeAnswer);
+
 			nextJsp = "/questionnaire_Aggregate.jsp";
 			break;
 

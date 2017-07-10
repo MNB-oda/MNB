@@ -43,6 +43,7 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		int writtenFree = 0;	//answerNumberに入れる自由記述用の番号
 
 		//データの追加
 		AnswerDAO ansDAO = new AnswerDAO();
@@ -52,25 +53,29 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 		int i = 0;
 		while(request.getParameter("q" + i) != null){
 			AnswerBean ansBean = new AnswerBean();
+			String answerNumber;
 
 			//回答の形式によって追加の方法を変化
 			switch(request.getParameter("q" + i + "type")){
 			case "radio":
 				ansBean.setQuestionID(request.getParameter("questionID"));
 				ansBean.setRespondentID(respondentID);
-				ansBean.setTypeIsFree(false);
-				ansBean.setAnswer(request.getParameter("q" + i));
+				ansBean.setSmallQuestionLine(i+1);
+				answerNumber = request.getParameter("q" + i);
+				ansBean.setAnswerNumber(Integer.valueOf(answerNumber));
+				ansBean.setFreeAnswer(null);
 				ansDAO.insertDatabase(ansBean);
 				break;
 
 			case "select":
-				String[] selectAnswers = request.getParameterValues("q" + i);
-
+				String[] selectAnswers = request.getParameterValues("q" + i);	//データが配列で渡されるので一度避難
 				for(int j=0; j<selectAnswers.length; j++){
 					ansBean.setQuestionID(request.getParameter("questionID"));
 					ansBean.setRespondentID(respondentID);
-					ansBean.setTypeIsFree(false);
-					ansBean.setAnswer(selectAnswers[j]);
+					ansBean.setSmallQuestionLine(i+1);
+					answerNumber = selectAnswers[j];
+					ansBean.setAnswerNumber(Integer.valueOf(answerNumber));
+					ansBean.setFreeAnswer(null);
 					ansDAO.insertDatabase(ansBean);
 					//一旦初期化
 					ansBean = new AnswerBean();
@@ -78,11 +83,14 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 				break;
 
 			case "free":
-				ansBean.setQuestionID(request.getParameter("questionID"));
-				ansBean.setRespondentID(respondentID);
-				ansBean.setTypeIsFree(true);
-				ansBean.setAnswer(request.getParameter("q" + i));
-				ansDAO.insertDatabase(ansBean);
+				if(!request.getParameter("q" + i).equals("")){
+					ansBean.setQuestionID(request.getParameter("questionID"));
+					ansBean.setRespondentID(respondentID);
+					ansBean.setSmallQuestionLine(i+1);
+					ansBean.setAnswerNumber(writtenFree);
+					ansBean.setFreeAnswer(request.getParameter("q" + i));
+					ansDAO.insertDatabase(ansBean);
+				}
 				break;
 
 			default:

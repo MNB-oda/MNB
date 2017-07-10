@@ -92,6 +92,9 @@ th {
 			//contentBeansのどこまで描画しているかの変数
 			int pointer = 0;
 
+			//回答の番号
+			int answerNumber;
+
 			//アンケート描画
 			for(int i=0; i<smallBeans.size(); i++){
 				out.println("<tr>");
@@ -103,27 +106,31 @@ th {
 
 				//単体選択（ラジオボタン）
 				case "単体":
+					answerNumber = 1;
 					for(int j=pointer; j<contentBeans.size(); j++){
 						//今描こうとしてる部分の列が現在書いてる列のものじゃなかったら、pointerを更新して描画終了
 						if(contentBeans.get(j).getRow() != i+1){
 							pointer = j;
 							break;
 						}
-						out.println("<input type=\"radio\" name=\"q" + i + "\" value=\""+ contentBeans.get(j).getContent() + "\" />" + contentBeans.get(j).getContent());
+						out.println("<input type=\"radio\" name=\"q" + i + "\" value=\""+ answerNumber + "\" />" + contentBeans.get(j).getContent());
 						out.println("<input type=\"hidden\" name=\"q"+ i + "type\" value=\"radio\">");
+						answerNumber++;
 					}
 					break;
 
 				//複数選択（セレクトボックス）
 				case "複数":
+					answerNumber = 1;
 					for(int j=pointer; j<contentBeans.size(); j++){
 						//上と同様
 						if(contentBeans.get(j).getRow() != i+1){
 							pointer = j;
 							break;
 						}
-						out.println("<input type=\"checkBox\" name=\"q" + i + "\" value=\""+ contentBeans.get(j).getContent() + "\" />" + contentBeans.get(j).getContent());
+						out.println("<input type=\"checkBox\" name=\"q" + i + "\" value=\""+ answerNumber + "\" />" + contentBeans.get(j).getContent());
 						out.println("<input type=\"hidden\" name=\"q"+ i +"type\" value=\"select\">");
+						answerNumber++;
 					}
 					break;
 

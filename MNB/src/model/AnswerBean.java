@@ -1,11 +1,11 @@
 package model;
 
-//誰がどういう回答したのかは必要でないので、複数選択の場合は複数のデータを作る
 public class AnswerBean {
 	private String questionID;
-	private String respondentID;
-	private Boolean typeIsFree;
-	private String answer;
+	private String respondentID;	//回答者のID
+	private int smallQuestionLine;
+	private int answerNumber;	//チェックボックスやラジオボタンでの回答を上から番号にしたもの
+	private String freeAnswer;
 
 	public String getQuestionID() {
 		return questionID;
@@ -19,16 +19,22 @@ public class AnswerBean {
 	public void setRespondentID(String respondentID) {
 		this.respondentID = respondentID;
 	}
-	public Boolean getTypeIsFree() {
-		return typeIsFree;
+	public int getSmallQuestionLine() {
+		return smallQuestionLine;
 	}
-	public void setTypeIsFree(Boolean typeIsFree) {
-		this.typeIsFree = typeIsFree;
+	public void setSmallQuestionLine(int smallQuestionRow) {
+		this.smallQuestionLine = smallQuestionRow;
 	}
-	public String getAnswer() {
-		return answer;
+	public int getAnswerNumber() {
+		return answerNumber;
 	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setAnswerNumber(int answerNumber) {
+		this.answerNumber = answerNumber;
+	}
+	public String getFreeAnswer() {
+		return freeAnswer;
+	}
+	public void setFreeAnswer(String freeAnswer) {
+		this.freeAnswer = freeAnswer;
 	}
 }
