@@ -144,7 +144,7 @@ td {
 	</table>
 
 		<p>
-			<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentAssignment?TYPE=update&ID= <%= id %>'" value="変更">
+			<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentAssignment?TYPE=update&ID=<%=id%>'" value="変更">
 		<p>
 
 </body>

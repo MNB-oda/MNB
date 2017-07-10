@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="model.CalendarBean"%>
 <%@ page import="model.ScheduleBean"%>
+<%@ page import="model.StudentBean"%>
 
 <%
+	StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
 	int year = (Integer) request.getAttribute("year");
 	int month = (Integer) request.getAttribute("month");
 	int pointedDay = (Integer) request.getAttribute("pointedDay");
@@ -197,7 +199,7 @@ td.sche a{
 	</Div>
 
 	<Div Align = right>
-		<a href="#"  onClick = "location.href = 'myPage.jsp'" class="square_btn">マイページ</a>
+		<a href="#"  onClick = "location.href = '/MNB/MyPageController?ID=<%=studentBean.getId()%>'" class="square_btn">マイページ</a>
 
 	</Div>
 
