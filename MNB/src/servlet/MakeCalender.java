@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.InformationDAO;
 import dao.ScheduleDAO;
 import model.CalendarBean;
+import model.InformationBean;
 import model.ScheduleBean;
 
 /**
@@ -74,12 +77,19 @@ public class MakeCalender extends HttpServlet {
 		ScheduleDAO dao = new ScheduleDAO();
 		beans = dao.getDatabaseYM(bean);
 
+		//お知らせ情報を表示するための処理
+		ArrayList<InformationBean> infoBeans = new ArrayList<InformationBean>();
+		InformationDAO infoDAO = new InformationDAO();
+		infoBeans = infoDAO.createInformationList();
+
 		//requestにデータ格納
 		request.setAttribute("year", calendarBean.getCalendarYear());
 		request.setAttribute("month", calendarBean.getCalendarMonth() + 1);
 		request.setAttribute("pointedDay", calendarBean.getPointedDay());
 		request.setAttribute("thisMonthLastDay", calendarBean.getThisMonthLastDay());
 		request.setAttribute("beans", beans);
+
+		request.setAttribute("infoList", infoBeans);
 
 		//home.jspへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");

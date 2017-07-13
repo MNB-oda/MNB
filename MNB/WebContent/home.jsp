@@ -3,10 +3,14 @@
 <%@ page import="model.CalendarBean"%>
 <%@ page import="model.ScheduleBean"%>
 <%@ page import="model.StudentBean"%>
+<%@ page import="model.InformationBean"%>
+<%@ page import="java.util.*"%>
 
 <%
 	//${sessionScope.studentBean.id}
 	StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
+	ArrayList<InformationBean> infoList = (ArrayList<InformationBean>)request.getAttribute("infoList");
+
 	int year = (Integer) request.getAttribute("year");
 	int month = (Integer) request.getAttribute("month");
 	int pointedDay = (Integer) request.getAttribute("pointedDay");
@@ -284,31 +288,20 @@ td.sche a{
 	<br>
 	<br>
 		<table class= "homeNewList">
-			<caption><a href = "newsList.jsp"><u>お知らせ</u></a></caption>
+			<caption><a href = "/MNB/InformationListController"><u>お知らせ</u></a></caption>
 
-			<tr>
-				<td>講習情報はありません</td>
-			</tr>
-
-			<tr>
-				<td>講習情報はありません</td>
-			</tr>
-
-			<tr>
-				<td>講習情報はありません</td>
-			</tr>
-
-			<tr>
-				<td>講習情報はありません</td>
-			</tr>
-
-			<tr>
-				<td>講習情報はありません</td>
-			</tr>
-
-			<tr>
-				<td>講習情報はありません</td>
-			</tr>
+<%
+	//最新のものから表示
+	for(int i = infoList.size() - 1; i >= 0; i--) {
+		out.println("<tr>");
+		//タイトルをクリックすると内容を表示
+		out.println("<td><a href = \"InformationAssignment?TYPE=display&ID=" + infoList.get(i).getId() +"\">"
+				+ infoList.get(i).getTitle() + "</a></td>");
+		out.println("</tr>");
+		//最新5件まで表示
+		if(i <= infoList.size() - 5) {break;}
+	}
+%>
 		</table>
 
 	<br>
