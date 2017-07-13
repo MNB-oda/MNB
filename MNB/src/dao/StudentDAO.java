@@ -26,7 +26,7 @@ public class StudentDAO {
 
     String strPrepSQL_SI = "SELECT * FROM student WHERE id = ?";
     String strPrepSQL_S = "SELECT * FROM student ORDER BY id ASC";
-    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String strPrepSQL_I = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, FALSE)";
     String strPrepSQL_U = "UPDATE student SET handle = ? , name = ? , "
     						+ "pass = ? , email = ?  , program = ? , cg2d = ? , cg3d = ? , music = ?  "
     						+ "WHERE id = ?";
@@ -53,6 +53,7 @@ public class StudentDAO {
             	bean.setIs2dcghan(resultSet.getBoolean("cg2d"));
             	bean.setIs3dcghan(resultSet.getBoolean("cg3d"));
             	bean.setIsMusichan(resultSet.getBoolean("music"));
+            	bean.setIsAdmin(resultSet.getBoolean("admin"));
             }
 
 			resultSet.close();

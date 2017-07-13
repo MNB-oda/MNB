@@ -78,7 +78,8 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		}
 
 		// sessionスコープをまっさらにする
-		session.invalidate();
+		//session.invalidate();
+		session.removeAttribute("type");
 
 		// endへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/end.jsp");

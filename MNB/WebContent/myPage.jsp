@@ -3,7 +3,6 @@
 <%@ page import="model.StudentBean"%>
 <%
 	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
-	//String handle = (String) request.getAttribute("handle");
 	String handle = studentBean.getHandle();
 	String name = studentBean.getName();
 	String id = studentBean.getId();
@@ -83,7 +82,11 @@ td {
 
 	<p>マイページ</p>
 	<Div Align = left>
-	<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentListController'" value="登録者管理">
+	<%//管理者の場合にボタンが押された場合が表示される
+	if(studentBean.isAdmin()){
+		out.println("<input type=\"submit\" name=\"CONFIRM\" onclick=\"location.href = '/MNB/StudentListController?admin="+ studentBean.isAdmin() +"'\" value=\"登録者管理\">");
+	}
+	%>
 	</Div>
 		<table class= "myPageTable">
 			<caption>登録者一覧</caption>

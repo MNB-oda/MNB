@@ -5,6 +5,7 @@
 <%@ page import="model.StudentBean"%>
 
 <%
+	//${sessionScope.studentBean.id}
 	StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
 	int year = (Integer) request.getAttribute("year");
 	int month = (Integer) request.getAttribute("month");
@@ -199,7 +200,7 @@ td.sche a{
 	</Div>
 
 	<Div Align = right>
-		<a href="#"  onClick = "location.href = '/MNB/MyPageController?ID=<%=studentBean.getId()%>'" class="square_btn">マイページ</a>
+		<a href="#"  onClick = "location.href = '/MNB/MyPageController?ID=<%=studentBean.getId() %>'" class="square_btn">マイページ</a>
 
 	</Div>
 

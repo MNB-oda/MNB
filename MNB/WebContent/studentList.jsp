@@ -84,19 +84,12 @@ th {
 			</tr>
 <%
 for(int i = 0; i < studentList.size() ; i++){
-	//String handle = studentList.get(i).getHandle();
 	String name =studentList.get(i).getName();
 	String id = studentList.get(i).getId();
-	//String pass = studentList.get(i).getPass();
-	//String email = studentList.get(i).getEmail();
-	//String group = studentList.get(i).getGroup();
 
     out.print("<tr>");
     out.print("<td>" + id + "</td>");
     out.print("<td>" + name + "</td>");
-
-    //out.println("<td class=\"sche\"><a href=\"/MNB/StudentController?ID=" + id + "&NAME=" + name + "\">変更</a></td>");
-    //out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = 'StudentController?ID=" + id + "&NAME=" + name+"'\" value=\"変更\"></td>");
     out.println("<td>");
     out.println("<input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = 'StudentAssignment?TYPE=update&ID=" + id +"'\" value=\"変更\">");
     out.println("<input type=\"submit\" name=\"DELETE\" onclick=\"location.href = 'StudentAssignment?TYPE=delete&ID=" + id +"'\" value=\"削除\">");

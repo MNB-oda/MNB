@@ -6,11 +6,11 @@ public class StudentBean {
 	private String id;
 	private String pass;
 	private String email;
-	//private boolean hasAdmi;
 	private boolean isProhan;
 	private boolean is2dcghan;
 	private boolean is3dcghan;
 	private boolean isMusichan;
+	private boolean isAdmin;
 
 	public String getHandle() {
 		return handle;
@@ -39,16 +39,14 @@ public class StudentBean {
 	public String getEmail() {
 		return email;
 	}
-	/*
-	public boolean hasAdmi() {
-		return hasAdmi;
-	}
-	public void setHasAdmi(boolean hasAdmi) {
-		this.hasAdmi = hasAdmi;
-	}
-	*/
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	public boolean isProhan() {
 		return isProhan;
