@@ -49,7 +49,7 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
+		StudentBean studentBean = (StudentBean) session.getAttribute("student");
 		StudentDAO dao;
 
 		// 追加、更新、削除のどれなのかを判断し、それぞれを実行
@@ -80,6 +80,7 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		// sessionスコープをまっさらにする
 		//session.invalidate();
 		session.removeAttribute("type");
+		session.removeAttribute("student");
 
 		// endへ飛ぶ
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/end.jsp");

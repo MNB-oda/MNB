@@ -49,7 +49,7 @@ public class StudentAssignment extends HttpServlet {
 		switch((String)request.getParameter("TYPE")){
 		case "add":
 			studentBean = studentdao.getDatabase(studentBean);
-			session.setAttribute("studentBean", studentBean);
+			session.setAttribute("student", studentBean);
 			nextJsp = "/mypageEdit.jsp";
 			session.setAttribute("type", "add");
 			break;
@@ -63,7 +63,7 @@ public class StudentAssignment extends HttpServlet {
 			session.setAttribute("id", studentBean.getId());
 			session.setAttribute("pass", studentBean.getPass());
 			session.setAttribute("email", studentBean.getEmail());
-			session.setAttribute("studentBean", studentBean);
+			session.setAttribute("student", studentBean);
 			nextJsp = "/mypageEdit.jsp";
 			session.setAttribute("type", "update");
 			break;
@@ -71,7 +71,7 @@ public class StudentAssignment extends HttpServlet {
 		case "delete":
 			studentBean.setId((String)request.getParameter("ID"));
 			studentBean = studentdao.getDatabase(studentBean);
-			session.setAttribute("studentBean", studentBean);
+			session.setAttribute("student", studentBean);
 			nextJsp = "/studentDeleteCheck.jsp";
 			session.setAttribute("type", "delete");
 			break;

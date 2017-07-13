@@ -3,7 +3,7 @@
 <%@ page import="model.StudentBean"%>
 <%
 	String type = (String) session.getAttribute("type");
-	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
+	StudentBean studentBean = (StudentBean) session.getAttribute("student");
 
 	String handle = "";
 	String name = "";
