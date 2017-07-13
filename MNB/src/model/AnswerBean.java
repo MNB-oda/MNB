@@ -3,7 +3,7 @@ package model;
 public class AnswerBean {
 	private String questionID;
 	private String respondentID;	//回答者のID
-	private int smallQuestionLine;
+	private int questionRow;
 	private int answerNumber;	//チェックボックスやラジオボタンでの回答を上から番号にしたもの
 	private String freeAnswer;
 
@@ -19,11 +19,11 @@ public class AnswerBean {
 	public void setRespondentID(String respondentID) {
 		this.respondentID = respondentID;
 	}
-	public int getSmallQuestionLine() {
-		return smallQuestionLine;
+	public int getSmallQuestionRow() {
+		return questionRow;
 	}
-	public void setSmallQuestionLine(int smallQuestionRow) {
-		this.smallQuestionLine = smallQuestionRow;
+	public void setSmallQuestionRow(int smallQuestionRow) {
+		this.questionRow = smallQuestionRow;
 	}
 	public int getAnswerNumber() {
 		return answerNumber;

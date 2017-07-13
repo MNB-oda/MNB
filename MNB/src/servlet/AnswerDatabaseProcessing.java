@@ -60,7 +60,7 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 			case "radio":
 				ansBean.setQuestionID(request.getParameter("questionID"));
 				ansBean.setRespondentID(respondentID);
-				ansBean.setSmallQuestionLine(i+1);
+				ansBean.setSmallQuestionRow(i+1);
 				answerNumber = request.getParameter("q" + i);
 				ansBean.setAnswerNumber(Integer.valueOf(answerNumber));
 				ansBean.setFreeAnswer(null);
@@ -72,7 +72,7 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 				for(int j=0; j<selectAnswers.length; j++){
 					ansBean.setQuestionID(request.getParameter("questionID"));
 					ansBean.setRespondentID(respondentID);
-					ansBean.setSmallQuestionLine(i+1);
+					ansBean.setSmallQuestionRow(i+1);
 					answerNumber = selectAnswers[j];
 					ansBean.setAnswerNumber(Integer.valueOf(answerNumber));
 					ansBean.setFreeAnswer(null);
@@ -86,7 +86,7 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 				if(!request.getParameter("q" + i).equals("")){
 					ansBean.setQuestionID(request.getParameter("questionID"));
 					ansBean.setRespondentID(respondentID);
-					ansBean.setSmallQuestionLine(i+1);
+					ansBean.setSmallQuestionRow(i+1);
 					ansBean.setAnswerNumber(writtenFree);
 					ansBean.setFreeAnswer(request.getParameter("q" + i));
 					ansDAO.insertDatabase(ansBean);

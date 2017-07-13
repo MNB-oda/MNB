@@ -140,7 +140,7 @@ public class AnswerDAO {
 		    prepStmt_I = connection.prepareStatement(strPrepSQL_I);
 		    prepStmt_I.setString(1, bean.getQuestionID());
 		    prepStmt_I.setString(2, bean.getRespondentID());
-		    prepStmt_I.setInt(3, bean.getSmallQuestionLine());
+		    prepStmt_I.setInt(3, bean.getSmallQuestionRow());
 		    prepStmt_I.setInt(4, bean.getAnswerNumber());
 		    prepStmt_I.setString(5, bean.getFreeAnswer());
 
