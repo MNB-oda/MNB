@@ -89,7 +89,7 @@ th {
 <body>
 
 	<div Align="right">
-		<input type="button" name="CLOSE" onclick="window.close()" value="閉じる">
+		<input type="button" name="CLOSE" onclick = history.back() value="戻る">
 	</div>
 	<br>
 

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="model.InformationBean"%>
+<%@ page import="model.StudentBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
+	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 	InformationBean bean = (InformationBean)session.getAttribute("bean");
 %>
 <html>
@@ -63,7 +65,8 @@ th {
 <body>
 
 		<p>
-<%
+<%//管理者の場合に表示される
+if(studentBean.isAdmin()){
 	out.println("<div align = \"center\">");
 	//更新ボタン
 	out.println("<input type=\"button\" name=\"UPDATE\" value=\"更新\""
@@ -72,6 +75,7 @@ th {
 	out.println("<input type=\"button\" name=\"DELETE\" value=\"削除\""
 			+ " onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + bean.getId() +"'\">");
 	out.println("</div>");
+}
 %>
 		<p>
 		<table class= "contents">

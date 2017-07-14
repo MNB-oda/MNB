@@ -80,7 +80,7 @@ th {
 </head>
 <body>
 	<div align = "right">
-	<input class = "button" type="button" name="CLOSE" value="閉じる">
+	<input class = "button" type="button" name="CLOSE" onclick = history.back() value="戻る">
 	</div>
 	<form method="post" action="./AnswerDatabaseProcessing">
 	<input type='hidden' name='questionID' value=<%= bigBean.getId() %>>

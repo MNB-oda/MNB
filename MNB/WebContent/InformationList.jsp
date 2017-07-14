@@ -1,8 +1,10 @@
 </html><%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="model.InformationBean"%>
+<%@ page import="model.StudentBean"%>
 <%@ page import="java.util.*"%>
 <%
+	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 	ArrayList<InformationBean> list = (ArrayList<InformationBean>)request.getAttribute("list");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -37,7 +39,7 @@ th {
 </head>
 <body>
 <div Align = "right">
-<input type="button" name="CLOSE" onclick="window.close()" value="閉じる" >
+<input type="button" name="CLOSE" onclick = history.back() value="戻る">
 </div>
 <br>
 <font size = "7"> *日程管理システム </font>
@@ -47,7 +49,11 @@ th {
 <br>
 	<p>
 	<div align = "center">
-		<input type="submit" name="ADD" onclick="location.href = 'InformationAssignment?TYPE=add'" value="追加">
+	<%
+	if(studentBean.isAdmin()){
+		out.println("<input type=\"submit\" name=\"ADD\" onclick=\"location.href = 'InformationAssignment?TYPE=add'\" value=\"追加\">");
+	}
+	%>
 	</div>
 	</p>
 	<table>
@@ -66,12 +72,14 @@ th {
 			//タイトルをクリックすると内容を表示
 			out.println("<td><a href = \"InformationAssignment?TYPE=display&ID=" + list.get(i).getId() +"\">"
 					+ list.get(i).getTitle() + "</a></td>");
-			//更新ボタン
-			out.println("<td align = \"center\"><input type=\"button\" name=\"UPDATE\" value=\"更新\" "
-					+ "onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + list.get(i).getId() +"'\"</td>");
-			//削除ボタン
-			out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" "
-					+ "onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + list.get(i).getId() +"'\"</td>");
+			if(studentBean.isAdmin()){
+				//更新ボタン
+				out.println("<td align = \"center\"><input type=\"button\" name=\"UPDATE\" value=\"更新\" "
+						+ "onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + list.get(i).getId() +"'\"</td>");
+				//削除ボタン
+				out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" "
+						+ "onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + list.get(i).getId() +"'\"</td>");
+			}
 			out.println("</tr>");
 		}
 	} else {

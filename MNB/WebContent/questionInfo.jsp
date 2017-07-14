@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="model.BigQuestionBean"%>
+<%@ page import="model.StudentBean"%>
 <%
 BigQuestionBean[] bigBean = (BigQuestionBean[])request.getAttribute("bigBeans");
 String type = (String)request.getAttribute("type");
+StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 %>
 
 <html>
@@ -37,11 +39,14 @@ th {
 </head>
 <body>
 <div Align = "right">
-<input type="button" name="CLOSE" onclick="window.close()" value="閉じる" >
+<input type="button" name="CLOSE" onclick = history.back() value="戻る">
 </div>
 <br>
-
-<input type="button" name="ADD" value="追加" onClick = "location.href = '/MNB/QuestionMethodAssignment?TYPE=add&QUESTIONTYPE=<%= type%>'">
+<%//管理者の場合に表示される
+	if(studentBean.isAdmin()){
+		out.println("<input type=\"button\" name=\"ADD\" value=\"追加\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=add&QUESTIONTYPE="+ type +"'\">");
+	}
+%>
 <br>
 
 <table class = "table">
@@ -70,8 +75,10 @@ th {
 				for(int i=0; i<bigBean.length; i++){
 					out.println("<tr>");
 					out.println("<td><a href = \"/MNB/QuestionMethodAssignment?TYPE=answer&ID=" + bigBean[i].getId() + "\">" + bigBean[i].getTitle() + "</a></td>");
+					if(studentBean.isAdmin()){
 					out.println("<td align = \"center\"><input type=\"button\" name=\"AGGREGATE\" value=\"集計\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=aggregate&ID=" + bigBean[i].getId() + "'\"></td>");
 					out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=delete&ID=" + bigBean[i].getId() + "'\"></td>");
+					}
 					out.println("</tr>");
 				}
 				%>

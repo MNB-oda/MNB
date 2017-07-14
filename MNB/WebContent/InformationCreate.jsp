@@ -56,7 +56,7 @@ td {
 <body>
 	<form action="InformationDatabaseProcessing" method="post">
 		<div Align = "right">
-			<input type="button" name="CLOSE" value="閉じる">
+			<input type="button" name="CLOSE" onclick = history.back() value="戻る">
 		</div>
 		<table class = information>
 		<%
