@@ -4,8 +4,6 @@
 <%@ page import="java.util.*"%>
 <%
 	ArrayList<InformationBean> list = (ArrayList<InformationBean>)request.getAttribute("list");
-	InformationBean bean = list.get(0);
-	request.setAttribute("bean", bean);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -62,18 +60,24 @@ th {
 
 <%
 	//最新のものから表示
-	for(int i = list.size() - 1; i >= 0; i--) {
-		out.println("<tr>");
-		//タイトルをクリックすると内容を表示
-		out.println("<td><a href = \"InformationAssignment?TYPE=display&ID=" + list.get(i).getId() +"\">"
-				+ list.get(i).getTitle() + "</a></td>");
-		//更新ボタン
-		out.println("<td align = \"center\"><input type=\"button\" name=\"UPDATE\" value=\"更新\" "
-				+ "onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + list.get(i).getId() +"'\"</td>");
-		//削除ボタン
-		out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" "
-				+ "onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + list.get(i).getId() +"'\"</td>");
-		out.println("</tr>");
+	if(list.size() > 0) {
+		for(int i = list.size() - 1; i >= 0; i--) {
+			out.println("<tr>");
+			//タイトルをクリックすると内容を表示
+			out.println("<td><a href = \"InformationAssignment?TYPE=display&ID=" + list.get(i).getId() +"\">"
+					+ list.get(i).getTitle() + "</a></td>");
+			//更新ボタン
+			out.println("<td align = \"center\"><input type=\"button\" name=\"UPDATE\" value=\"更新\" "
+					+ "onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + list.get(i).getId() +"'\"</td>");
+			//削除ボタン
+			out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" "
+					+ "onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + list.get(i).getId() +"'\"</td>");
+			out.println("</tr>");
+		}
+	} else {
+		out.println("<tr><td>");
+		out.println("お知らせはありません。");
+		out.println("</td></tr>");
 	}
 %>
 

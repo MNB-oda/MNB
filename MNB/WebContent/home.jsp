@@ -297,7 +297,8 @@ td.sche a{
 		%>
 
 <%
-	//最新のものから表示
+//最新のものから表示
+if(infoList.size() > 0) {
 	for(int i = infoList.size() - 1; i >= 0; i--) {
 		out.println("<tr>");
 		//タイトルをクリックすると内容を表示
@@ -307,6 +308,11 @@ td.sche a{
 		//最新5件まで表示
 		if(i <= infoList.size() - 5) {break;}
 	}
+} else {
+	out.println("<tr><td>");
+	out.println("お知らせはありません。");
+	out.println("</td></tr>");
+}
 %>
 		</table>
 
