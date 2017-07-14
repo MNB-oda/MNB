@@ -22,9 +22,9 @@ public class AnswerDAO {
     PreparedStatement prepStmt_I; // INSERT用
 
     String strPrepSQL_CR = "SELECT COUNT(DISTINCT respondentID) AS amount FROM answer WHERE questionID = ?";
-    String strPrepSQL_CA = "SELECT smallQuestionLine, answerNumber, COUNT(*) AS amount FROM answer "
-    						+ "WHERE questionID = ? GROUP BY smallQuestionLine, answernumber "
-    						+ "ORDER BY smallQuestionLine,answerNumber;";
+    String strPrepSQL_CA = "SELECT smallQuestionRow, answerNumber, COUNT(*) AS amount FROM answer "
+    						+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
+    						+ "ORDER BY smallQuestionRow,answerNumber;";
     String strPrepSQL_CF = "SELECT smallQuestionLine,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
     String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
@@ -72,7 +72,7 @@ public class AnswerDAO {
 
 					for(int i=0; i<answersAmount.size(); i++){
 						//もし列と回答番号の一致するデータがあれば、そのデータを格納
-						if(answersAmount.get(i).getQuestionLine() == resultSet.getInt("smallQuestionLine")
+						if(answersAmount.get(i).getQuestionLine() == resultSet.getInt("smallQuestionRow")
 								&& answersAmount.get(i).getAnswerNumber() == resultSet.getInt("answerNumber")){
 
 							answersAmount.get(i).setAnswersAmount(resultSet.getInt("amount"));
@@ -109,10 +109,10 @@ public class AnswerDAO {
 			if(resultSet != null){
 				while(resultSet.next()){
 					if(linePointer == 0){
-						linePointer = resultSet.getInt("smallQuestionLine");
+						linePointer = resultSet.getInt("smallQuestionRow");
 					}
 					//回答の行が変化したら格納する配列番号を変える
-					if(linePointer != resultSet.getInt("smallQuestionLine")){
+					if(linePointer != resultSet.getInt("smallQuestionRow")){
 						linesFreeAnswers.add(freeAnswers);
 						freeAnswers = new ArrayList<String>();
 					}
