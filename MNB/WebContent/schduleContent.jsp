@@ -2,7 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="model.ScheduleBean"%>
+<%@ page import="model.StudentBean"%>
 <%
+	StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 	int month = (Integer) request.getAttribute("month");
 	int day = (Integer) request.getAttribute("day");
 	String dayOfTheWeek = (String) request.getAttribute("dayOfTheWeek");
@@ -107,11 +109,13 @@ th {
 
 		<tr>
 			<%
-			if((boolean) request.getAttribute("exist")){
-				out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=update'\" value=\"更新\"></td>");
-				out.println("<td><input type=\"submit\" name=\"DELETE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=delete'\" value=\"削除\"></td>");
-			}else{
-				out.println("<td><input type=\"submit\" name=\"ADD\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=add'\" value=\"追加\" ></td>");
+			if(studentBean.isAdmin()){
+				if((boolean) request.getAttribute("exist")){
+					out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=update'\" value=\"更新\"></td>");
+					out.println("<td><input type=\"submit\" name=\"DELETE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=delete'\" value=\"削除\"></td>");
+				}else{
+					out.println("<td><input type=\"submit\" name=\"ADD\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=add'\" value=\"追加\" ></td>");
+				}
 			}
 			%>
 		</tr>

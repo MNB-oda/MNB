@@ -99,7 +99,8 @@ public class StudentDatabaseProcessing extends HttpServlet {
 		bean.setIsMusichan(Boolean.valueOf(request.getParameter("music")));
 	}
 	private void checkBoxCheck(StudentBean bean, HttpServletRequest request){
-		String han[] = request.getParameterValues("han");
+		String han[] = new String[4];
+		han = request.getParameterValues("han");
 		for (int i = 0; i < han.length; i++) {
 			if(Arrays.asList(han).contains("プログラム班")){bean.setIsProhan(true);}
 			if(Arrays.asList(han).contains("2DCG班")){bean.setIs2dcghan(true);}

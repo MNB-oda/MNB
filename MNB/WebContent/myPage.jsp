@@ -82,7 +82,7 @@ td {
 
 	<p>マイページ</p>
 	<Div Align = left>
-	<%//管理者の場合にボタンが押された場合が表示される
+	<%//管理者の場合に表示される
 	if(studentBean.isAdmin()){
 		out.println("<input type=\"submit\" name=\"CONFIRM\" onclick=\"location.href = '/MNB/StudentListController'\" value=\"登録者管理\">");
 	}

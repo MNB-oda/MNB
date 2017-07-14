@@ -2,8 +2,6 @@
 <%@ page import="model.StudentBean"%>
 <%@ page import="java.util.*"%>
 <%
-	//String id = (String) request.getAttribute("id");
-	request.setCharacterEncoding("UTF-8");
 	@SuppressWarnings("unchecked")
 	ArrayList<StudentBean> studentList = (ArrayList<StudentBean>)request.getAttribute("studentList");
 %>

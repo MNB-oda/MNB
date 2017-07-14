@@ -15,23 +15,19 @@
 	boolean is2dcg = false;
 	boolean is3dcg = false;
 	boolean ismusic = false;
-	switch (type) {
-	case "add":
-		break;
-	case "update":
-		handle = studentBean.getHandle();
-		name = studentBean.getName();
-		id = studentBean.getId();
-		pass = studentBean.getPass();
-		email = studentBean.getEmail();
-		isprogram = studentBean.isProhan();
-		is2dcg = studentBean.isIs2dcghan();
-		is3dcg = studentBean.isIs3dcghan();
-		ismusic = studentBean.isMusichan();
-		break;
-	default:
-		break;
-	}
+
+	//更新の画面なら現在のデータを表示
+		if(type == "update"){
+			handle = studentBean.getHandle();
+			name = studentBean.getName();
+			id = studentBean.getId();
+			pass = studentBean.getPass();
+			email = studentBean.getEmail();
+			isprogram = studentBean.isProhan();
+			is2dcg = studentBean.isIs2dcghan();
+			is3dcg = studentBean.isIs3dcghan();
+			ismusic = studentBean.isMusichan();
+		}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -91,7 +87,7 @@ td {
 }
 </style>
 </head>
-<body>
+<body>z
 	<form method="post" action="./StudentDatabaseProcessing">
 		<p>
 			<font size="5">ソフトウェア研究部</font>

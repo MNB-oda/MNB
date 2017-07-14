@@ -54,7 +54,8 @@ public class StudentLogin extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("login", result);
 		if (result) {
-			// ログインに成功している場合はmember.jspへ
+			// ログインに成功している場合はidからstudentBeanの残りの情報を取得しMakeCalenderへ
+			dao.getDatabase(studentBean);
 			session.setAttribute("studentBean", studentBean);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MakeCalender");
 			dispatcher.forward(request, response);

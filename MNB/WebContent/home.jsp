@@ -7,8 +7,8 @@
 <%@ page import="java.util.*"%>
 
 <%
-	//${sessionScope.studentBean.id}
 	StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
+	@SuppressWarnings("unchecked")
 	ArrayList<InformationBean> infoList = (ArrayList<InformationBean>)request.getAttribute("infoList");
 
 	int year = (Integer) request.getAttribute("year");
@@ -288,7 +288,13 @@ td.sche a{
 	<br>
 	<br>
 		<table class= "homeNewList">
-			<caption><a href = "/MNB/InformationListController"><u>お知らせ</u></a></caption>
+		<%
+		if(studentBean.isAdmin()){
+		out.println("<caption><a href = \"/MNB/InformationListController\"><u>お知らせ</u></a></caption>");
+		}else{
+		out.println("<caption><a><u>お知らせ</u></a></caption>");
+		}
+		%>
 
 <%
 	//最新のものから表示
