@@ -31,53 +31,52 @@ public class InformationDAO {
 	private String strPrepSQL_D = "DELETE FROM information WHERE id = ?";
 	private String strPrepSQL_C = "SELECT COUNT(*) AS cnt FROM information WHERE id LIKE ?";
 
-	public InformationDAO(){
+	public InformationDAO() {
 	}
 
 	//
-	public ArrayList<InformationBean> createInformationList(){
+	public ArrayList<InformationBean> createInformationList() {
 		ArrayList<InformationBean> list = new ArrayList<InformationBean>();
-		try{
+		try {
 			Class.forName(driverClassName);
-            connection = DriverManager.getConnection(url, user, password);
-            prepStmt_L = connection.prepareStatement(strPrepSQL_L);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_L = connection.prepareStatement(strPrepSQL_L);
 
-            resultSet = prepStmt_L.executeQuery();
+			resultSet = prepStmt_L.executeQuery();
 
-            while (resultSet.next()) {
-            	InformationBean bean = new InformationBean();
+			while (resultSet.next()) {
+				InformationBean bean = new InformationBean();
 				bean.setId(resultSet.getString("id"));
 				bean.setTitle(resultSet.getString("title"));
 				bean.setContent(resultSet.getString("content"));
-                list.add(bean);
-            }
+				list.add(bean);
+			}
 
 			resultSet.close();
 			connection.close();
 
 			return list;
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	//データベースから指定IDのデータを持ってくる
+	// データベースから指定IDのデータを持ってくる
 	public InformationBean getDatabase(InformationBean bean) {
 		// データベース処理
 		try {
 			Class.forName(driverClassName);
-            connection = DriverManager.getConnection(url, user, password);
-            prepStmt_S = connection.prepareStatement(strPrepSQL_S);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_S = connection.prepareStatement(strPrepSQL_S);
 
-            prepStmt_S.setString(1, bean.getId());
+			prepStmt_S.setString(1, bean.getId());
 
-            resultSet = prepStmt_S.executeQuery();
-
+			resultSet = prepStmt_S.executeQuery();
 
 			if (resultSet != null) {
-				while(resultSet.next()){
+				while (resultSet.next()) {
 					bean.setId(resultSet.getString("id"));
 					bean.setTitle(resultSet.getString("title"));
 					bean.setContent(resultSet.getString("content"));
@@ -93,75 +92,76 @@ public class InformationDAO {
 		return bean;
 	}
 
-	//指定データをデータベースに挿入
-	public void insertDatabase(InformationBean bean){
+	// 指定データをデータベースに挿入
+	public void insertDatabase(InformationBean bean) {
 		try {
-		    Class.forName(driverClassName);
-		    connection = DriverManager.getConnection(url, user, password);
-            prepStmt_I = connection.prepareStatement(strPrepSQL_I);
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_I = connection.prepareStatement(strPrepSQL_I);
 
-            prepStmt_I.setString(1, bean.getId());
-            prepStmt_I.setString(2, bean.getTitle());
-            prepStmt_I.setString(3, bean.getContent());
+			prepStmt_I.setString(1, bean.getId());
+			prepStmt_I.setString(2, bean.getTitle());
+			prepStmt_I.setString(3, bean.getContent());
 
-		    prepStmt_I.executeUpdate();
+			prepStmt_I.executeUpdate();
 
 			connection.close();
 
 		} catch (Exception e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
-	//指定データで同じIDのデータを更新
-	public void updateDatabase(InformationBean bean){
+	// 指定データで同じIDのデータを更新
+	public void updateDatabase(InformationBean bean) {
 		try {
-		    Class.forName(driverClassName);
-		    connection = DriverManager.getConnection(url, user, password);
-            prepStmt_U = connection.prepareStatement(strPrepSQL_U);
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_U = connection.prepareStatement(strPrepSQL_U);
 
-            prepStmt_U.setString(1, bean.getTitle());
-            prepStmt_U.setString(2, bean.getContent());
-            prepStmt_U.setString(3, bean.getId());
-            prepStmt_U.executeUpdate();
+			prepStmt_U.setString(1, bean.getTitle());
+			prepStmt_U.setString(2, bean.getContent());
+			prepStmt_U.setString(3, bean.getId());
+			prepStmt_U.executeUpdate();
 
 			connection.close();
 
 		} catch (Exception e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
-	//指定IDのデータを削除
-	public void deleteDatabase(InformationBean bean){
+	// 指定IDのデータを削除
+	public void deleteDatabase(InformationBean bean) {
 		try {
-		    Class.forName(driverClassName);
-		    connection = DriverManager.getConnection(url, user, password);
-            prepStmt_D = connection.prepareStatement(strPrepSQL_D);
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_D = connection.prepareStatement(strPrepSQL_D);
 
-            prepStmt_D.setString(1, bean.getId());
-            prepStmt_D.executeUpdate();
+			prepStmt_D.setString(1, bean.getId());
+			prepStmt_D.executeUpdate();
 
 			connection.close();
 
 		} catch (Exception e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
-	//指定IDのデータがデータベース内に存在するか
-	public boolean checkExist(InformationBean bean){
+	// 指定IDのデータがデータベース内に存在するか
+	public boolean checkExist(InformationBean bean) {
 		boolean result = false;
 		try {
 			Class.forName(driverClassName);
-            connection = DriverManager.getConnection(url, user, password);
-            prepStmt_S = connection.prepareStatement(strPrepSQL_S);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_S = connection.prepareStatement(strPrepSQL_S);
 
-            prepStmt_S.setString(1, bean.getId());
+			prepStmt_S.setString(1, bean.getId());
 
-            resultSet = prepStmt_S.executeQuery();
+			resultSet = prepStmt_S.executeQuery();
 
-			if (resultSet.next()) result = true;
+			if (resultSet.next())
+				result = true;
 
 			resultSet.close();
 			connection.close();
@@ -172,28 +172,28 @@ public class InformationDAO {
 		return result;
 	}
 
-	//データベースから指定IDのデータを持ってくる
+	// データベースから指定IDのデータを持ってくる
 	public String getNewId(String str) {
 		// データベース処理
 		try {
 			Class.forName(driverClassName);
-            connection = DriverManager.getConnection(url, user, password);
-            prepStmt_C = connection.prepareStatement(strPrepSQL_C);
-    		DecimalFormat dformat = new DecimalFormat("00");
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_C = connection.prepareStatement(strPrepSQL_C);
+			DecimalFormat dformat = new DecimalFormat("00");
 
-    		for(int i = 0; i < 100; i++) {
-    			prepStmt_C.setString(1, str + dformat.format(i));
+			for (int i = 0; i < 100; i++) {
+				prepStmt_C.setString(1, str + dformat.format(i));
 
-            	resultSet = prepStmt_C.executeQuery();
+				resultSet = prepStmt_C.executeQuery();
 
 				if (resultSet != null) {
 					resultSet.next();
-					if(resultSet.getInt("cnt") == 0) {
+					if (resultSet.getInt("cnt") == 0) {
 						str = str + dformat.format(i);
 						break;
 					}
 				}
-    		}
+			}
 			resultSet.close();
 			connection.close();
 
