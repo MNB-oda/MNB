@@ -135,7 +135,19 @@ th {
 				for(int k=0; k<allFreeAnswer.get(freeAnswersPointer).size(); k++){
 					out.println("<tr>");
 					out.println("<td>回答" + (k+1) + "</td>");
-					out.println("<td>"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
+
+					StringBuilder sb = new StringBuilder();
+					sb.append("<td>"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
+					while(true) {
+						int l = sb.indexOf("\r");
+						if(l == -1) {break;}
+						else {
+							sb.replace(l, l+1, "<br>");
+						}
+					}
+					out.println(sb);
+
+					//out.println("<td>"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
 					out.println("</tr>");
 				}
 				freeAnswersPointer++;

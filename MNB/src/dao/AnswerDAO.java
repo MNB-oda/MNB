@@ -25,7 +25,7 @@ public class AnswerDAO {
     String strPrepSQL_CA = "SELECT smallQuestionRow, answerNumber, COUNT(*) AS amount FROM answer "
     						+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
     						+ "ORDER BY smallQuestionRow,answerNumber;";
-    String strPrepSQL_CF = "SELECT smallQuestionLine,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
+    String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
     String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
     ResultSet resultSet;
