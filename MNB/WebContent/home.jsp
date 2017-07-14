@@ -288,14 +288,7 @@ td.sche a{
 	<br>
 	<br>
 		<table class= "homeNewList">
-		<%
-		if(studentBean.isAdmin()){
-		out.println("<caption><a href = \"/MNB/InformationListController\"><u>お知らせ</u></a></caption>");
-		}else{
-		out.println("<caption><a><u>お知らせ</u></a></caption>");
-		}
-		%>
-
+		<caption><a href = "/MNB/InformationListController"><u>お知らせ</u></a></caption>
 <%
 //最新のものから表示
 if(infoList.size() > 0) {

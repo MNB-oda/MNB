@@ -87,7 +87,7 @@ td {
 }
 </style>
 </head>
-<body>z
+<body>
 	<form method="post" action="./StudentDatabaseProcessing">
 		<p>
 			<font size="5">ソフトウェア研究部</font>
