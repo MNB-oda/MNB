@@ -73,7 +73,7 @@ th {
 </head>
 <body>
 	<div align = "right">
-	<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
+	<input type="button" name="CLOSE" onclick = history.back() value="戻る">
 	</div>
 		<input type="submit" name="ADD" onclick="location.href = 'StudentAssignment?TYPE=add'" value="追加">
 		<table class="contents">

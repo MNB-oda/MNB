@@ -89,7 +89,7 @@ td {
 	%>
 	</Div>
 		<table class= "myPageTable">
-			<caption>登録者一覧</caption>
+			<caption>登録情報一覧</caption>
 
 			<tr>
 				<td>ハンドルネーム</td>
