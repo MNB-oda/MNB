@@ -136,6 +136,7 @@ th {
 					out.println("<tr>");
 					out.println("<td>回答" + (k+1) + "</td>");
 
+					//改行の表示処理
 					StringBuilder sb = new StringBuilder();
 					sb.append("<td>"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
 					while(true) {

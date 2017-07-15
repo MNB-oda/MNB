@@ -167,16 +167,37 @@ th {
 
 			<tr>
 				<td>関係者連絡先</td>
-				<td><%= contact%>
-				</td>
+				<%
+				//改行の表示処理
+				StringBuilder sb = new StringBuilder();
+				sb.append("<td>"+ contact + "</td>");
+				while(true) {
+					int l = sb.indexOf("\r");
+					if(l == -1) {break;}
+					else {
+						sb.replace(l, l+1, "<br>");
+					}
+				}
+				out.println(sb);
+				%>
 			</tr>
 
 			<tr>
 				<td>講習概要</td>
-				<td><%= content%>
-				</td>
-			</tr>
-
+				<%
+				//改行の表示処理
+				sb = new StringBuilder();
+				sb.append("<td>"+ content + "</td>");
+				while(true) {
+					int l = sb.indexOf("\r");
+					if(l == -1) {break;}
+					else {
+						sb.replace(l, l+1, "<br>");
+					}
+				}
+				out.println(sb);
+				%>
+				</tr>
 		</table>
 </body>
 </html>
