@@ -358,8 +358,13 @@ body {
 								out.println("</td></tr>");
 							}
 						%>
-					</table>
 
+					</table>
+					<br>
+					<br>
+					<br>
+					</div>
+					</div>
 					<div id=nav>
 						<div class="SCQ">
 							<a href="#"
