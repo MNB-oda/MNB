@@ -64,6 +64,9 @@ th {
 </head>
 <body>
 
+<div Align = "right">
+<input type="button" name="CLOSE" onclick = history.back() value="戻る">
+</div>
 		<p>
 <%//管理者の場合に表示される
 if(studentBean.isAdmin()){

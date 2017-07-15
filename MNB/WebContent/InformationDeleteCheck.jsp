@@ -25,10 +25,10 @@ div {
 </head>
 <body>
 	<form action="./InformationDatabaseProcessing" method = "post">
+<div Align = "right">
+<input type="button" name="CLOSE" onclick = history.back() value="戻る">
+</div>
 		<caption>
-			<div>
-				<input type="button" name="CLOSE" onClick = window.close() value="閉じる">
-			</div>
 			削除
 		</caption>
 
