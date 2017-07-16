@@ -35,6 +35,7 @@ th {
 
 
 .newsList td {
+	width: 95%;
 	text-align: left;
 	padding-right: 20px;
 	padding-left: 10px;
@@ -63,29 +64,117 @@ th {
 	background-color: #d7e2f4;
 }
 
+a.square_btn_add{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+a.square_btn_add:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
+
+
+a.square_btn_update_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0bda51 0%, #6bbf3f 100%);
+	transition: .4s;
+}
+a.square_btn_update_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #47ea7e 0%, #10c98d 100%);
+}
+
+
+
+a.square_btn_back{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+a.square_btn_del_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_del_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
+
+
 
 </style>
 </head>
 <body>
+
 <div Align = "right">
-<input type="button" name="CLOSE" onclick = history.back() value="戻る">
+<a  onclick = history.back()   class="square_btn_back">戻る</a>
 </div>
-<br>
 <font size = "7"> *日程管理システム </font>
-<br>
 <font size = "2"> 東京電機大学　ソフトウェア研究部 </font>
+<br>
+<br>
+
 <br>
 <br>
 	<p>
 	<div align = "center">
 	<%
 	if(studentBean.isAdmin()){
-		out.println("<input type=\"submit\" name=\"ADD\" onclick=\"location.href = 'InformationAssignment?TYPE=add'\" value=\"追加\">");
+		out.println("<td align = \"center\"> <a  onClick=\"location.href ='InformationAssignment?TYPE=add' \"class=\"square_btn_add\"> 追加</a></td>");
 	}
 	%>
-	</div>
 
-		<table class="newsList">
+	</div>
+	<br>
+	<table class="newsList">
 
 
 		<caption>お知らせ一覧</caption>
@@ -100,11 +189,9 @@ th {
 						+ list.get(i).getTitle() + "</a></td>");
 				if(studentBean.isAdmin()){
 					//更新ボタン
-					out.println("<td align = \"center\"><input type=\"button\" name=\"UPDATE\" value=\"更新\" "
-							+ "onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + list.get(i).getId() +"'\"</td>");
+					 out.println("<td align = \"center\"> <a  onClick=\"location.href ='InformationAssignment?TYPE=update&ID=" + list.get(i).getId() +"' \"class=\"square_btn_update_list\"> 更新</td>");
 					//削除ボタン
-					out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" "
-							+ "onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + list.get(i).getId() +"'\"</td>");
+					 out.println("<td align = \"center\"> <a  onClick=\"location.href ='InformationAssignment?TYPE=delete&ID=" + list.get(i).getId() +"' \"class=\"square_btn_del_list\"> 削除</td>");
 				}
 				out.println("</tr>");
 			}

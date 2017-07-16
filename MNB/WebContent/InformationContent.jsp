@@ -67,6 +67,64 @@ th {
 	width: 100%;
 }
 
+a.square_btn_back{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
+a.square_btn_update{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0bda51 0%, #6bbf3f 100%);
+	transition: .4s;
+}
+a.square_btn_update:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #47ea7e 0%, #10c98d 100%);
+}
+
+
+a.square_btn_del{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_del:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
 
 
 </style>
@@ -75,18 +133,22 @@ th {
 <body>
 
 <div Align = "right">
-<input type="button" name="CLOSE" onclick = history.back() value="戻る">
+<a  onclick = history.back()   class="square_btn_back">戻る</a>
 </div>
+<br>
+<br>
 		<p>
 <%//管理者の場合に表示される
 if(studentBean.isAdmin()){
 	out.println("<div align = \"center\">");
 	//更新ボタン
-	out.println("<input type=\"button\" name=\"UPDATE\" value=\"更新\""
-			+ " onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + bean.getId() +"'\">");
+	out.println("<td align = \"center\"> <a  onClick=\"location.href ='InformationAssignment?TYPE=update&ID=" + bean.getId() +"'\"class=\"square_btn_update\"> 更新</a></td>");
+	//out.println("<input type=\"button\" name=\"UPDATE\" value=\"更新\""+ " onClick = \"location.href = 'InformationAssignment?TYPE=update&ID=" + bean.getId() +"'\">");
 	//削除ボタン
-	out.println("<input type=\"button\" name=\"DELETE\" value=\"削除\""
-			+ " onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + bean.getId() +"'\">");
+
+	out.println("<td align = \"center\"> <a  onClick=\"location.href ='InformationAssignment?TYPE=delete&ID=" + bean.getId() +"'\"class=\"square_btn_del\"> 削除</a></td>");
+
+	//out.println("<input type=\"button\" name=\"DELETE\" value=\"削除\""+ " onClick = \"location.href = 'InformationAssignment?TYPE=delete&ID=" + bean.getId() +"'\">");
 	out.println("</div>");
 }
 %>
