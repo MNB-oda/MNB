@@ -53,6 +53,16 @@ th {
 	background-color: #d7e2f4;
 }
 
+.contents caption{
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+
 .widthMax {
 	width: 100%;
 }
@@ -83,11 +93,9 @@ if(studentBean.isAdmin()){
 		<p>
 		<table class= "contents">
 			<tr>
-				<td style="background:#5a9bd5">
 					<%
-					out.println(bean.getTitle());
+					out.println("<caption>" +bean.getTitle()+ "</caption>");
 					%>
-				</td>
 			</tr>
 
 			<tr>

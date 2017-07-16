@@ -95,6 +95,16 @@ div {
 .contents tr:nth-child(odd) td ,th{
 	background-color: #d7e2f4;
 }
+.contents caption{
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+
 
 .widthMax {
 	width: 100%;
@@ -107,20 +117,19 @@ div {
 <body>
 	<form method="post" action="./DatabaseProcessing">
 		<table class= "contents">
-		<caption><div><input type="button" name="CLOSE" onClick = window.close() value="閉じる"></div>
+		<div><input type="button" name="CLOSE" onClick = window.close() value="閉じる"></div>
 		<%
 		switch(type){
 		case "add":
-			out.println("追加");
+			out.println("<caption>追加</caption>");
 			break;
 		case "update":
-			out.println("更新");
+			out.println("<caption>更新</caption>");
 			break;
 		default :
 			break;
 		}
 		%>
-		</caption>
 
 			<tr>
 				<td>ID</td>
