@@ -329,25 +329,25 @@ body {
 											if (str1.equals(han))
 												out.println("<td class=\"sche\" bgcolor= #ee87b4><a href=\"/MNB/AccsessContents?YEAR="
 														+ year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">"
-														+ beans[beansPointer].getTitle() + "</a></td>");
+														+ beans[beansPointer].getHan() + "<br>"+ beans[beansPointer].getPlace() + "</a></td>");
 											else if (str2.equals(han))
 												out.println("<td class=\"sche\" bgcolor= #7fff00><a href=\"/MNB/AccsessContents?YEAR="
 														+ year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">"
-														+ beans[beansPointer].getTitle() + "</a></td>");
+														+ beans[beansPointer].getHan() + "<br>"+ beans[beansPointer].getPlace() + "</a></td>");
 											else if (str3.equals(han))
 												out.println("<td class=\"sche\" bgcolor= #00a0e9 ><a href=\"/MNB/AccsessContents?YEAR="
 														+ year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">"
-														+ beans[beansPointer].getHan() + "<br>" + beans[beansPointer].getTitle()
+														+ beans[beansPointer].getHan() + "<br>" + beans[beansPointer].getPlace()
 														+ "</a></td>");
 											else if (str4.equals(han))
 												out.println("<td class=\"sche\" bgcolor= #f2e55c><a href=\"/MNB/AccsessContents?YEAR="
 														+ year + "&MONTH=" + month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">"
-														+ beans[beansPointer].getTitle() + "</a></td>");
+														+ beans[beansPointer].getHan() + "<br>" + beans[beansPointer].getPlace() + "</a></td>");
 											/*例外：どの班にも所属してなかったら*/
 											else
 												out.println("<td class=\"sche\"><a href=\"/MNB/AccsessContents?YEAR=" + year + "&MONTH="
 														+ month + "&DAY=" + pointer + "&DAYOFTHEWEEK=" + i + "\">"
-														+ beans[beansPointer].getTitle() + "</a></td>");
+														+ beans[beansPointer].getPlace() + "</a></td>");
 											beansPointer++;
 										} else {
 											//データが無ければリンクを作るだけ
