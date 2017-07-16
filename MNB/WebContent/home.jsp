@@ -75,6 +75,11 @@ body {
 	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
 	transition: .4s;
 }
+#header a.square_btn_mypage:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
 
 #main {
 	float: right;
@@ -206,6 +211,10 @@ body {
 	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
 	transition: .4s;
 }
+#nav a.square_btn:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
 
 #nav a.square_btn2 {
 	width: 250px;
@@ -220,6 +229,11 @@ body {
 	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
 	transition: .4s;
 }
+#nav a.square_btn2:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
 
 #nav a.square_btn3 {
 	width: 250px;
@@ -234,6 +248,12 @@ body {
 	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
 	transition: .4s;
 }
+#nav a.square_btn3:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
+
 </style>
 <body>
 
