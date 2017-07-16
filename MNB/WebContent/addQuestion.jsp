@@ -41,11 +41,15 @@ td {
 	background-color: #eaeff7;
 }
 
-.question tr:first-child td {
-	background-color: #0099f2;
-	color: #ffffff;
-}
 
+.title caption{
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 .widthMax {
 	width: 90%;
 }
@@ -264,8 +268,15 @@ td {
 
 		<form method="post" action ="./QuestionDatabaseProcessing" name = "question">
 		<input type='hidden' name='methodType' value="add">
+		<table class = title>
+
+		<caption>集計</caption>
+		</table>
+
 		<table class = question>
+
 		<tbody id = tablebody>
+
 			<tr>
 				<td>タイトル</td>
 				<td> <input type="text" name="TITLE" value="" maxlength="100" class="widthMax"></td>

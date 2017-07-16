@@ -27,11 +27,12 @@ body {
 .table1 {
 	font-size: 20px;
 	border: 2px solid #ffffff;
-	width: 80%;
+	width: 95%;
 }
 
 .table1 tr:nth-child(even) td {
 	background-color: #eaeff7;
+		width: 10%;
 }
 
 .table1 tr:nth-child(even) th {
@@ -45,14 +46,7 @@ body {
 .table1 tr:nth-child(odd) th {
 	background-color: #d7e2f4;
 }
-
-.answerTable {
-	font-size: 20px;
-	border: 5px solid #ffffff;
-	width: 90%;
-}
-
-.answerTable caption {
+.table1 caption{
 	border: 1px solid #ffffff;
 	background-color: #0099f4;
 	padding-right: 10px;
@@ -61,21 +55,44 @@ body {
 	padding-bottom: 10px;
 }
 
+
+.answerTable {
+	font-size: 20px;
+	border: 2px solid #ffffff;
+	width: 80%;
+}
+
+.answerTable caption {
+	border: 1px solid #ffffff;
+	background-color: #00B9f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
 .answerTable tr:nth-child(even) td {
 	background-color: #eaeff7;
+		width: 80%;
 }
 
 .answerTable tr:nth-child(even) th {
 	background-color: #eaeff7;
+		width: 80%;
 }
 
 .answerTable tr:nth-child(odd) td {
 	background-color: #d7e2f4;
+		width: 90%;
 }
 
 .answerTable tr:nth-child(odd) th {
 	background-color: #d7e2f4;
+		width: 90%;
 }
+
+
+
 td {
 	border: 1px solid #000000;
 }
@@ -94,6 +111,9 @@ th {
 	<br>
 
 	<table class="table1" align="center">
+		<tr>
+			<caption>アンケート集計</caption>
+		</tr>
 		<tr>
 			<td>タイトル</td>
 			<th><%= bigBean.getTitle() %></th>

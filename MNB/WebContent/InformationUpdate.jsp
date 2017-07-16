@@ -39,10 +39,16 @@ td {
 	background-color: #eaeff7;
 }
 
-.information tr:first-child td {
-	background-color: #0099f2;
-	color: #ffffff;
+
+.information caption{
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
+
 
 .widthMax {
 	width: 90%;
@@ -62,6 +68,9 @@ td {
 </div>
 		<table class = information>
 		<%
+			out.println("<tr>");
+			out.println("<caption>お知らせ更新</caption>");
+			out.println("</tr>");
 			out.println("<tr>");
 			out.println("<td>タイトル</td>");
 			out.println("<td><input"

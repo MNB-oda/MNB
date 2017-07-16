@@ -121,10 +121,10 @@ div {
 		<%
 		switch(type){
 		case "add":
-			out.println("<caption>追加</caption>");
+			out.println("<caption>講習追加</caption>");
 			break;
 		case "update":
-			out.println("<caption>更新</caption>");
+			out.println("<caption>講習更新</caption>");
 			break;
 		default :
 			break;
