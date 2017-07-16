@@ -63,36 +63,16 @@ td {
 
 
 
-a.square_btn_add{
-	width: 150px;
-	font-size: 100%;
-	text-align: center;
-	display: inline-block;
-	padding: 0.7em 1.5em;
-	text-decoration: none;
-	border-radius: 10px;
-	font-weight: bold;
-	color: #000;
-	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
-	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
-	transition: .4s;
-}
-a.square_btn_add:hover{
-    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
-    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
-}
-
-
 a.square_btn_decide{
 	width: 150px;
-	font-size: 100%;
+	font-size: 150%;
 	text-align: center;
 	display: inline-block;
 	padding: 0.7em 1.5em;
 	text-decoration: none;
 	border-radius: 10px;
 	font-weight: bold;
-	color: #000;
+	color: #fff;
 	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
 	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
 	transition: .4s;
@@ -121,7 +101,7 @@ a.square_btn_back:hover{
     background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
 }
 
-a.square_btn_del{
+input.square_btn_del{
 	width: 150px;
 	font-size: 100%;
 	text-align: center;
@@ -135,11 +115,29 @@ a.square_btn_del{
 	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
 	transition: .4s;
 }
-a.square_btn_del:hover{
+input.square_btn_del:hover{
     background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
     background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
 }
 
+input.square_btn_add{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+input.square_btn_add:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
 
 
 
@@ -356,7 +354,7 @@ a.square_btn_del:hover{
 </div>
 <br>
 <br>
-		<form method="post" action ="./QuestionDatabaseProcessing" name = "question">
+		<form  name = "question" method="post" action ="./QuestionDatabaseProcessing">
 		<input type='hidden' name='methodType' value="add">
 		<table class = title>
 
@@ -401,14 +399,18 @@ a.square_btn_del:hover{
 		</table>
 
 		<p>
-			<input type="button" name="ADD" value="追加" onClick = "add();">
+
+
+			<input class ="square_btn_add" type="button" name="ADD" value="追加" onClick = "add();">
 
 		<p>
 		<p>
-			<input type="button" name="DELETE" value="削除" id = deleteRow onClick = "delRow();" disabled = "true" >
+			<input  class="square_btn_del" type="button" name="DELETE" value="削除" id = deleteRow onClick = "delRow();" disabled = "true" >
 		<p>
 		<p>
-			<input type="submit" name="CONFIRM" value="確定">
+		<br>
+			<a href="javascript:document.question.submit()" class="square_btn_decide">確定</a>
+			<input type=hidden name="CONFIRM" value="確定">
 		<p>
 
 		</form>

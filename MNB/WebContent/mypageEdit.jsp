@@ -112,6 +112,7 @@ a.square_btn_decide:hover{
 </style>
 </head>
 <body>
+			<form name = "formA" method="post" action="./StudentDatabaseProcessing">
 		<p>
 			<font size="5">ソフトウェア研究部</font>
 		</p>
@@ -203,15 +204,8 @@ a.square_btn_decide:hover{
 		</table>
 
 		<p>
-			<input type="submit" name="CONFIRM" value="確定">
-
-			<form name = "formA" method="post" action="./StudentDatabaseProcessing">
-			<a href="javascript:document.formA.submit()">ログイン</a>
+			<a href="javascript:document.formA.submit()" class="square_btn_decide">確定</a>
 			<input type=hidden name="CONFIRM" value="確定">
-
-			<a  onClick="location.href ='./StudentDatabaseProcessing'" class="square_btn_devide">てすと</a>
-
-			<a type="submit"   class="square_btn_decide">確定</a>
 		<p>
 	</form>
 </body>
