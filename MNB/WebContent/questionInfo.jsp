@@ -39,6 +39,7 @@ th {
 	text-align: left;
 	padding-right: 20px;
 	padding-left: 10px;
+	width: 90%;
 }
 
 .table th {
@@ -65,20 +66,105 @@ th {
 	font-size: 100%;
 }
 
+a.square_btn_add{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+a.square_btn_add:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+
+}
+
+a.square_btn_back{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+a.square_btn_update_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0bda51 0%, #6bbf3f 100%);
+	transition: .4s;
+}
+a.square_btn_update_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #47ea7e 0%, #10c98d 100%);
+}
+
+
+
+a.square_btn_del_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_del_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
+
 
 
 </style>
 </head>
 <body>
 <div Align = "right">
-<input type="button" name="CLOSE" onclick = history.back() value="戻る">
+<a  onclick = history.back()   class="square_btn_back">戻る</a>
+
 </div>
 <br>
 <%//管理者の場合に表示される
 	if(studentBean.isAdmin()){
-		out.println("<input type=\"button\" name=\"ADD\" value=\"追加\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=add&QUESTIONTYPE="+ type +"'\">");
+		out.println(" <a  onClick=\"location.href = '/MNB/QuestionMethodAssignment?TYPE=add&QUESTIONTYPE="+ type + "'\" class=\"square_btn_add\">追加</a>");
 	}
 %>
+<br>
+<br>
 <br>
 
 
@@ -102,8 +188,8 @@ th {
 					out.println("<tr>");
 					out.println("<td><a href = \"/MNB/QuestionMethodAssignment?TYPE=answer&ID=" + bigBean[i].getId() + "\">" + bigBean[i].getTitle() + "</a></td>");
 					if(studentBean.isAdmin()){
-					out.println("<td align = \"center\"><input type=\"button\" name=\"AGGREGATE\" value=\"集計\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=aggregate&ID=" + bigBean[i].getId() + "'\"></td>");
-					out.println("<td align = \"center\"><input type=\"button\" name=\"DELETE\" value=\"削除\" onClick = \"location.href = '/MNB/QuestionMethodAssignment?TYPE=delete&ID=" + bigBean[i].getId() + "'\"></td>");
+					out.println("<td align = \"center\"> <a  onClick=\"location.href ='/MNB/QuestionMethodAssignment?TYPE=aggregate&ID=" + bigBean[i].getId() + "'\"class=\"square_btn_update_list\"> 集計</td>");
+					out.println("<td align = \"center\"> <a  onClick=\"location.href ='/MNB/QuestionMethodAssignment?TYPE=delete&ID=" + bigBean[i].getId() + "'\"class=\"square_btn_del_list\"> 削除</td>");
 					}
 					out.println("</tr>");
 				}

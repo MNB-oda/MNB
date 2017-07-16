@@ -100,7 +100,7 @@ a.square_btn_decide{
 	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
 	transition: .4s;
 }
-a.square_btn_add:hover{
+a.square_btn_decide:hover{
     background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
     background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
 }
