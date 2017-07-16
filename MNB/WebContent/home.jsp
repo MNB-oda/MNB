@@ -267,7 +267,7 @@ body {
 					<img src="../MNB/titlelogo2-1.png" alt="タイトル" width="1200"
 						height="200">
 				</h1>
-				<a href="#" onClick="location.href = 'myPage.jsp'"
+				<a href="#" onClick="location.href = '/MNB/MyPageController?ID=<%=studentBean.getId() %>'"
 					class="square_btn_mypage">マイページ</a>
 			</div>
 		</div>
