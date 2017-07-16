@@ -95,13 +95,102 @@ th {
 	background-color: #0099f2;
 	color: #ffffff;
 }
+
+
+a.square_btn_add_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+a.square_btn_add_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
+
+a.square_btn_update_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0bda51 0%, #6bbf3f 100%);
+	transition: .4s;
+}
+a.square_btn_update_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #47ea7e 0%, #10c98d 100%);
+}
+
+
+
+a.square_btn_del_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_del_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
+a.square_btn_back{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
 </style>
 
 </head>
 <body>
 
-	<input type="button" name="CLOSE" onClick = history.back() value="戻る">
-
+<div Align = "right">
+<a  onclick = history.back()   class="square_btn_back">戻る</a>
+</div>
+<br>
+<br>
 	<table class="button">
 		<tr>
 			<td colspan="3"><%=month %>月<%=day %>日（<%=dayOfTheWeek %>）</td>
@@ -111,10 +200,11 @@ th {
 			<%
 			if(studentBean.isAdmin()){
 				if((boolean) request.getAttribute("exist")){
-					out.println("<td><input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=update'\" value=\"更新\"></td>");
-					out.println("<td><input type=\"submit\" name=\"DELETE\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=delete'\" value=\"削除\"></td>");
+					out.println("<td align = \"center\"> <a  onClick=\"location.href ='/MNB/ScheduleAssignment?TYPE=update'\"class=\"square_btn_update_list\"> 更新</td>");
+					out.println("<td align = \"center\"> <a  onClick=\"location.href ='/MNB/ScheduleAssignment?TYPE=delete'\"class=\"square_btn_del_list\"> 削除</td>");
 				}else{
-					out.println("<td><input type=\"submit\" name=\"ADD\" onclick=\"location.href = '/MNB/ScheduleAssignment?TYPE=add'\" value=\"追加\" ></td>");
+					out.println("<td align = \"center\"> <a  onClick=\"location.href ='/MNB/ScheduleAssignment?TYPE=add'\"class=\"square_btn_add_list\"> 追加</td>");
+					//out.println("<td><a onClick=\"location.href = '/MNB/ScheduleAssignment?TYPE=add'\" class=\"square_btn_add_list\">追加</td>");
 				}
 			}
 			%>
