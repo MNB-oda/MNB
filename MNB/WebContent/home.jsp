@@ -270,6 +270,8 @@ body {
 							<td class="week">SAT</td>
 						</tr>
 						<%
+							int beansPointer = 0;
+
 							//日付部分
 							while (pointedDay <= thisMonthLastDay) {
 								out.println("<tr>");
@@ -290,7 +292,6 @@ body {
 								out.println("<tr>");
 
 								//情報部分
-								int beansPointer = 0;
 								for (int i = 0; i < 7; i++) {
 									//描画対象の月以外の部分はリンクを作らない
 									if (pointer < 1 || pointer > thisMonthLastDay) {
