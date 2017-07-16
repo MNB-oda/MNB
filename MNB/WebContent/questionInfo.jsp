@@ -35,6 +35,38 @@ th {
   text-align: left;
 }
 
+.table td {
+	text-align: left;
+	padding-right: 20px;
+	padding-left: 10px;
+}
+
+.table th {
+	text-align: left;
+	padding-right: 20px;
+}
+
+.table tr:nth-child(even) td, th {
+	background-color: #d7e2f4;
+}
+
+.table tr:nth-child(odd) td, th {
+	background-color: #eaeff7;
+}
+
+
+.table caption {
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 100%;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -49,28 +81,22 @@ th {
 %>
 <br>
 
-<table class = "table">
-			<tr>
-				<th>
-				<%
-				switch(type){
-				case "講習アンケート":
-					out.println("講習アンケート一覧");
-					break;
-				case "イベントアンケート":
-					out.println("イベントアンケート一覧");
-					break;
-				default :
-					break;
-				}
-				%>
-				</th>
-			</tr>
-			</table>
 
 			<div style="overflow-y:scroll;">
 		<table class = "table">
 				<%
+
+				switch(type){
+				case "講習アンケート":
+					out.println("<caption> 講習アンケート一覧 </caption>");
+					break;
+				case "イベントアンケート":
+					out.println("<caption> イベントアンケート一覧 </caption>");
+					break;
+				default :
+					break;
+				}
+
 				//アンケートタイトルの表示
 				for(int i=0; i<bigBean.length; i++){
 					out.println("<tr>");

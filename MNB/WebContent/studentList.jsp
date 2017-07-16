@@ -19,18 +19,18 @@ body {
 }
 
 table {
-	border: 2px solid #ffffff;
+	border: 1px solid #ffffff;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 td {
-	border: 1px solid #ffffff;
+
 }
 
 th {
-	border: 1px solid #ffffff;
+
 }
 
 .button {
@@ -65,10 +65,18 @@ th {
 	background-color: #eaeff7;
 }
 
-.contents tr:first-child td {
-	background-color: #0099f2;
-	color: #ffffff;
+
+
+.contents caption{
+	border: 1px solid #ffffff;
+	background-color: #0099f4;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
+
+
 </style>
 </head>
 <body>
@@ -78,7 +86,7 @@ th {
 		<input type="submit" name="ADD" onclick="location.href = 'StudentAssignment?TYPE=add'" value="追加">
 		<table class="contents">
 			<tr>
-				<td colspan="3">登録者一覧</td>
+				<caption>登録者一覧</caption>
 			</tr>
 <%
 for(int i = 0; i < studentList.size() ; i++){
