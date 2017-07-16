@@ -138,6 +138,12 @@ body {
 	font-size: 100%;
 }
 
+#main td.sche a{
+	display: block;
+	width: 100%;
+	height: 100%
+}
+
 #main holiday {
 	background-color: #95c9ff;
 	text-align: center;
