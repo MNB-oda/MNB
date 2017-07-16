@@ -162,8 +162,9 @@ body {
 }
 
 #main table.homeNewsList {
+	margin:
 	border: 1px solid #000;
-	width: 125%;
+	width: 140%;
 }
 
 #main table.homeNewList caption {
@@ -359,8 +360,9 @@ body {
 						%>
 					</table>
 
+					</div>
 
-					<br> <br> <br>
+					<div class="NewsList">
 					<table class="homeNewList">
 						<caption>
 							<a href="/MNB/InformationListController"><u>お知らせ</u></a>
