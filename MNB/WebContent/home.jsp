@@ -96,6 +96,7 @@ body {
 	width: 140%;
 	font-size: 200%;
 	text-align: center;
+
 }
 
 #main  p.month {
@@ -108,7 +109,7 @@ body {
 }
 
 #main table.calendermain {
-	border: 1px solid #000;
+	border: 3px solid #000;
 	width: 140%;
 	height: 100%;
 	border-collapse: collapse;
@@ -163,12 +164,12 @@ body {
 
 #main table.homeNewsList {
 	margin:
-	border: 1px solid #000;
 	width: 140%;
+
 }
 
 #main table.homeNewList caption {
-	/*border: 1px solid #ffffff;*/
+
 	background-color: #0099f4;
 	padding-right: 20px;
 	padding-left: 10px;
@@ -195,6 +196,7 @@ body {
 }
 
 #nav {
+
 	width: 300px;
 	margin: 0 50px 0 -70px;
 }
@@ -373,10 +375,13 @@ body {
 								for (int i = infoList.size() - 1; i >= 0; i--) {
 									out.println("<tr>");
 									//タイトルをクリックすると内容を表示
-									out.println("<td><a href = \"InformationAssignment?TYPE=display&ID=" + infoList.get(i).getId()
-											+ "\">" + infoList.get(i).getTitle() + "</a></td>");
+									out.println("<td>");
+									out.println("<a href = \"InformationAssignment?TYPE=display&ID="+ infoList.get(i).getId()
+											+ "\">" + infoList.get(i).getTitle()+ "</a>");
+									out.println("</td>");
 									out.println("</tr>");
-									//最新5件まで表示
+
+									//最新5件まで表示されたらループ脱出
 									if (i <= infoList.size() - 5) {
 										break;
 									}

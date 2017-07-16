@@ -72,6 +72,44 @@ td {
 }
 
 
+a.square_btn_studentList{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+a.square_btn_studentList:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
+a.square_btn_update{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0bda51 0%, #6bbf3f 100%);
+	transition: .4s;
+}
+a.square_btn_update:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #47ea7e 0%, #10c98d 100%);
+}
+
 
 </style>
 
@@ -84,7 +122,10 @@ td {
 	<Div Align = left>
 	<%//管理者の場合に表示される
 	if(studentBean.isAdmin()){
-		out.println("<input type=\"submit\" name=\"CONFIRM\" onclick=\"location.href = '/MNB/StudentListController'\" value=\"登録者管理\">");
+		out.println(" <a  onClick=\"location.href = '/MNB/StudentListController'\" class=\"square_btn_studentList\">登録者一覧</a>");
+
+		//out.println("<input type=\"submit\" name=\"CONFIRM\" onclick=\"location.href = '/MNB/StudentListController'\" value=\"登録者管理\">");
+
 	}
 	%>
 	</Div>
@@ -147,7 +188,7 @@ td {
 	</table>
 
 		<p>
-			<input type="submit" name="CONFIRM" onclick="location.href = '/MNB/StudentAssignment?TYPE=update&ID=<%=id%>'" value="変更">
+		<a  onClick="location.href = '/MNB/StudentAssignment?TYPE=update&ID=<%=id%>'" class="square_btn_update">変更</a>
 		<p>
 
 </body>
