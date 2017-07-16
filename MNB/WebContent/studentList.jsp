@@ -50,6 +50,7 @@ th {
 	text-align: left;
 	padding-right: 20px;
 	padding-left: 10px;
+	width: 50%;
 }
 
 .contents th {
@@ -76,14 +77,101 @@ th {
 	padding-bottom: 10px;
 }
 
+a.square_btn_back{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+a.square_btn_add{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+a.square_btn_add:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
+
+
+
+a.square_btn_update_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0bda51 0%, #6bbf3f 100%);
+	transition: .4s;
+}
+a.square_btn_update_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #47ea7e 0%, #10c98d 100%);
+}
+
+
+
+a.square_btn_del_list{
+	width: 50px;
+	height:20px;
+	font-size: 80%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #000;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_del_list:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
+
 
 </style>
 </head>
-<body>
-	<div align = "right">
-	<input type="button" name="CLOSE" onclick = history.back() value="戻る">
-	</div>
-		<input type="submit" name="ADD" onclick="location.href = 'StudentAssignment?TYPE=add'" value="追加">
+<div Align = "right">
+	<a  onclick = history.back()   class="square_btn_back">戻る</a>
+
+</div>
+<div Align = "left">
+		<a  onClick="location.href = 'StudentAssignment?TYPE=add'" class="square_btn_add">追加</a>
+</div>
+	<br>
+	<br>
 		<table class="contents">
 			<tr>
 				<caption>登録者一覧</caption>
@@ -96,10 +184,10 @@ for(int i = 0; i < studentList.size() ; i++){
     out.print("<tr>");
     out.print("<td>" + id + "</td>");
     out.print("<td>" + name + "</td>");
-    out.println("<td>");
-    out.println("<input type=\"submit\" name=\"UPDATE\" onclick=\"location.href = 'StudentAssignment?TYPE=update&ID=" + id +"'\" value=\"変更\">");
-    out.println("<input type=\"submit\" name=\"DELETE\" onclick=\"location.href = 'StudentAssignment?TYPE=delete&ID=" + id +"'\" value=\"削除\">");
-    out.println("</td>");
+
+    out.println("<td align = \"center\"> <a  onClick=\"location.href ='StudentAssignment?TYPE=update&ID=" + id +"'\"class=\"square_btn_update_list\"> 変更</td>");
+	out.println("<td align = \"center\"> <a  onClick=\"location.href ='StudentAssignment?TYPE=delete&ID=" + id +"'\"class=\"square_btn_del_list\"> 削除</td>");
+
     out.println("</tr>");
 }
 %>

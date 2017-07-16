@@ -111,13 +111,35 @@ a.square_btn_update:hover{
 }
 
 
+a.square_btn_back{
+	width: 150px;
+	font-size: 100%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
+
 </style>
 
 </head>
 <body>
 	<p><font size ="5">ソフトウェア研究部</font></p>
 
-
+<div Align = "right">
+<a  onclick = history.back()   class="square_btn_back">戻る</a>
+</div>
 	<p>マイページ</p>
 	<Div Align = left>
 	<%//管理者の場合に表示される
