@@ -100,15 +100,38 @@ td {
 th {
 	border: 1px solid #000000;
 }
+
+
+
+a.square_btn_back{
+	width: 150px;
+	font-size: 150%;
+	text-align: center;
+	display: inline-block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+	border-radius: 10px;
+	font-weight: bold;
+	color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #ff1d00 0%, #e5001e 100%);
+	transition: .4s;
+}
+a.square_btn_back:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #ff657a 50%, #e790b5 100%);
+}
+
 </style>
 </head>
 
 <body>
 
-	<div Align="right">
-		<input type="button" name="CLOSE" onclick = history.back() value="戻る">
-	</div>
-	<br>
+		<div Align = "right">
+		<a  onclick = history.back()   class="square_btn_back">戻る</a>
+		</div>
+		<br>
+		<br>
 
 	<table class="table1" align="center">
 		<tr>

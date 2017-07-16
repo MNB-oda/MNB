@@ -196,6 +196,10 @@ a.square_btn_del_list:hover{
 				%>
 		</table>
 	</div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

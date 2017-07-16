@@ -37,6 +37,10 @@ td {
 	text-align: left;
 }
 
+p {
+	font-size: 230%;
+}
+
 .myPageTable td {
 	text-align: left;
 	padding-right: 20px;
@@ -135,12 +139,11 @@ a.square_btn_back:hover{
 
 </head>
 <body>
-	<p><font size ="5">ソフトウェア研究部</font></p>
-
 <div Align = "right">
 <a  onclick = history.back()   class="square_btn_back">戻る</a>
 </div>
 	<p>マイページ</p>
+
 	<Div Align = left>
 	<%//管理者の場合に表示される
 	if(studentBean.isAdmin()){

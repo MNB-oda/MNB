@@ -157,11 +157,7 @@ a.square_btn_del_list:hover{
 <div Align = "right">
 <a  onclick = history.back()   class="square_btn_back">戻る</a>
 </div>
-<font size = "7"> *日程管理システム </font>
-<font size = "2"> 東京電機大学　ソフトウェア研究部 </font>
 <br>
-<br>
-
 <br>
 <br>
 	<p>

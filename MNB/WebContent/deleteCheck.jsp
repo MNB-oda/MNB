@@ -24,7 +24,6 @@ div {
 
 p	{
 	font-size: 150%;
-
 }
 
 a.square_btn_back{
