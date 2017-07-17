@@ -14,7 +14,7 @@
 <title>お知らせ一覧</title>
 <style>
 body {
-	background-color: #ceecff;
+	/*background-color: #ceecff;*/
 }
 table {
 	font-size: 20px;

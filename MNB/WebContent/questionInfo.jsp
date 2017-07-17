@@ -15,7 +15,7 @@ StudentBean studentBean = (StudentBean) session.getAttribute("studentBean");
 <title>講習会アンケート編集</title>
 <style>
 body {
-	background-color: #ceecff;
+	/* background-color: #ceecff; */
 }
 
 table {

@@ -21,7 +21,7 @@ ArrayList<ArrayList<String>> allFreeAnswer = (ArrayList<ArrayList<String>>)reque
 <title>＊日程管理システム・アンケート集計</title>
 <style>
 body {
-	background-color: #ceecff;
+	/* background-color: #ceecff; */
 }
 
 .table1 {

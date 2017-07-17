@@ -7,7 +7,7 @@
 <title>ログアウト</title>
 <style>
 body {
-	background-color: #ceecff;
+
 	text-align: center;
 }
 

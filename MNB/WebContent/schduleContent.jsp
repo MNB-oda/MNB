@@ -41,7 +41,7 @@
 <title>講習情報</title>
 <style>
 body {
-	background-color: #ceecff;
+	/* background-color: #ceecff; */
 }
 
 table {

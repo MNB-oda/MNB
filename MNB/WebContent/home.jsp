@@ -94,6 +94,10 @@ body {
     background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
     background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
 }
+#header a.square_btn_logout:hover{
+    background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+    background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+}
 
 
 #main {

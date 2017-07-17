@@ -14,7 +14,7 @@
 <!--  <link rel="stylesheet" type="text/css" href="main.css"> -->
 <style>
 body {
-	background-color: #ceecff;
+
 	text-align: center;
 }
 

@@ -7,7 +7,7 @@
 <title>回答済み</title>
 <style>
 body {
-	background-color: #ceecff;
+
 }
 .button {
 	text-align: right;

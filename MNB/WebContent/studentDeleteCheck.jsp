@@ -12,7 +12,6 @@
 <title>削除確認</title>
 <style>
 body {
-	background-color: #ceecff;
 	text-align: center;
 }
 
