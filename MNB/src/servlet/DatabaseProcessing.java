@@ -81,6 +81,7 @@ public class DatabaseProcessing extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	//beanにデータを入れるためのメソッド
 	private void setParameter(ScheduleBean bean, HttpServletRequest request){
 		bean.setHan((String)request.getParameter("HAN"));
 		bean.setNumber(Integer.valueOf(request.getParameter("NUMBER")));

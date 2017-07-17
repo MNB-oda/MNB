@@ -55,14 +55,18 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 		StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
 		String respondentID = studentBean.getId();
 
+		//回答者IDをbeanにset
 		ansBean.setRespondentID(respondentID);
 
+		//回答のデータベース管理
 		int i = 0;
 		while(request.getParameter("q" + i) != null){
 			String answerNumber;
 
 			//回答の形式によって追加の方法を変化
 			switch(request.getParameter("q" + i + "type")){
+
+			//ラジオボタン(単体選択)の場合
 			case "radio":
 				ansBean.setQuestionID(request.getParameter("questionID"));
 				ansBean.setSmallQuestionRow(i+1);
@@ -72,6 +76,7 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 				ansDAO.insertDatabase(ansBean);
 				break;
 
+			//セレクトボックス(複数選択)の場合
 			case "select":
 				String[] selectAnswers = request.getParameterValues("q" + i);	//データが配列で渡されるので一度避難
 				for(int j=0; j<selectAnswers.length; j++){
@@ -86,6 +91,7 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 				}
 				break;
 
+			//自由記入の場合
 			case "free":
 				if(!request.getParameter("q" + i).equals("")){
 					ansBean.setQuestionID(request.getParameter("questionID"));

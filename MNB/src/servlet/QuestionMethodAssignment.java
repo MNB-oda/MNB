@@ -67,12 +67,14 @@ public class QuestionMethodAssignment extends HttpServlet {
 		//typeによって次のjspを判断及びデータの処理
 		switch((String)request.getParameter("TYPE")){
 
+		//アンケートの追加
 		case "add":
 			//アンケートのタイプを投げる
 			request.setAttribute("questionType", request.getParameter("QUESTIONTYPE"));
 			nextJsp = "/addQuestion.jsp";
 			break;
 
+		//アンケートの回答
 		case "answer":
 			StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
 
@@ -102,6 +104,7 @@ public class QuestionMethodAssignment extends HttpServlet {
 			}
 			break;
 
+		//回答の集計
 		case "aggregate":
 			bigBean.setId(id);
 			bigBean = bigDAO.getDatabaseById(bigBean);
@@ -142,6 +145,7 @@ public class QuestionMethodAssignment extends HttpServlet {
 			nextJsp = "/questionnaire_Aggregate.jsp";
 			break;
 
+		//アンケートの削除
 		case "delete":
 			bigBean.setId(id);
 			bigBean = bigDAO.getDatabaseById(bigBean);

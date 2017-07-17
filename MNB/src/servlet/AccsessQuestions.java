@@ -35,6 +35,7 @@ public class AccsessQuestions extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		//アンケートの種類を取得
 		String type = null;
 		switch((String)request.getParameter("TYPE")){
 		case "kosyu":
@@ -55,6 +56,7 @@ public class AccsessQuestions extends HttpServlet {
 		BigQuestionBean[] bigBeans = (BigQuestionBean[])bigDAO.getDatabase(bigBean).toArray(new BigQuestionBean[0]);
 
 		request.setAttribute("bigBeans", bigBeans);
+
 
 		//アンケートの種類を格納
 		request.setAttribute("type", type);
