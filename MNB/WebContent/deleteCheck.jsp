@@ -14,7 +14,7 @@
 
 <style>
 body {
-	background-color: #ceecff;
+
 	text-align: center;
 }
 

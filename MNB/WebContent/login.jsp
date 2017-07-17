@@ -7,7 +7,6 @@
 <title>SRCES-login-</title>
 <style>
 body{
-	background
 	font:21px;
 }
 .notice{

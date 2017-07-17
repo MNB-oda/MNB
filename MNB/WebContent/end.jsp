@@ -7,7 +7,7 @@
 <title>完了</title>
 <style>
 body {
-	background-color: #ceecff;
+	/* background-color: #ceecff; */
 }
 .button {
 	text-align: right;

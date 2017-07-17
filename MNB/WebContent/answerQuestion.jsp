@@ -21,7 +21,7 @@ ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)re
 %>
 <style>
 body {
-	background-color: #ceecff;
+
 	text-align: center;
 }
 
