@@ -26,20 +26,21 @@ public class AnswerDAO {
     String strPrepSQL_CA = "SELECT smallQuestionRow, answerNumber, COUNT(*) AS amount FROM answer "
     						+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
     						+ "ORDER BY smallQuestionRow,answerNumber;";
-    String strPrepSQL_CHECK = "SELECT * FROM answer WHERE respondentID = ?";
+    String strPrepSQL_CHECK = "SELECT * FROM answer WHERE questionID = ? AND respondentID = ?";
     String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
     String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
     ResultSet resultSet;
 
-    public boolean checkAlreadyAnswered(String respondentID){
+    public boolean checkAlreadyAnswered(AnswerBean ansBean){
     	boolean result = false;
     	try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
 			prepStmt_CHECK = connection.prepareStatement(strPrepSQL_CHECK);
 
-			prepStmt_CHECK.setString(1, respondentID);
+			prepStmt_CHECK.setString(1, ansBean.getQuestionID());
+			prepStmt_CHECK.setString(2, ansBean.getRespondentID());
 
 			resultSet = prepStmt_CHECK.executeQuery();
 

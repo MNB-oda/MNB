@@ -55,6 +55,7 @@ public class QuestionMethodAssignment extends HttpServlet {
 		ArrayList<SmallQuestionBean> smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
 		ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
 
+		AnswerBean ansBean = new AnswerBean();
 		AnswerDAO ansDAO = new AnswerDAO();
 
 		//Questionそれぞれの要素に共通するID
@@ -75,8 +76,10 @@ public class QuestionMethodAssignment extends HttpServlet {
 		case "answer":
 			StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
 
-			//もし既に同じIDの人が回答していたら、別のページに飛ばす
-			if(ansDAO.checkAlreadyAnswered(studentBean.getId())){
+			//もし既に回答していたら、別のページに飛ばす
+			ansBean.setQuestionID(id);
+			ansBean.setRespondentID(studentBean.getId());
+			if(ansDAO.checkAlreadyAnswered(ansBean)){
 				nextJsp = "/alreadyAnswered.jsp";
 
 			}else{
@@ -114,7 +117,6 @@ public class QuestionMethodAssignment extends HttpServlet {
 			contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
 			request.setAttribute("contentBeans", contentBeans);
 
-			AnswerBean ansBean = new AnswerBean();
 			ansBean.setQuestionID(id);
 
 			//回答者の人数を持ってくる
