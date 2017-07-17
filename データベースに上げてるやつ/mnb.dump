@@ -1,0 +1,291 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'SJIS';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: answer; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE answer (
+    questionid text,
+    respondentid text,
+    smallquestionrow integer,
+    answernumber integer,
+    freeanswer text
+);
+
+
+ALTER TABLE answer OWNER TO wspuser;
+
+--
+-- Name: bigquestion; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE bigquestion (
+    id text NOT NULL,
+    title text,
+    type text
+);
+
+
+ALTER TABLE bigquestion OWNER TO wspuser;
+
+--
+-- Name: information; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE information (
+    id text NOT NULL,
+    title text,
+    content text
+);
+
+
+ALTER TABLE information OWNER TO wspuser;
+
+--
+-- Name: questioncontent; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE questioncontent (
+    id text,
+    "row" integer,
+    choicesnumber integer,
+    content text
+);
+
+
+ALTER TABLE questioncontent OWNER TO wspuser;
+
+--
+-- Name: schedule; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE schedule (
+    id text NOT NULL,
+    han text,
+    number integer,
+    title text,
+    year integer,
+    month integer,
+    day integer,
+    place text,
+    belongings text,
+    subjects text,
+    contact text,
+    content text
+);
+
+
+ALTER TABLE schedule OWNER TO wspuser;
+
+--
+-- Name: smallquestion; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE smallquestion (
+    id text,
+    title text,
+    questiontype text,
+    "row" integer
+);
+
+
+ALTER TABLE smallquestion OWNER TO wspuser;
+
+--
+-- Name: student; Type: TABLE; Schema: public; Owner: wspuser
+--
+
+CREATE TABLE student (
+    handle text NOT NULL,
+    name text NOT NULL,
+    id text NOT NULL,
+    pass text NOT NULL,
+    email text NOT NULL,
+    program boolean,
+    cg2d boolean,
+    cg3d boolean,
+    music boolean,
+    admin boolean NOT NULL
+);
+
+
+ALTER TABLE student OWNER TO wspuser;
+
+--
+-- Data for Name: answer; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY answer (questionid, respondentid, smallquestionrow, answernumber, freeanswer) FROM stdin;
+20176150	admin	1	1	\N
+20176150	admin	2	1	\N
+20176150	\N	2	3	\N
+20176150	\N	3	0	aaaaa
+20176150	test	1	2	\N
+20176150	test	2	2	\N
+20176150	\N	2	3	\N
+\.
+
+
+--
+-- Data for Name: bigquestion; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY bigquestion (id, title, type) FROM stdin;
+20176150	第3回　3DCG講習アンケート	講習アンケート
+20176161	手紙	講習アンケート
+20176170	旭祭アンケート	イベントアンケート
+\.
+
+
+--
+-- Data for Name: information; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY information (id, title, content) FROM stdin;
+2017070600	[6/3]合宿の日程について	合宿の日程がほげほげ\r\n今年は○○○
+\.
+
+
+--
+-- Data for Name: questioncontent; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY questioncontent (id, "row", choicesnumber, content) FROM stdin;
+20176150	1	1	良かった
+20176150	1	2	まあまあ
+20176150	1	3	良くなかった
+20176150	2	1	人型
+20176150	2	2	乗り物
+20176150	2	3	植物
+20176150	3	0	\N
+20176161	1	1	デデデデース
+20176161	1	2	デース
+20176161	1	3	デェース!?
+20176161	2	1	シャカシャカ
+20176161	2	2	キーン
+20176170	1	1	YES
+20176170	1	2	NO
+20176170	2	1	YES
+20176170	2	2	NO
+20176170	3	0	\N
+\.
+
+
+--
+-- Data for Name: schedule; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY schedule (id, han, number, title, year, month, day, place, belongings, subjects, contact, content) FROM stdin;
+2017061405	プログラム班	5	第5回講習会	2017	6	14	21005教室	いつもの通り	3Dゲーム制作したい方	東京電機大学	新入生向けです
+2017721	プログラム班	5	発表日	2017	7	21	メディア演習室	色々	MNB		
+2017723	3DCG班	0	作品提出締め切り	2017	7	23	どこからでも	無し	3DCG班員	提出用メールアドレス\r\n○○○@○○○	作品提出の締め切りです\r\n可能ならば提出をお願いします
+2017813	3DCG班	3	コミケ	2017	8	13	東京ビッグサイト	かばん	シフトのある部員	部長連絡先	戦じゃぁぁぁぁぁぁぁぁぁぁぁ
+201779	サウンド班	9	第9回講習会	2017	7	9	21004教室				
+201774	2DCG班	2	clip studio講習	2017	7	4	21003教室				
+\.
+
+
+--
+-- Data for Name: smallquestion; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY smallquestion (id, title, questiontype, "row") FROM stdin;
+20176150	内容はどうでしたか？	単体	1
+20176150	今後どれをやってみたいですか？	複数	2
+20176150	ご自由に意見をどうぞ	自由	3
+20176161	拝啓神様へ	複数	1
+20176161	かき氷	単体	2
+20176170	楽しかったか	単体	1
+20176170	また作品を提出したいか	単体	2
+20176170	自由にどうぞ	自由	3
+\.
+
+
+--
+-- Data for Name: student; Type: TABLE DATA; Schema: public; Owner: wspuser
+--
+
+COPY student (handle, name, id, pass, email, program, cg2d, cg3d, music, admin) FROM stdin;
+管理者	管理者太郎	admin	pass	admin@gmail.com	t	f	f	f	t
+利用者	利用者太郎	test	pass	test@gmail.com	t	f	t	f	f
+\.
+
+
+--
+-- Name: bigquestion bigquestion_pkey; Type: CONSTRAINT; Schema: public; Owner: wspuser
+--
+
+ALTER TABLE ONLY bigquestion
+    ADD CONSTRAINT bigquestion_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schedule schedule_pkey; Type: CONSTRAINT; Schema: public; Owner: wspuser
+--
+
+ALTER TABLE ONLY schedule
+    ADD CONSTRAINT schedule_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answer answer_questionid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: wspuser
+--
+
+ALTER TABLE ONLY answer
+    ADD CONSTRAINT answer_questionid_fkey FOREIGN KEY (questionid) REFERENCES bigquestion(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: questioncontent questioncontent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: wspuser
+--
+
+ALTER TABLE ONLY questioncontent
+    ADD CONSTRAINT questioncontent_id_fkey FOREIGN KEY (id) REFERENCES bigquestion(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: smallquestion smallquestion_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: wspuser
+--
+
+ALTER TABLE ONLY smallquestion
+    ADD CONSTRAINT smallquestion_id_fkey FOREIGN KEY (id) REFERENCES bigquestion(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
