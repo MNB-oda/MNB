@@ -73,12 +73,12 @@ body {
 
 .answerTable tr:nth-child(even) td {
 	background-color: #eaeff7;
-		width: 80%;
+		width: 90%;
 }
 
 .answerTable tr:nth-child(even) th {
 	background-color: #eaeff7;
-		width: 80%;
+		width: 90%;
 }
 
 .answerTable tr:nth-child(odd) td {
@@ -91,7 +91,9 @@ body {
 		width: 90%;
 }
 
-
+td#free {
+	width: 50%;
+}
 
 td {
 	border: 1px solid #000000;
@@ -177,11 +179,11 @@ a.square_btn_back:hover{
 				//自由回答の場合
 				for(int k=0; k<allFreeAnswer.get(freeAnswersPointer).size(); k++){
 					out.println("<tr>");
-					out.println("<td>回答" + (k+1) + "</td>");
+					out.println("<td id = \"free\">回答" + (k+1) + "</td>");
 
 					//改行の表示処理
 					StringBuilder sb = new StringBuilder();
-					sb.append("<td>"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
+					sb.append("<td id = \"free\">"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
 					while(true) {
 						int l = sb.indexOf("\r");
 						if(l == -1) {break;}
@@ -191,7 +193,6 @@ a.square_btn_back:hover{
 					}
 					out.println(sb);
 
-					//out.println("<td>"+ allFreeAnswer.get(freeAnswersPointer).get(k) + "</td>");
 					out.println("</tr>");
 				}
 				freeAnswersPointer++;

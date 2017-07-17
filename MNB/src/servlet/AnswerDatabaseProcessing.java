@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.AnswerDAO;
 import model.AnswerBean;
+import model.StudentBean;
 
 /**
  * Servlet implementation class AnswerDatabaseProsessing
@@ -47,19 +49,22 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 
 		//データの追加
 		AnswerDAO ansDAO = new AnswerDAO();
+		AnswerBean ansBean = new AnswerBean();
 
-		String respondentID = "15FI018";
+		HttpSession session = request.getSession();
+		StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
+		String respondentID = studentBean.getId();
+
+		ansBean.setRespondentID(respondentID);
 
 		int i = 0;
 		while(request.getParameter("q" + i) != null){
-			AnswerBean ansBean = new AnswerBean();
 			String answerNumber;
 
 			//回答の形式によって追加の方法を変化
 			switch(request.getParameter("q" + i + "type")){
 			case "radio":
 				ansBean.setQuestionID(request.getParameter("questionID"));
-				ansBean.setRespondentID(respondentID);
 				ansBean.setSmallQuestionRow(i+1);
 				answerNumber = request.getParameter("q" + i);
 				ansBean.setAnswerNumber(Integer.valueOf(answerNumber));
@@ -71,7 +76,6 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 				String[] selectAnswers = request.getParameterValues("q" + i);	//データが配列で渡されるので一度避難
 				for(int j=0; j<selectAnswers.length; j++){
 					ansBean.setQuestionID(request.getParameter("questionID"));
-					ansBean.setRespondentID(respondentID);
 					ansBean.setSmallQuestionRow(i+1);
 					answerNumber = selectAnswers[j];
 					ansBean.setAnswerNumber(Integer.valueOf(answerNumber));
@@ -85,7 +89,6 @@ public class AnswerDatabaseProcessing extends HttpServlet {
 			case "free":
 				if(!request.getParameter("q" + i).equals("")){
 					ansBean.setQuestionID(request.getParameter("questionID"));
-					ansBean.setRespondentID(respondentID);
 					ansBean.setSmallQuestionRow(i+1);
 					ansBean.setAnswerNumber(writtenFree);
 					ansBean.setFreeAnswer(request.getParameter("q" + i));

@@ -20,6 +20,7 @@ import model.AnswerContainer;
 import model.BigQuestionBean;
 import model.QuestionContentBean;
 import model.SmallQuestionBean;
+import model.StudentBean;
 
 /**
  * Servlet implementation class QuestionMethodAssignment
@@ -42,6 +43,7 @@ public class QuestionMethodAssignment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 
 		BigQuestionDAO bigDAO = new BigQuestionDAO();
 		SmallQuestionDAO smallDAO = new SmallQuestionDAO();
@@ -52,6 +54,8 @@ public class QuestionMethodAssignment extends HttpServlet {
 		QuestionContentBean contentBean = new QuestionContentBean();
 		ArrayList<SmallQuestionBean> smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
 		ArrayList<QuestionContentBean> contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
+
+		AnswerDAO ansDAO = new AnswerDAO();
 
 		//Questionそれぞれの要素に共通するID
 		String id = request.getParameter("ID");
@@ -69,22 +73,30 @@ public class QuestionMethodAssignment extends HttpServlet {
 			break;
 
 		case "answer":
-			//指定のIDのデータを全てanswerQuestion.jspに投げる
-			bigBean.setId(id);
-			bigBean = bigDAO.getDatabaseById(bigBean);
-			request.setAttribute("bigBean", bigBean);
+			StudentBean studentBean = (StudentBean)session.getAttribute("studentBean");
 
-			smallBean = new SmallQuestionBean();
-			smallBean.setId(id);
-			smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
-			request.setAttribute("smallBeans", smallBeans);
+			//もし既に同じIDの人が回答していたら、別のページに飛ばす
+			if(ansDAO.checkAlreadyAnswered(studentBean.getId())){
+				nextJsp = "/alreadyAnswered.jsp";
 
-			contentBean = new QuestionContentBean();
-			contentBean.setId(id);
-			contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
-			request.setAttribute("contentBeans", contentBeans);
+			}else{
+				//指定のIDのデータを全てanswerQuestion.jspに投げる
+				bigBean.setId(id);
+				bigBean = bigDAO.getDatabaseById(bigBean);
+				request.setAttribute("bigBean", bigBean);
 
-			nextJsp = "/answerQuestion.jsp";
+				smallBean = new SmallQuestionBean();
+				smallBean.setId(id);
+				smallBeans = (ArrayList<SmallQuestionBean>)smallDAO.getDatabase(smallBean);
+				request.setAttribute("smallBeans", smallBeans);
+
+				contentBean = new QuestionContentBean();
+				contentBean.setId(id);
+				contentBeans = (ArrayList<QuestionContentBean>)contentDAO.getDatabase(contentBean);
+				request.setAttribute("contentBeans", contentBeans);
+
+				nextJsp = "/answerQuestion.jsp";
+			}
 			break;
 
 		case "aggregate":
@@ -103,7 +115,6 @@ public class QuestionMethodAssignment extends HttpServlet {
 			request.setAttribute("contentBeans", contentBeans);
 
 			AnswerBean ansBean = new AnswerBean();
-			AnswerDAO ansDAO = new AnswerDAO();
 			ansBean.setQuestionID(id);
 
 			//回答者の人数を持ってくる
@@ -133,7 +144,6 @@ public class QuestionMethodAssignment extends HttpServlet {
 			bigBean.setId(id);
 			bigBean = bigDAO.getDatabaseById(bigBean);
 			bigBean.getTitle();
-			HttpSession session = request.getSession();
 			session.setAttribute("deleteBean", bigBean);
 
 			nextJsp = "/questionDeleteCheck.jsp";

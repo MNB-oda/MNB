@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>完了</title>
+<title>回答済み</title>
 <style>
 body {
 	background-color: #ceecff;
@@ -44,7 +44,7 @@ a.square_btn_back:hover{
 <br>
 <div Align = "center">
 <a  onClick="location.href = '/MNB/MakeCalender'" class="square_btn_back">ホームに戻る</a>
-<p>完了しました</p>
+<p>回答済みです</p>
 </div>
 
 </body>

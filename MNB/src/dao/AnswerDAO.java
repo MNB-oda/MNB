@@ -18,6 +18,7 @@ public class AnswerDAO {
 
 	PreparedStatement prepStmt_CR; // 回答者人数を数える用
 	PreparedStatement prepStmt_CA; // それぞれの回答の数を数える用
+	PreparedStatement prepStmt_CHECK; // それぞれの回答の数を数える用
 	PreparedStatement prepStmt_CF; // 自由記入の回答内容を取り出す用
     PreparedStatement prepStmt_I; // INSERT用
 
@@ -25,10 +26,35 @@ public class AnswerDAO {
     String strPrepSQL_CA = "SELECT smallQuestionRow, answerNumber, COUNT(*) AS amount FROM answer "
     						+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
     						+ "ORDER BY smallQuestionRow,answerNumber;";
+    String strPrepSQL_CHECK = "SELECT * FROM answer WHERE respondentID = ?";
     String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
     String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
     ResultSet resultSet;
+
+    public boolean checkAlreadyAnswered(String respondentID){
+    	boolean result = false;
+    	try {
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
+			prepStmt_CHECK = connection.prepareStatement(strPrepSQL_CHECK);
+
+			prepStmt_CHECK.setString(1, respondentID);
+
+			resultSet = prepStmt_CHECK.executeQuery();
+
+			if(resultSet.next()){
+				result = true;
+			}
+
+			resultSet.close();
+			connection.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return result;
+    }
 
     public int countRespndent(AnswerBean bean){
     	int amount = 0;

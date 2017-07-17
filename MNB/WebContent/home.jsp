@@ -63,6 +63,21 @@ body {
 #header a.square_btn_mypage {
 	font-size: 200%;
 	position: absolute;
+	right: 260px;
+	top: 50px;
+	display: inline-block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	border-radius: 3px;
+	font-weight: bold;
+	color: #FF0;
+	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
+	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
+	transition: .4s;
+}
+#header a.square_btn_logout {
+	font-size: 200%;
+	position: absolute;
 	right: 50px;
 	top: 50px;
 	display: inline-block;
@@ -214,6 +229,7 @@ body {
 	background-image: linear-gradient(45deg, #0085C9 0%, #604dff 100%);
 	transition: .4s;
 }
+
 #nav a.square_btn:hover{
     background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
     background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
@@ -269,6 +285,8 @@ body {
 				</h1>
 				<a href="#" onClick="location.href = '/MNB/MyPageController?ID=<%=studentBean.getId() %>'"
 					class="square_btn_mypage">マイページ</a>
+				<a href="#" onClick="location.href = 'checkLogout.jsp'"
+					class="square_btn_logout">ログアウト</a>
 			</div>
 		</div>
 	</div>
