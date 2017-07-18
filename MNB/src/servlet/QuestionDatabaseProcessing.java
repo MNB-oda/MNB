@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,9 +58,8 @@ public class QuestionDatabaseProcessing extends HttpServlet {
 			//共通のidの作成
 			BigQuestionBean subBean = new BigQuestionBean();
 			subBean.setType(request.getParameter("QUESTIONTYPE"));
-			int count = bigDAO.getLines(subBean);
-			Calendar calendar = Calendar.getInstance();
-			String id = String.valueOf(calendar.get(Calendar.YEAR)) + String.valueOf(calendar.get(Calendar.MONTH)) + String.valueOf(calendar.get(Calendar.DATE)) + count;
+			int count = bigDAO.getLines();
+			String id = String.valueOf(count);
 
 			//大きなくくりの挿入
 			BigQuestionBean bigBean = new BigQuestionBean();
