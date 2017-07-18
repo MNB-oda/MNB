@@ -20,21 +20,21 @@ public class AnswerDAO {
 	PreparedStatement prepStmt_CA; // それぞれの回答の数を数える用
 	PreparedStatement prepStmt_CHECK; // それぞれの回答の数を数える用
 	PreparedStatement prepStmt_CF; // 自由記入の回答内容を取り出す用
-    PreparedStatement prepStmt_I; // INSERT用
+	PreparedStatement prepStmt_I; // INSERT用
 
-    String strPrepSQL_CR = "SELECT COUNT(DISTINCT respondentID) AS amount FROM answer WHERE questionID = ?";
-    String strPrepSQL_CA = "SELECT smallQuestionRow, answerNumber, COUNT(*) AS amount FROM answer "
-    						+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
-    						+ "ORDER BY smallQuestionRow,answerNumber;";
-    String strPrepSQL_CHECK = "SELECT * FROM answer WHERE questionID = ? AND respondentID = ?";
-    String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
-    String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
+	String strPrepSQL_CR = "SELECT COUNT(DISTINCT respondentID) AS amount FROM answer WHERE questionID = ?";
+	String strPrepSQL_CA = "SELECT smallQuestionRow, answerNumber, COUNT(*) AS amount FROM answer "
+			+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
+			+ "ORDER BY smallQuestionRow,answerNumber;";
+	String strPrepSQL_CHECK = "SELECT * FROM answer WHERE questionID = ? AND respondentID = ?";
+	String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
+	String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
-    ResultSet resultSet;
+	ResultSet resultSet;
 
-    public boolean checkAlreadyAnswered(AnswerBean ansBean){
-    	boolean result = false;
-    	try {
+	public boolean checkAlreadyAnswered(AnswerBean ansBean) {
+		boolean result = false;
+		try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
 			prepStmt_CHECK = connection.prepareStatement(strPrepSQL_CHECK);
@@ -44,7 +44,7 @@ public class AnswerDAO {
 
 			resultSet = prepStmt_CHECK.executeQuery();
 
-			if(resultSet.next()){
+			if (resultSet.next()) {
 				result = true;
 			}
 
@@ -54,12 +54,12 @@ public class AnswerDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return result;
-    }
+		return result;
+	}
 
-    public int countRespndent(AnswerBean bean){
-    	int amount = 0;
-    	try {
+	public int countRespndent(AnswerBean bean) {
+		int amount = 0;
+		try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
 			prepStmt_CR = connection.prepareStatement(strPrepSQL_CR);
@@ -68,8 +68,8 @@ public class AnswerDAO {
 
 			resultSet = prepStmt_CR.executeQuery();
 
-			if(resultSet != null){
-				while(resultSet.next()){
+			if (resultSet != null) {
+				while (resultSet.next()) {
 					amount = resultSet.getInt("amount");
 				}
 			}
@@ -81,11 +81,11 @@ public class AnswerDAO {
 			e.printStackTrace();
 		}
 
-    	return amount;
-    }
+		return amount;
+	}
 
-    public ArrayList<AnswerContainer> countAnswer(AnswerBean bean, ArrayList<AnswerContainer> answersAmount){
-    	try {
+	public ArrayList<AnswerContainer> countAnswer(AnswerBean bean, ArrayList<AnswerContainer> answersAmount) {
+		try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
 			prepStmt_CA = connection.prepareStatement(strPrepSQL_CA);
@@ -94,13 +94,13 @@ public class AnswerDAO {
 
 			resultSet = prepStmt_CA.executeQuery();
 
-			if(resultSet != null){
-				while(resultSet.next()){
+			if (resultSet != null) {
+				while (resultSet.next()) {
 
-					for(int i=0; i<answersAmount.size(); i++){
-						//もし列と回答番号の一致するデータがあれば、そのデータを格納
-						if(answersAmount.get(i).getQuestionLine() == resultSet.getInt("smallQuestionRow")
-								&& answersAmount.get(i).getAnswerNumber() == resultSet.getInt("answerNumber")){
+					for (int i = 0; i < answersAmount.size(); i++) {
+						// もし列と回答番号の一致するデータがあれば、そのデータを格納
+						if (answersAmount.get(i).getQuestionLine() == resultSet.getInt("smallQuestionRow")
+								&& answersAmount.get(i).getAnswerNumber() == resultSet.getInt("answerNumber")) {
 
 							answersAmount.get(i).setAnswersAmount(resultSet.getInt("amount"));
 						}
@@ -116,12 +116,12 @@ public class AnswerDAO {
 			e.printStackTrace();
 		}
 
-    	return answersAmount;
-    }
+		return answersAmount;
+	}
 
-    public ArrayList<ArrayList<String>> getFreeAnswers(AnswerBean bean){
-    	ArrayList<ArrayList<String>> linesFreeAnswers = new ArrayList<ArrayList<String>>();
-    	try {
+	public ArrayList<ArrayList<String>> getFreeAnswers(AnswerBean bean) {
+		ArrayList<ArrayList<String>> linesFreeAnswers = new ArrayList<ArrayList<String>>();
+		try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
 			prepStmt_CF = connection.prepareStatement(strPrepSQL_CF);
@@ -133,19 +133,19 @@ public class AnswerDAO {
 
 			int linePointer = 0;
 			ArrayList<String> freeAnswers = new ArrayList<String>();
-			if(resultSet != null){
-				while(resultSet.next()){
-					if(linePointer == 0){
+			if (resultSet != null) {
+				while (resultSet.next()) {
+					if (linePointer == 0) {
 						linePointer = resultSet.getInt("smallQuestionRow");
 					}
-					//回答の行が変化したら格納する配列番号を変える
-					if(linePointer != resultSet.getInt("smallQuestionRow")){
+					// 回答の行が変化したら格納する配列番号を変える
+					if (linePointer != resultSet.getInt("smallQuestionRow")) {
 						linesFreeAnswers.add(freeAnswers);
 						freeAnswers = new ArrayList<String>();
 					}
 					freeAnswers.add(resultSet.getString("freeAnswer"));
 				}
-				//resultSet.next()との関係上、最後の行の回答配列を入れる瞬間が無いため
+				// resultSet.next()との関係上、最後の行の回答配列を入れる瞬間が無いため
 				linesFreeAnswers.add(freeAnswers);
 			}
 
@@ -156,26 +156,26 @@ public class AnswerDAO {
 			e.printStackTrace();
 		}
 
-    	return linesFreeAnswers;
-    }
+		return linesFreeAnswers;
+	}
 
-    public void insertDatabase(AnswerBean bean){
-    	try {
-		    Class.forName(driverClassName);
-		    connection = DriverManager.getConnection(url, user, password);
+	public void insertDatabase(AnswerBean bean) {
+		try {
+			Class.forName(driverClassName);
+			connection = DriverManager.getConnection(url, user, password);
 
-		    prepStmt_I = connection.prepareStatement(strPrepSQL_I);
-		    prepStmt_I.setString(1, bean.getQuestionID());
-		    prepStmt_I.setString(2, bean.getRespondentID());
-		    prepStmt_I.setInt(3, bean.getSmallQuestionRow());
-		    prepStmt_I.setInt(4, bean.getAnswerNumber());
-		    prepStmt_I.setString(5, bean.getFreeAnswer());
+			prepStmt_I = connection.prepareStatement(strPrepSQL_I);
+			prepStmt_I.setString(1, bean.getQuestionID());
+			prepStmt_I.setString(2, bean.getRespondentID());
+			prepStmt_I.setInt(3, bean.getSmallQuestionRow());
+			prepStmt_I.setInt(4, bean.getAnswerNumber());
+			prepStmt_I.setString(5, bean.getFreeAnswer());
 
-		    prepStmt_I.executeUpdate();
+			prepStmt_I.executeUpdate();
 
-		    connection.close();
-    	} catch (Exception e) {
-		    e.printStackTrace();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-    }
+	}
 }
