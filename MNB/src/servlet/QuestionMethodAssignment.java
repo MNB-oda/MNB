@@ -138,8 +138,7 @@ public class QuestionMethodAssignment extends HttpServlet {
 			request.setAttribute("answersAmount", answersAmount);
 
 			//自由記入の部分のデータを別で持ってくる
-			int freeNumber = 0;
-			ansBean.setAnswerNumber(freeNumber);
+			ansBean.setAnswerNumber(0);
 			ArrayList<ArrayList<String>> allFreeAnswer = ansDAO.getFreeAnswers(ansBean);
 			request.setAttribute("allFreeAnswer", allFreeAnswer);
 

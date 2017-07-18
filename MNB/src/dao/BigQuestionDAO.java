@@ -25,7 +25,7 @@ public class BigQuestionDAO {
     String strPrepSQL_SI = "SELECT * FROM bigQuestion WHERE id = ?";
     String strPrepSQL_I = "INSERT INTO bigQuestion VALUES(?, ?, ?)";
     String strPrepSQL_D = "DELETE FROM bigQuestion WHERE id = ?";
-    String strPrepSQL_C = "SELECT COUNT(*) AS count FROM bigQuestion";
+    String strPrepSQL_C = "SELECT COUNT(*) AS count FROM bigQuestion WHERE type = ?";
 
     ResultSet resultSet;
 
@@ -121,13 +121,14 @@ public class BigQuestionDAO {
 		}
     }
 
-    public int getLines(){
+    public int getLines(BigQuestionBean bean){
     	int count = 0;
     	try {
 		    Class.forName(driverClassName);
 		    connection = DriverManager.getConnection(url, user, password);
 
 		    prepStmt_C = connection.prepareStatement(strPrepSQL_C);
+		    prepStmt_C.setString(1, bean.getType());
 		    resultSet = prepStmt_C.executeQuery();
 
 		    if(resultSet != null){

@@ -27,7 +27,7 @@ public class AnswerDAO {
     						+ "WHERE questionID = ? GROUP BY smallQuestionRow, answernumber "
     						+ "ORDER BY smallQuestionRow,answerNumber;";
     String strPrepSQL_CHECK = "SELECT * FROM answer WHERE questionID = ? AND respondentID = ?";
-    String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ? ORDER BY smallQuestionRow ASC";
+    String strPrepSQL_CF = "SELECT smallQuestionRow,freeAnswer FROM answer WHERE questionID = ? AND answerNumber = ?";
     String strPrepSQL_I = "INSERT INTO answer VALUES(?, ?, ?, ?, ?)";
 
     ResultSet resultSet;
@@ -120,7 +120,7 @@ public class AnswerDAO {
     }
 
     public ArrayList<ArrayList<String>> getFreeAnswers(AnswerBean bean){
-    	ArrayList<ArrayList<String>> rowFreeAnswers = new ArrayList<ArrayList<String>>();
+    	ArrayList<ArrayList<String>> linesFreeAnswers = new ArrayList<ArrayList<String>>();
     	try {
 			Class.forName(driverClassName);
 			connection = DriverManager.getConnection(url, user, password);
@@ -131,23 +131,22 @@ public class AnswerDAO {
 
 			resultSet = prepStmt_CF.executeQuery();
 
-			int rowPointer = 0;
+			int linePointer = 0;
 			ArrayList<String> freeAnswers = new ArrayList<String>();
 			if(resultSet != null){
 				while(resultSet.next()){
-					if(rowPointer == 0){
-						rowPointer = resultSet.getInt("smallQuestionRow");
+					if(linePointer == 0){
+						linePointer = resultSet.getInt("smallQuestionRow");
 					}
 					//回答の行が変化したら格納する配列番号を変える
-					if(rowPointer != resultSet.getInt("smallQuestionRow")){
-						rowFreeAnswers.add(freeAnswers);
+					if(linePointer != resultSet.getInt("smallQuestionRow")){
+						linesFreeAnswers.add(freeAnswers);
 						freeAnswers = new ArrayList<String>();
-						rowPointer = resultSet.getInt("smallQuestionRow");
 					}
 					freeAnswers.add(resultSet.getString("freeAnswer"));
 				}
 				//resultSet.next()との関係上、最後の行の回答配列を入れる瞬間が無いため
-				rowFreeAnswers.add(freeAnswers);
+				linesFreeAnswers.add(freeAnswers);
 			}
 
 			resultSet.close();
@@ -157,7 +156,7 @@ public class AnswerDAO {
 			e.printStackTrace();
 		}
 
-    	return rowFreeAnswers;
+    	return linesFreeAnswers;
     }
 
     public void insertDatabase(AnswerBean bean){
