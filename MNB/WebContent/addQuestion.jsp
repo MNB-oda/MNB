@@ -337,9 +337,9 @@ input.square_btn_add:hover{
     function hideKomoku(rowNumber){
     	radio = document.getElementsByName('TYPE' + rowNumber);
     	if(radio[2].checked){
-    		document.getElementById('notFree' + i).style.display = "none";
+    		document.getElementById('notFree' + rowNumber).style.display = "none";
     	}else{
-    		document.getElementById('notFree' + i).style.display = "";
+    		document.getElementById('notFree' + rowNumber).style.display = "";
     	}
     }
 
